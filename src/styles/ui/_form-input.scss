@@ -1,0 +1,85 @@
+// Remove forced yellow input background in Chrome 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active { 
+  -webkit-transition-delay: 9999s; transition-delay: 9999s; 
+}
+
+
+.input-round {
+  border-radius: 2em;
+}
+
+input.input-primary {
+  border-color: $skin;
+  &:focus {
+    border-color: $skin;
+  }
+}
+input.input-info {
+  border-color: theme-color("info");
+  &:focus {
+    border-color: theme-color("info");
+  }
+}
+input.input-success {
+  border-color: theme-color("success");
+  &:focus {
+    border-color: theme-color("success");
+  }
+}
+input.input-warning {
+  border-color: theme-color("warning");
+  &:focus {
+    border-color: theme-color("warning");
+  }
+}
+input.input-danger {
+  border-color: theme-color("danger");
+  &:focus {
+    border-color: theme-color("danger");
+  }
+}
+
+// Datepicker Range
+
+:not(.mat-calendar-body-disabled):hover > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-semi-selected),
+.cdk-keyboard-focused .mat-calendar-body-active > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-semi-selected),
+.cdk-program-focused .mat-calendar-body-active > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-semi-selected) {
+  background-color: rgba(0, 0, 0, 0.04); }
+
+:not(.mat-calendar-body-disabled):hover > .mat-calendar-body-semi-selected,
+.cdk-keyboard-focused .mat-calendar-body-active > .mat-calendar-body-semi-selected,
+.cdk-program-focused .mat-calendar-body-active > .mat-calendar-body-semi-selected {
+  background-color: #3f51b5;
+  color: white; }
+
+.mat-calendar-body-selected {
+  background-color: #3f51b5;
+  color: white; }
+
+.mat-calendar-body-begin-range:not(.mat-calendar-body-end-range) {
+  border-radius: 100% 0 0 100%;
+  background-color: #e8eaf6; }
+
+.mat-calendar-body-end-range:not(.mat-calendar-body-begin-range) {
+  border-radius: 0 100% 100% 0;
+  background-color: #e8eaf6; }
+
+.mat-calendar-body > tr .mat-calendar-cell-semi-selected ~ .mat-calendar-cell-semi-selected {
+  border-radius: 0; }
+
+.mat-calendar-cell-semi-selected {
+  background-color: #e8eaf6; }
+
+.services-icon {
+  display: inline-block;
+  position: relative;
+
+  & > i {
+    float: left;
+    font-size: 22px;
+  }
+  
+}

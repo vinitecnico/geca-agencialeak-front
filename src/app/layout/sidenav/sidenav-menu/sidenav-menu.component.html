@@ -1,0 +1,36 @@
+<ul class="nav" appAccordionNav appAppendSubmenuIcon appSlimScroll appHighlightActiveItems>
+  <!-- <li>
+    <a mat-button [routerLink]="['home']">
+      <i class="nav-icon material-icons">home</i>
+      <span class="nav-text">Home</span>
+    </a>
+  </li> -->
+
+  <!-- Configuração do site -->
+  <li [ngClass]="{'hide-arrow': !showWebsiteOptions}">
+    <a mat-button (click)="loginWebsiteSettings(true);">
+      <i class="nav-icon material-icons">language</i>
+      <span class="nav-text">website</span>
+    </a>
+    <ul [hidden]="!showWebsiteOptions">
+      <li>
+        <a mat-button class="md-button prepend-icon">
+          <span>information</span>
+        </a>
+      </li>
+      <li>
+        <a mat-button class="md-button prepend-icon" [routerLink]="['slider']">
+          <span>Slider</span>
+        </a>
+      </li>      
+    </ul>
+  </li>
+
+  <!-- Personalização de Hotel -->
+  <li *ngIf="showHotelCustomization && hasHotelCustomization">
+    <a mat-button [routerLink]="['hotel-customization']">
+      <i class="nav-icon material-icons">location_city</i>
+      <span class="nav-text">hotelCustomization</span>
+    </a>
+  </li>
+</ul>

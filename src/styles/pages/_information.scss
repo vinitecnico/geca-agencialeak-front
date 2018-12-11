@@ -1,0 +1,11 @@
+.information-icon-add-new {
+    padding-top: 18px;
+    color: $blue;
+    text-align: right;
+    padding-left: 5px;
+
+    @media (max-width: 425px){
+        text-align: left;
+     }
+}
+

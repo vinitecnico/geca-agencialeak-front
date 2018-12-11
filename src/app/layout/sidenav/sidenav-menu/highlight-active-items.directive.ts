@@ -1,0 +1,39 @@
+import { Directive, ElementRef, AfterViewInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { Router, NavigationEnd } from '@angular/router';
+
+@Directive({ selector: '[appHighlightActiveItems]' })
+
+export class HighlightActiveItemsDirective implements AfterViewInit {
+  constructor(private el: ElementRef, private location: Location, private router: Router) {}
+
+  ngAfterViewInit() {
+    const $el = $(this.el.nativeElement);
+    const $links = $el.find('a');
+
+    function highlightActive(links) {
+      const path = location.pathname;
+      links.each( (i, link) => {
+        const $link = $(link);
+        const $li = $link.parent('li');
+        const href = $link.attr('href');
+
+        if ($li.hasClass('active')) {
+          $li.removeClass('active');
+        }
+        if (path === href) {
+          $li.addClass('active');
+        }
+      } );
+    }
+
+    highlightActive($links);
+
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      highlightActive($links);
+    });
+  }
+}
