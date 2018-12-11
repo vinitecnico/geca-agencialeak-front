@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { LayoutService } from './layout/services/layout.service';
 import { APPCONFIG } from './config';
 import * as jQuery from 'jquery';
 
@@ -16,7 +15,7 @@ import * as jQuery from 'jquery';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  providers: [LayoutService]
+  providers: []
 })
 export class AppComponent implements OnInit {
   public AppConfig: any;

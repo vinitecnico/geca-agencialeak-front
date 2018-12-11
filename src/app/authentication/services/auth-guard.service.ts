@@ -14,7 +14,6 @@ export class AuthGuard implements CanActivate {
   }
 
   checkLogin(url): boolean {
-    debugger
     const auth = localStorage.getItem('authData');
 
     if (!auth) {
@@ -31,6 +30,6 @@ export class AuthGuard implements CanActivate {
     //   return false;
     // }
 
-    // return true;
+    return true;
   }
 }

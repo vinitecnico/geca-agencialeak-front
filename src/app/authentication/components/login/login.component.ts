@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 
@@ -12,15 +13,14 @@ export class LoginComponent implements OnInit {
   passwordType: String = 'password';
   showPasswordError = false;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private router: Router, @Inject('LocalStorage') localStorage,
+    private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
       password: [null, Validators.required],
-      username: [null, Validators.required],
-      host: [null, Validators.required],
-      managerId: null
+      username: [null, Validators.required]
     });
   }
 
@@ -30,8 +30,8 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    const data = this.form.value;
-    alert(true);
+    localStorage.setItem('authData', JSON.stringify(this.form.value));
+    this.router.navigateByUrl('/app/information');
   }
 
   getHostErrorMessage(): string {
