@@ -1,0 +1,100 @@
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Criar Usuário</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="#">Dashboard</a></li>
+                            <li><a href="#">Forms</a></li>
+                            <li class="active">Cadastro de Usuário</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="animated fadeIn card">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="card-body card-block">
+                    <form [formGroup]="form">
+                        <div class="form-group col-md-12">
+                            <div class="row">
+                                <div class="col-12 col-sm-8">
+                                    <mat-form-field class="full-width">
+                                        <input matInput placeholder="Nome" formControlName="name">
+                                        <mat-error>
+                                            Campo obrigatório
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <mat-form-field class="full-width">
+                                        <input matInput placeholder="CPF" formControlName="cpf">
+                                        <mat-error>
+                                            Campo obrigatório
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-8">
+                                    <mat-form-field class="full-width">
+                                        <input matInput placeholder="E-mail" formControlName="email">
+                                        <mat-error>
+                                            Campo obrigatório
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <mat-form-field class="full-width">
+                                        <input matInput placeholder="Celular" formControlName="phone">
+                                        <mat-error>
+                                            Campo obrigatório
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-4">
+                                    <mat-form-field class="full-width">
+                                        <input matInput placeholder="Senha" formControlName="password" type="password">
+                                        <mat-error>
+                                            Campo obrigatório
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <mat-form-field class="full-width">
+                                        <input matInput placeholder="Confirmar Senha" formControlName="confirmPassword"
+                                            type="password">
+                                        <mat-error>
+                                            Campo obrigatório
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="container-fluid form-group" style="text-align: right;">
+                        <button mat-raised-button color="primary">Save</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>

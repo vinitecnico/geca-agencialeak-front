@@ -15,6 +15,7 @@ import { LayoutModule } from './layout/layout.module';
 // Sub modules
 import { AuthenticationModule } from './authentication/authentication.module';
 import { WebsiteSettingsModule } from './website-settings/website-settings.module';
+import { UserSettingsModule } from './settings/settings.module';
 
 // Layout
 import { LayoutComponent } from './layout/layout.component';
@@ -118,6 +119,7 @@ export function getLocalStorage() {
     MatTooltipModule,
     AuthenticationModule,
     LayoutModule,
+    UserSettingsModule,
     WebsiteSettingsModule,
     BlockUIModule.forRoot(),
     BlockUIHttpModule.forRoot({
