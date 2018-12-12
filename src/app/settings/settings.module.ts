@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFileUploadModule } from 'angular-material-fileupload';
 
 import {
     MatTableModule,
@@ -34,8 +33,7 @@ import { UserRoutingModule } from './settings-routing.module';
         MatButtonModule,
         MatButtonToggleModule,
         FormsModule,
-        ReactiveFormsModule,
-        MatFileUploadModule
+        ReactiveFormsModule
     ],
     declarations: [
         UserSettingsComponent
