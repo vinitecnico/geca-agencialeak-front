@@ -62,3 +62,11 @@ footer img:focus , footer a:focus { outline: none; }
 div.mat-radio-label-content {
     padding-right: 5px;
 }
+
+.actionBar {
+    width: 100%;
+    border-top: 1px solid #ddd;
+    padding: 16px 5px;
+    text-align: right;
+    margin-top: 4%;
+}

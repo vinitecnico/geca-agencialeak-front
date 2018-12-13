@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {CommonModule } from '@angular/common';
 
 import {
     MatTableModule,
@@ -10,7 +11,9 @@ import {
         MatInputModule,
         MatButtonModule,
         MatButtonToggleModule,
-        MatRadioModule
+        MatRadioModule,
+        MatStepperModule,
+        MatSelectModule
 } from '@angular/material';
 
 // Components
@@ -25,6 +28,7 @@ import { RegistrationRoutingModule } from './registration-routing.module';
 
 @NgModule({
     imports: [
+        CommonModule,
         RegistrationRoutingModule,
         MatTableModule,
         MatPaginatorModule,
@@ -35,6 +39,8 @@ import { RegistrationRoutingModule } from './registration-routing.module';
         MatButtonModule,
         MatButtonToggleModule,
         MatRadioModule,
+        MatStepperModule,
+        MatSelectModule,
         SharedModule,
         FormsModule,
         ReactiveFormsModule

@@ -5,129 +5,257 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12">
                 <div class="card-body card-block">
-                    <form [formGroup]="form">
-                        <div class="form-group col-md-12">
-                            <div class="row">
-                                <div class="col-12 col-sm-6">
-                                    <mat-form-field class="full-width">
-                                        <input matInput placeholder="Nome" formControlName="name">
-                                        <mat-error>
-                                            Campo obrigatório
-                                        </mat-error>
-                                    </mat-form-field>
+                    <mat-horizontal-stepper labelPosition="bottom" #stepper>
+                        <mat-step [stepControl]="firstFormGroup">
+                            <form [formGroup]="firstFormGroup">
+                                <ng-template matStepLabel>Dados pessoais</ng-template>
+                                <div class="form-group col-md-12">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="Nome" formControlName="name">
+                                                <mat-error>
+                                                    Campo obrigatório
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-12 col-sm-3">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="CPF" formControlName="cpf">
+                                                <mat-error>
+                                                    Campo obrigatório
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-12 col-sm-3">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="RG" formControlName="rg">
+                                                <mat-error>
+                                                    Campo obrigatório
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-3">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="Data nascimento" formControlName="birthDate">
+                                                <mat-error>
+                                                    Campo obrigatório
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-12 col-sm-3">
+                                            <mat-form-field class="full-width">
+                                                <mat-select placeholder="Etnia" formControlName="etnia">
+                                                    <mat-option *ngFor="let etnia of etnias" [value]="etnia">
+                                                        {{etnia}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="Nome da mãe" formControlName="motherName">
+                                                <mat-error>
+                                                    Campo obrigatório
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-3">
+                                            <mat-form-field class="full-width">
+                                                <mat-select placeholder="Sexo" formControlName="gender">
+                                                    <mat-option *ngFor="let gender of genders" [value]="gender">
+                                                        {{gender}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-12 col-sm-3">
+                                            <mat-form-field class="full-width">
+                                                <mat-select placeholder="Transgênero" formControlName="transgenero">
+                                                    <mat-option *ngFor="let transgenero of transgeneros" [value]="transgenero">
+                                                        {{transgenero}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <mat-form-field class="full-width">
+                                                <mat-select placeholder="Orientação sexual" formControlName="orientacaoSexual">
+                                                    <mat-option *ngFor="let orientacaoSexual of orientacaoSexuals"
+                                                        [value]="orientacaoSexual">
+                                                        {{orientacaoSexual}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="Nome social (tratamento opcional garantido a pessoa trans)"
+                                                    formControlName="socialName">
+                                                <mat-error>
+                                                    Campo obrigatório
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 actionBar" style="text-align: right;">
+                                            <button mat-raised-button color="primary" matStepperNext>Próximo</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-12 col-sm-2">
-                                    <mat-form-field class="full-width">
-                                        <input matInput placeholder="RG" formControlName="rg">
-                                        <mat-error>
-                                            Campo obrigatório
-                                        </mat-error>
-                                    </mat-form-field>
+                            </form>
+                        </mat-step>
+                        <mat-step [stepControl]="secondFormGroup">
+                            <form [formGroup]="secondFormGroup">
+                                <ng-template matStepLabel>Endereço e contato</ng-template>
+                                <div class="form-group col-md-12">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-3">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="CEP" formControlName="cep">
+                                                <mat-error>
+                                                    Campo obrigatório
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="Endereço" formControlName="address">
+                                                <mat-error>
+                                                    Campo obrigatório
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-12 col-sm-3">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="Número" formControlName="numberAddress">
+                                                <mat-error>
+                                                    Campo obrigatório
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-3">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="Complemento" formControlName="complement">
+                                                <mat-error>
+                                                    Campo obrigatório
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-12 col-sm-3">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="Bairro" formControlName="neighborhood">
+                                                <mat-error>
+                                                    Campo obrigatório
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-12 col-sm-3">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="Cidade" formControlName="city">
+                                                <mat-error>
+                                                    Campo obrigatório
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-12 col-sm-3">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="Estado" formControlName="uf">
+                                                <mat-error>
+                                                    Campo obrigatório
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-3">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="Posiçao GPS" formControlName="gps">
+                                                <mat-error>
+                                                    Campo obrigatório
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-3">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="Telefone" formControlName="phone">
+                                                <mat-error>
+                                                    Campo obrigatório
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-12 col-sm-3">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="Celular" formControlName="mobile">
+                                                <mat-error>
+                                                    Campo obrigatório
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="E-mail" formControlName="email">
+                                                <mat-error>
+                                                    Campo obrigatório
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-4">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="Facebook" formControlName="facebook">
+                                                <mat-error>
+                                                    Campo obrigatório
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-12 col-sm-4">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="Instagram" formControlName="instagram">
+                                                <mat-error>
+                                                    Campo obrigatório
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-12 col-sm-4">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="Twitter" formControlName="twitter">
+                                                <mat-error>
+                                                    Campo obrigatório
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 actionBar" style="text-align: right;">
+                                            <button mat-raised-button matStepperPrevious>Voltar</button>
+                                            <button mat-raised-button color="primary" matStepperNext>Próximo</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-12 col-sm-2">
-                                    <mat-form-field class="full-width">
-                                        <input matInput placeholder="CPF" formControlName="cpf">
-                                        <mat-error>
-                                            Campo obrigatório
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-12 col-sm-2">
-                                    <mat-form-field class="full-width">
-                                        <input matInput placeholder="Data nascimento" formControlName="birthDate">
-                                        <mat-error>
-                                            Campo obrigatório
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
+                            </form>
+                        </mat-step>
+                        <mat-step>
+                            <ng-template matStepLabel>Done</ng-template>
+                            You are now done.
+                            <div>
+                                <button mat-button matStepperPrevious>Back</button>
+                                <button mat-button (click)="stepper.reset()">Reset</button>
                             </div>
-                            <div class="row">
-                                <div class="col-12 col-sm-6">
-                                    <mat-form-field class="full-width">
-                                        <input matInput placeholder="Nome da mãe" formControlName="motherName">
-                                        <mat-error>
-                                            Campo obrigatório
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <mat-form-field class="full-width">
-                                        <input matInput placeholder="Nome social" formControlName="motherName">
-                                        <mat-error>
-                                            Campo obrigatório
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 col-sm-5">
-                                    <span><b>Gênero: </b> </span>
-                                    <mat-radio-group color="primary">
-                                        <mat-radio-button value="1">Masculino</mat-radio-button>
-                                        <mat-radio-button value="0">Feminino</mat-radio-button>
-                                    </mat-radio-group>
-                                </div>
-                                <div class="col-12 col-sm-7">
-                                    <span><b>Orientação sexual: </b> </span>
-                                    <mat-radio-group color="primary">
-                                        <mat-radio-button value="0">Heterosexual</mat-radio-button>
-                                        <mat-radio-button value="1">Homossexual</mat-radio-button>
-                                        <mat-radio-button value="1">Bissexual</mat-radio-button>
-                                    </mat-radio-group>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 col-sm-6">
-                                    <span><b>Identidade de gênero: </b> </span>
-                                    <mat-radio-group color="primary">
-                                        <mat-radio-button value="0">Travesti</mat-radio-button>
-                                        <mat-radio-button value="1">Transexual</mat-radio-button>
-                                    </mat-radio-group>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 col-sm-8">
-                                    <mat-form-field class="full-width">
-                                        <input matInput placeholder="E-mail" formControlName="email">
-                                        <mat-error>
-                                            Campo obrigatório
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <mat-form-field class="full-width">
-                                        <input matInput placeholder="Celular" formControlName="phone">
-                                        <mat-error>
-                                            Campo obrigatório
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 col-sm-4">
-                                    <mat-form-field class="full-width">
-                                        <input matInput placeholder="Senha" formControlName="password" type="password">
-                                        <mat-error>
-                                            Campo obrigatório
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <mat-form-field class="full-width">
-                                        <input matInput placeholder="Confirmar Senha" formControlName="confirmPassword"
-                                            type="password">
-                                        <mat-error>
-                                            Campo obrigatório
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-                    <div class="container-fluid form-group" style="text-align: right;">
-                        <button mat-raised-button color="primary">Save</button>
-                    </div>
+                        </mat-step>
+                    </mat-horizontal-stepper>
 
                 </div>
             </div>
