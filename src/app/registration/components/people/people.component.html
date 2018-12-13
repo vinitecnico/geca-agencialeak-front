@@ -1,0 +1,137 @@
+<app-breadcrumb [title]="'Nova Pessoa'" [domain]="'Cadastro'" [page]="'Pessoas'"></app-breadcrumb>
+
+<div class="content">
+    <div class="animated fadeIn card">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="card-body card-block">
+                    <form [formGroup]="form">
+                        <div class="form-group col-md-12">
+                            <div class="row">
+                                <div class="col-12 col-sm-6">
+                                    <mat-form-field class="full-width">
+                                        <input matInput placeholder="Nome" formControlName="name">
+                                        <mat-error>
+                                            Campo obrigatório
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-12 col-sm-2">
+                                    <mat-form-field class="full-width">
+                                        <input matInput placeholder="RG" formControlName="rg">
+                                        <mat-error>
+                                            Campo obrigatório
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-12 col-sm-2">
+                                    <mat-form-field class="full-width">
+                                        <input matInput placeholder="CPF" formControlName="cpf">
+                                        <mat-error>
+                                            Campo obrigatório
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-12 col-sm-2">
+                                    <mat-form-field class="full-width">
+                                        <input matInput placeholder="Data nascimento" formControlName="birthDate">
+                                        <mat-error>
+                                            Campo obrigatório
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-6">
+                                    <mat-form-field class="full-width">
+                                        <input matInput placeholder="Nome da mãe" formControlName="motherName">
+                                        <mat-error>
+                                            Campo obrigatório
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <mat-form-field class="full-width">
+                                        <input matInput placeholder="Nome social" formControlName="motherName">
+                                        <mat-error>
+                                            Campo obrigatório
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-5">
+                                    <span><b>Gênero: </b> </span>
+                                    <mat-radio-group color="primary">
+                                        <mat-radio-button value="1">Masculino</mat-radio-button>
+                                        <mat-radio-button value="0">Feminino</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                                <div class="col-12 col-sm-7">
+                                    <span><b>Orientação sexual: </b> </span>
+                                    <mat-radio-group color="primary">
+                                        <mat-radio-button value="0">Heterosexual</mat-radio-button>
+                                        <mat-radio-button value="1">Homossexual</mat-radio-button>
+                                        <mat-radio-button value="1">Bissexual</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-6">
+                                    <span><b>Identidade de gênero: </b> </span>
+                                    <mat-radio-group color="primary">
+                                        <mat-radio-button value="0">Travesti</mat-radio-button>
+                                        <mat-radio-button value="1">Transexual</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-8">
+                                    <mat-form-field class="full-width">
+                                        <input matInput placeholder="E-mail" formControlName="email">
+                                        <mat-error>
+                                            Campo obrigatório
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <mat-form-field class="full-width">
+                                        <input matInput placeholder="Celular" formControlName="phone">
+                                        <mat-error>
+                                            Campo obrigatório
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-4">
+                                    <mat-form-field class="full-width">
+                                        <input matInput placeholder="Senha" formControlName="password" type="password">
+                                        <mat-error>
+                                            Campo obrigatório
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <mat-form-field class="full-width">
+                                        <input matInput placeholder="Confirmar Senha" formControlName="confirmPassword"
+                                            type="password">
+                                        <mat-error>
+                                            Campo obrigatório
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="container-fluid form-group" style="text-align: right;">
+                        <button mat-raised-button color="primary">Save</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>

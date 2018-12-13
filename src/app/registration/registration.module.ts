@@ -3,28 +3,29 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
     MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatIconModule,
-    MatDialogModule,
-    MatInputModule,
-    MatButtonModule,
-    MatButtonToggleModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatIconModule,
+        MatDialogModule,
+        MatInputModule,
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatRadioModule
 } from '@angular/material';
 
 // Components
-import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import { PeopleComponent } from './components/people/people.component';
 import { SharedModule } from '../shared/shared.module';
 
 // Services
 
 
 // Router
-import { UserRoutingModule } from './settings-routing.module';
+import { RegistrationRoutingModule } from './registration-routing.module';
 
 @NgModule({
     imports: [
-        UserRoutingModule,
+        RegistrationRoutingModule,
         MatTableModule,
         MatPaginatorModule,
         MatSortModule,
@@ -33,15 +34,16 @@ import { UserRoutingModule } from './settings-routing.module';
         MatInputModule,
         MatButtonModule,
         MatButtonToggleModule,
+        MatRadioModule,
+        SharedModule,
         FormsModule,
-        ReactiveFormsModule,
-        SharedModule
+        ReactiveFormsModule
     ],
     declarations: [
-        UserSettingsComponent
+        PeopleComponent
     ],
     entryComponents: [
     ],
     providers: []
 })
-export class UserSettingsModule { }
+export class RegistrationModule { }

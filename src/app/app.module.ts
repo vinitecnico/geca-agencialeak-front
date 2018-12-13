@@ -16,6 +16,8 @@ import { LayoutModule } from './layout/layout.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { WebsiteSettingsModule } from './website-settings/website-settings.module';
 import { UserSettingsModule } from './settings/settings.module';
+import { RegistrationModule } from './registration/registration.module';
+import { SharedModule } from './shared/shared.module';
 
 // Layout
 import { LayoutComponent } from './layout/layout.component';
@@ -121,6 +123,8 @@ export function getLocalStorage() {
     LayoutModule,
     UserSettingsModule,
     WebsiteSettingsModule,
+    RegistrationModule,
+    SharedModule,
     BlockUIModule.forRoot(),
     BlockUIHttpModule.forRoot({
       requestFilters: []
