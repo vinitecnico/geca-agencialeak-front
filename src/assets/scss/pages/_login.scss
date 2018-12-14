@@ -98,3 +98,13 @@ mat-checkbox {
 #img-upload{
   width: 100%;
 }
+
+.input-zona {
+  margin-top: 18px;
+}
+
+@media only screen and (max-width: 767px) {
+  .input-zona {
+    margin-top: 0;
+  }
+}

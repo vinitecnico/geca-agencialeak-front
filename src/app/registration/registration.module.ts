@@ -28,6 +28,7 @@ import { SharedModule } from '../shared/shared.module';
 // Router
 import { RegistrationRoutingModule } from './registration-routing.module';
 import { FairComponent } from './components/fair/fair.component';
+import { CollegeComponent } from './components/college/college.component';
 
 @NgModule({
     imports: [
@@ -52,7 +53,8 @@ import { FairComponent } from './components/fair/fair.component';
     declarations: [
         PeopleComponent,
         EnterpriseComponent,
-        FairComponent
+        FairComponent,
+        CollegeComponent
     ],
     entryComponents: [
     ],
