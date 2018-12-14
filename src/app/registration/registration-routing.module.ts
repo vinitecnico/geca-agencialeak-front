@@ -12,7 +12,7 @@ import { CollegeComponent } from './components/college/college.component';
 
 const routes: Routes = [
     {
-        path: 'app',
+        path: 'registration',
         component: LayoutComponent,
         canActivate: [AuthGuard],
         children: [
