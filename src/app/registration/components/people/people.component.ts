@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import value from '*.json';
 
 @Component({
     selector: 'app-people',
@@ -12,9 +13,12 @@ export class PeopleComponent implements OnInit {
     orientacaoSexuals: any = [' Heterosexual', 'Homossexual', 'Bissexual'];
     etnias: any = ['Negro', 'Indígena', 'Mulato/Pardo', 'Asiático', 'Indiano', 'Latino/Hispânico',
         'Branco', 'Árabe/Oriente Médio', 'Outra'];
-    form: any;
     firstFormGroup: any;
     secondFormGroup: any;
+    thirdFormGroup: any;
+    fourthFormGroup: any;
+    fifthFormGroup: any;
+    isEditable = true;
 
     constructor(private formBuilder: FormBuilder) {
     }
@@ -37,7 +41,6 @@ export class PeopleComponent implements OnInit {
             confirmPassword: [null]
         });
 
-
         this.secondFormGroup = this.formBuilder.group({
             cep: [null, Validators.required],
             address: [null],
@@ -53,6 +56,33 @@ export class PeopleComponent implements OnInit {
             facebook: [null],
             instagram: [null],
             twitter: [null]
+        });
+
+        this.thirdFormGroup = this.formBuilder.group({
+            company: [null],
+            admissionDate: [null],
+            terminationDate: [null],
+            positionCompany: [null],
+            workplace: [null],
+            sindcalizado: [null],
+            associationNumber: [null],
+            militante: [null],
+            indicacaoDiretor: [null],
+            tituloEleitoral: [null],
+            zona: [null],
+            secao: [null],
+            municipio: [null],
+            uf: [null]
+        });
+
+        this.fourthFormGroup = this.formBuilder.group({
+            score: [null],
+            history: [null]
+        });
+
+        this.fifthFormGroup = this.formBuilder.group({
+            score: [null],
+            history: [null]
         });
     }
 

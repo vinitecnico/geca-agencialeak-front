@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-// import * as moment from 'moment';
+import * as moment from 'moment';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -21,14 +21,14 @@ export class AuthGuard implements CanActivate {
       return false;
     }
 
-    // const authObj = JSON.parse(auth);
-    // const now = moment();
-    // const tokenData = moment(authObj.expires_in);
+    const authObj = JSON.parse(auth);
+    const now = moment();
+    const tokenData = moment(authObj.expires_in);
 
-    // if (now.diff(tokenData, 'seconds') > 0) {
-    //   this.router.navigate(['/login']);
-    //   return false;
-    // }
+    if (now.diff(tokenData, 'seconds') > 0) {
+      this.router.navigate(['/login']);
+      return false;
+    }
 
     return true;
   }

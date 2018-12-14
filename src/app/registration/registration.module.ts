@@ -13,7 +13,8 @@ import {
         MatButtonToggleModule,
         MatRadioModule,
         MatStepperModule,
-        MatSelectModule
+        MatSelectModule,
+        MatCheckboxModule
 } from '@angular/material';
 
 // Components
@@ -41,6 +42,7 @@ import { RegistrationRoutingModule } from './registration-routing.module';
         MatRadioModule,
         MatStepperModule,
         MatSelectModule,
+        MatCheckboxModule,
         SharedModule,
         FormsModule,
         ReactiveFormsModule

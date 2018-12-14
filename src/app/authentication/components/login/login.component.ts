@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    localStorage.setItem('authData', JSON.stringify(this.form.value));
+    localStorage.setItem('authData', JSON.stringify({expires_in: moment().add(30, 'minutes')}));
     this.router.navigateByUrl('/app/information');
   }
 
