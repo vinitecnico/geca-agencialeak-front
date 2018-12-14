@@ -19,6 +19,7 @@ import {
 
 // Components
 import { PeopleComponent } from './components/people/people.component';
+import { EnterpriseComponent } from './components/enterprises/enterprise.component';
 import { SharedModule } from '../shared/shared.module';
 
 // Services
@@ -48,7 +49,8 @@ import { RegistrationRoutingModule } from './registration-routing.module';
         ReactiveFormsModule
     ],
     declarations: [
-        PeopleComponent
+        PeopleComponent,
+        EnterpriseComponent
     ],
     entryComponents: [
     ],
