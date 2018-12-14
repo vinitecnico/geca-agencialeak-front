@@ -19,7 +19,7 @@ import {
 
 // Components
 import { PeopleComponent } from './components/people/people.component';
-import { EnterpriseComponent } from './components/enterprises/enterprise.component';
+import { EnterpriseComponent } from './components/enterprise/enterprise.component';
 import { SharedModule } from '../shared/shared.module';
 
 // Services
@@ -27,6 +27,7 @@ import { SharedModule } from '../shared/shared.module';
 
 // Router
 import { RegistrationRoutingModule } from './registration-routing.module';
+import { FairComponent } from './components/fair/fair.component';
 
 @NgModule({
     imports: [
@@ -50,7 +51,8 @@ import { RegistrationRoutingModule } from './registration-routing.module';
     ],
     declarations: [
         PeopleComponent,
-        EnterpriseComponent
+        EnterpriseComponent,
+        FairComponent
     ],
     entryComponents: [
     ],
