@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BlockUIModule } from 'ng-block-ui';
 import { BlockUIHttpModule } from 'ng-block-ui/http';
 import { QuillModule } from 'ngx-quill';
+import { AlertModule } from 'ngx-alerts';
+
 
 // Components
 import { AppRoutingModule } from './app-routing.module';
@@ -21,12 +23,6 @@ import { SharedModule } from './shared/shared.module';
 
 // Layout
 import { LayoutComponent } from './layout/layout.component';
-
-// Header
-
-
-// Sidenav
-
 
 // Pages
 import { HomeComponent } from './home/home.component';
@@ -129,7 +125,8 @@ export function getLocalStorage() {
     BlockUIHttpModule.forRoot({
       requestFilters: []
     }),
-    QuillModule
+    QuillModule,
+    AlertModule.forRoot()
   ],
   providers: [
     { provide: 'LocalStorage', useFactory: getLocalStorage },

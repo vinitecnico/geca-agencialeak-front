@@ -2,28 +2,25 @@ import { Injectable, Inject, OnInit } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+
 // import * as moment from 'moment';
 
 // Services
-// import { LocaltSorageService } from '../../shared/services/local-storage.service';
-// import { StartupConfigService } from '../../shared/services/startup.config.service';
+import { StartupConfigService } from '../../shared/services/startup.config.service';
 
 @Injectable()
 export class AuthenticationService {
 
     constructor(private http: HttpClient,
         private router: Router,
+        private apiConfig: StartupConfigService,
         @Inject('LocalStorage') localStorage) {
     }
 
     login(authData): Observable<any> {
-        this.checkLocalData();
-        const url = '';
-        // `${this.apiConfig.value}token`;
+        const url = `${this.apiConfig.domain}api/login`;
 
-        const request = `grant_type=password&username=${authData.username}&password=${authData.password}&domain=${authData.host}`;
-
-        return this.http.post(url, request, { headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded') });
+        return this.http.post(url, authData);
     }
 
     checkLocalData() {

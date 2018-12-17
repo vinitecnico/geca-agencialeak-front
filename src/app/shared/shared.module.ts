@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-// components
+// Components
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+
+// Services
+import { StartupConfigService } from './services/startup.config.service';
 
 @NgModule({
     imports: [
@@ -15,6 +18,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
         BreadcrumbComponent
     ],
     providers: [
+        StartupConfigService
     ],
     entryComponents: [
     ]

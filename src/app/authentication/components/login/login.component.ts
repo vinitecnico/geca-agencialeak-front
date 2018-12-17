@@ -1,8 +1,14 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
+import { finalize, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { AlertService } from 'ngx-alerts';
 import * as moment from 'moment';
+
+// services
+import { AuthenticationService } from '../../services/authentication.service';
+
 
 @Component({
   selector: 'app-login',
@@ -14,14 +20,17 @@ export class LoginComponent implements OnInit {
   passwordType: String = 'password';
   showPasswordError = false;
 
-  constructor(private router: Router, @Inject('LocalStorage') localStorage,
+  constructor(private router: Router,
+    private alertService: AlertService,
+    private authenticationService: AuthenticationService,
+    @Inject('LocalStorage') localStorage,
     private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      password: [null, Validators.required],
-      username: [null, Validators.required]
+      email: [null, Validators.required],
+      senha: [null, Validators.required]
     });
   }
 
@@ -31,8 +40,21 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    localStorage.setItem('authData', JSON.stringify({expires_in: moment().add(30, 'minutes')}));
-    this.router.navigateByUrl('/app/information');
+    this.authenticationService.login(this.form.value)
+      .pipe(
+        takeUntil(this.unsubscribe)
+      )
+      .subscribe((response) => {
+        const auth = response;
+        if (!auth) {
+          this.alertService.danger('Usuário ou senha inválido!');
+          return;
+        }
+        localStorage.setItem('authData', JSON.stringify({ expires_in: moment().add(30, 'minutes') }));
+        this.router.navigateByUrl('/app/information');
+      }, (error) => {
+        console.log(error);
+      });
   }
 
   getHostErrorMessage(): string {
