@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { MatIconModule, MatInputModule, MatButtonModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
 // Components
