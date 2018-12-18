@@ -23,7 +23,7 @@ export class EnterpriseComponent implements OnInit {
             complement: [null],
             neighborhood: [null],
             city: [null],
-            uf: [null],
+            state: [null],
             mainContact: [null],
             phone: [null],
             mobile: [null],

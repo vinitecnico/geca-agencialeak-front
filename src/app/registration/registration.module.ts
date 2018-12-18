@@ -30,6 +30,10 @@ import { RegistrationRoutingModule } from './registration-routing.module';
 import { FairComponent } from './components/fair/fair.component';
 import { CollegeComponent } from './components/college/college.component';
 
+// Services
+import { FairService } from './services/fair.service';
+import { CollegeService } from './services/college.service';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -58,6 +62,6 @@ import { CollegeComponent } from './components/college/college.component';
     ],
     entryComponents: [
     ],
-    providers: []
+    providers: [FairService, CollegeService]
 })
 export class RegistrationModule { }

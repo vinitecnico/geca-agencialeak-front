@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
+// Services
+import { FairService } from '../../services/fair.service';
+import { AlertService } from 'ngx-alerts';
+
 @Component({
     selector: 'app-fair',
     templateUrl: './fair.component.html'
@@ -8,10 +12,16 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 
 export class FairComponent implements OnInit {
     form: any;
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private formBuilder: FormBuilder,
+        private fairService: FairService,
+        private alertService: AlertService) {
     }
 
     ngOnInit() {
+        this.createForm();
+    }
+
+    createForm() {
         this.form = this.formBuilder.group({
             name: [null, Validators.required],
             weekday: [null, Validators.required],
@@ -21,7 +31,7 @@ export class FairComponent implements OnInit {
             complement: [null],
             neighborhood: [null],
             city: [null],
-            uf: [null],
+            state: [null],
             gps: [null]
         });
     }
@@ -32,6 +42,13 @@ export class FairComponent implements OnInit {
             return;
         }
 
-        console.log(JSON.stringify(this.form.value));
+        const request = this.form.value;
+        this.fairService.createOrUpdateFair(request)
+            .subscribe((response) => {
+                this.alertService.success('Feira criada com sucesso!');
+                this.createForm();
+            }, (error) => {
+                this.alertService.danger('Erro para criar Feira!');
+            });
     }
 }
