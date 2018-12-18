@@ -9,7 +9,7 @@ import { UserSettingsComponent } from './components/user-settings/user-settings.
 
 const routes: Routes = [
     {
-        path: 'app',
+        path: 'settings',
         component: LayoutComponent,
         canActivate: [AuthGuard],
         children: [

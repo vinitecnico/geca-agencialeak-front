@@ -7,20 +7,20 @@
                     <li class="active">
                         <a [routerLink]="['/']"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
-                    <li class="menu-item-has-children dropdown">
+                    <li id="registration" class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="menu-icon fa fa-folder-open"></i>Cadastro
                         </a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-users"></i><a [routerLink]="['/registration/people']">Pessoa</a></li>
-                            <li><i class="fa fa-briefcase"></i><a [routerLink]="['/registration/enterprise']">Empresa</a></li>
-                            <li><i class="fa fa-graduation-cap"></i><a [routerLink]="['/registration/college']">Colégio</a></li>
-                            <li><i class="fa fa-calendar"></i><a [routerLink]="['/registration/fair']">Feira</a></li>
+                            <li id="people"><i class="fa fa-users"></i><a [routerLink]="['/registration/people']">Pessoa</a></li>
+                            <li id="enterprise"><i class="fa fa-briefcase"></i><a [routerLink]="['/registration/enterprise']">Empresa</a></li>
+                            <li id="college"><i class="fa fa-graduation-cap"></i><a [routerLink]="['/registration/college']">Colégio</a></li>
+                            <li id="fair"><i class="fa fa-calendar"></i><a [routerLink]="['/registration/fair']">Feira</a></li>
                             <!-- <li><i class="fa  fa-share-square-o"></i><a [routerLink]="['/app/user-settings']">Demanda</a></li> -->
                         </ul>
                     </li>
                     <!-- <li class="menu-title">Configurações</li> -->
-                    <li class="menu-item-has-children dropdown">
+                    <li id="settings" class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="menu-icon fa fa-users"></i>Usuário
                         </a>
@@ -29,7 +29,7 @@
                             <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">Badges</a></li>
                             <li><i class="fa fa-bars"></i><a href="ui-tabs.html">Tabs</a></li> -->
 
-                            <li><i class="fa fa-id-card-o"></i><a [routerLink]="['/app/user-settings']">Cadastro</a></li>
+                            <li id="user-settings"><i class="fa fa-id-card-o"></i><a [routerLink]="['/settings/user-settings']">Cadastro</a></li>
                             <!-- <li><i class="fa fa-exclamation-triangle"></i><a href="ui-alerts.html">Alerts</a></li>
                             <li><i class="fa fa-spinner"></i><a href="ui-progressbar.html">Progress Bars</a></li>
                             <li><i class="fa fa-fire"></i><a href="ui-modals.html">Modals</a></li>

@@ -108,3 +108,17 @@ mat-checkbox {
     margin-top: 0;
   }
 }
+
+div.dropdown-menu.show {
+  display: block;
+  position: initial!important;
+}
+
+li.action-sub-menu {
+  i {
+    color: #03a9f3!important;
+  }
+  a {
+    color: #03a9f3!important;
+  }
+}
