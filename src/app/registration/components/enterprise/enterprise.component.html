@@ -43,66 +43,7 @@
                                     </mat-form-field>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-12 col-sm-3">
-                                    <mat-form-field class="full-width">
-                                        <input matInput placeholder="CEP" formControlName="zipcode">
-                                        <mat-error>
-                                            Campo obrigatório
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <mat-form-field class="full-width">
-                                        <input matInput placeholder="Endereço" formControlName="address">
-                                        <mat-error>
-                                            Campo obrigatório
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-12 col-sm-3">
-                                    <mat-form-field class="full-width">
-                                        <input matInput placeholder="Número" formControlName="numberAddress">
-                                        <mat-error>
-                                            Campo obrigatório
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 col-sm-3">
-                                    <mat-form-field class="full-width">
-                                        <input matInput placeholder="Complemento" formControlName="complement">
-                                        <mat-error>
-                                            Campo obrigatório
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-12 col-sm-3">
-                                    <mat-form-field class="full-width">
-                                        <input matInput placeholder="Bairro" formControlName="neighborhood">
-                                        <mat-error>
-                                            Campo obrigatório
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-12 col-sm-3">
-                                    <mat-form-field class="full-width">
-                                        <input matInput placeholder="Cidade" formControlName="city">
-                                        <mat-error>
-                                            Campo obrigatório
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-12 col-sm-3">
-                                    <mat-form-field class="full-width">
-                                        <input matInput placeholder="Estado" formControlName="state">
-                                        <mat-error>
-                                            Campo obrigatório
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
+                            <app-zipcode [parentForm]="form"></app-zipcode>
                             <div class="row">
                                 <div class="col-12 col-sm-3">
                                     <mat-form-field class="full-width">
