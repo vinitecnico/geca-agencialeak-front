@@ -14,6 +14,7 @@ import { Zipcode } from 'src/app/shared/classes/zipcode.classe';
 
 export class FairComponent implements OnInit {
     form: any;
+    zipcodeLoading: Boolean = false;
     constructor(private formBuilder: FormBuilder,
         private fairService: FairService,
         private alertService: AlertService,
@@ -28,8 +29,10 @@ export class FairComponent implements OnInit {
         setTimeout(() => {
             const request: any = this.form.value;
             if (request.zipcode.length >= 8) {
+                this.zipcodeLoading = true;
                 this.zipcodeService.getZipCode(request.zipcode)
                     .subscribe(data => {
+                        this.zipcodeLoading = false;
                         const zipcode = this.zipcodeResponse(data);
 
                         this.form.controls.zipcode.setValue(zipcode.zipcode);
@@ -38,6 +41,8 @@ export class FairComponent implements OnInit {
                         this.form.controls.neighborhood.setValue(zipcode.neighborhood);
                         this.form.controls.city.setValue(zipcode.city);
                         this.form.controls.state.setValue(zipcode.state);
+                    }, (error) => {
+                        this.zipcodeLoading = false;
                     });
             }
         }, 400);
