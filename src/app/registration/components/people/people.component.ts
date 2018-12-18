@@ -42,13 +42,13 @@ export class PeopleComponent implements OnInit {
         });
 
         this.secondFormGroup = this.formBuilder.group({
-            cep: [null, Validators.required],
+            zipcode: [null, Validators.required],
             address: [null],
             numberAddress: [null],
             complement: [null],
             neighborhood: [null],
             city: [null],
-            uf: [null],
+            state: [null],
             gps: [null],
             phone: [null],
             mobile: [null],
@@ -72,7 +72,7 @@ export class PeopleComponent implements OnInit {
             zona: [null],
             secao: [null],
             municipio: [null],
-            uf: [null]
+            state: [null]
         });
 
         this.fourthFormGroup = this.formBuilder.group({

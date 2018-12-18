@@ -18,14 +18,23 @@ export class CollegeComponent implements OnInit {
             zona: [null, Validators.required],
             secoes: [null, Validators.required],
             secoesEspeciais: [null, Validators.required],
-            cep: [null, Validators.required],
+            zipcode: [null, Validators.required],
             address: [null],
             numberAddress: [null],
             complement: [null],
             neighborhood: [null],
             city: [null],
-            uf: [null],
+            state: [null],
             gps: [null]
         });
+    }
+
+    save() {
+        if (!this.form.valid) {
+            // this.formService.validateAllFormFields(this.form);
+            return;
+        }
+
+        console.log(JSON.stringify(this.form.value));
     }
 }

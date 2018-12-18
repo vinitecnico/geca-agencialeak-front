@@ -17,7 +17,7 @@ export class EnterpriseComponent implements OnInit {
             cnpj: [null, Validators.required],
             segment: [null],
             activity: [null],
-            cep: [null, Validators.required],
+            zipcode: [null, Validators.required],
             address: [null],
             numberAddress: [null],
             complement: [null],

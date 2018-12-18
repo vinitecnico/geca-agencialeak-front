@@ -15,7 +15,7 @@ export class FairComponent implements OnInit {
         this.form = this.formBuilder.group({
             name: [null, Validators.required],
             weekday: [null, Validators.required],
-            cep: [null, Validators.required],
+            zipcode: [null, Validators.required],
             address: [null],
             numberAddress: [null],
             complement: [null],
@@ -24,5 +24,14 @@ export class FairComponent implements OnInit {
             uf: [null],
             gps: [null]
         });
+    }
+
+    save() {
+        if (!this.form.valid) {
+            // this.formService.validateAllFormFields(this.form);
+            return;
+        }
+
+        console.log(JSON.stringify(this.form.value));
     }
 }
