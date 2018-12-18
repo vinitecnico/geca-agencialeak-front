@@ -6,6 +6,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 
 // Services
 import { StartupConfigService } from './services/startup.config.service';
+import { ZipcodeService } from './services/zipcode.service';
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import { StartupConfigService } from './services/startup.config.service';
         BreadcrumbComponent
     ],
     providers: [
-        StartupConfigService
+        StartupConfigService,
+        ZipcodeService
     ],
     entryComponents: [
     ]
