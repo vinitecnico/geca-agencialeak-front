@@ -20,10 +20,10 @@ export class CollegeComponent implements OnInit {
     ngOnInit() {
         this.form = this.formBuilder.group({
             name: [null, Validators.required],
-            numeroEleitores: [null, Validators.required],
-            zona: [null, Validators.required],
-            secoes: [null, Validators.required],
-            secoesEspeciais: [null, Validators.required],
+            numbervoters: [null],
+            electoralzone: [null, Validators.required],
+            section: [null, Validators.required],
+            specialsection: [null, Validators.required],
             zipcode: [null, Validators.required],
             address: [null],
             numberAddress: [null],
