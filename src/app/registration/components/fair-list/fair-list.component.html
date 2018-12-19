@@ -63,7 +63,16 @@
                         <ng-container matColumnDef="edit">
                             <mat-header-cell *matHeaderCellDef></mat-header-cell>
                             <mat-cell *matCellDef="let fair">
-                                <mat-icon class="cursor-pointer" mat-button [routerLink]="['/registration/fair']" [queryParams]="{id: fair._id}" matTooltip="Editar">mode_edit</mat-icon>
+                                <mat-icon class="cursor-pointer" mat-button [routerLink]="['/registration/fair']"
+                                    [queryParams]="{_id: fair._id}" matTooltip="Editar">mode_edit</mat-icon>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="delete">
+                            <mat-header-cell *matHeaderCellDef style="flex: 0 0 15%"></mat-header-cell>
+                            <mat-cell *matCellDef="let fair" style="flex: 0 0 15%">
+                                <mat-icon style="color: #DD6B55;" class="cursor-pointer" mat-button (click)="delete(fair._id)"
+                                    matTooltip="Apagar">delete</mat-icon>
                             </mat-cell>
                         </ng-container>
 

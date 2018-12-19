@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import * as _ from 'lodash';
 
 // Services
 import { FairService } from '../../services/fair.service';
@@ -18,14 +19,48 @@ declare var swal: any;
 export class FairComponent implements OnInit {
     form: any;
     zipcodeLoading: Boolean = false;
+    _id: string;
     constructor(private router: Router,
+        private route: ActivatedRoute,
         private formBuilder: FormBuilder,
         private fairService: FairService,
         private zipcodeService: ZipcodeService) {
+        this.route.queryParams.subscribe(params => {
+            this._id = params['_id'];
+        });
     }
 
     ngOnInit() {
         this.createForm();
+
+        if (this._id) {
+            this.fairService.getById(this._id)
+                .subscribe((response) => {
+                    if (_.isArray(response)) {
+                        this.setValueData(_.first(response));
+                    } else {
+                        this.router.navigateByUrl('/registration/fair-list');
+                    }
+                });
+        }
+    }
+
+    setValueData(request): void {
+        const data = {
+            _id: request._id,
+            name: request.name,
+            weekday: request.weekday,
+            zipcode: request.zipcode,
+            address: request.address,
+            numberAddress: request.numberAddress,
+            complement: request.complement,
+            neighborhood: request.neighborhood,
+            city: request.city,
+            state: request.state,
+            gps: request.gps
+        };
+
+        this.form.setValue(data);
     }
 
     getZipcode() {
@@ -65,6 +100,7 @@ export class FairComponent implements OnInit {
 
     createForm() {
         this.form = this.formBuilder.group({
+            _id: [null],
             name: [null, Validators.required],
             weekday: [null, Validators.required],
             zipcode: [null, Validators.required],
@@ -88,7 +124,7 @@ export class FairComponent implements OnInit {
         this.fairService.createOrUpdateFair(request)
             .subscribe((response) => {
                 swal({
-                    text: 'Feira criada com sucesso!',
+                    text: `Feira ${!request._id ? 'criada' : 'alterada'} com sucesso!`,
                     type: 'success'
                 }).then(() => {
                     this.router.navigateByUrl('/registration/fair-list');

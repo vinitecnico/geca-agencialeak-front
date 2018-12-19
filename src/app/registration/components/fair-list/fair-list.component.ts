@@ -15,7 +15,7 @@ declare var swal: any;
 
 export class FairListComponent implements OnInit, AfterViewInit {
     // Table elements
-    displayedColumns = ['name', 'weekday', 'city', 'edit'];
+    displayedColumns = ['name', 'weekday', 'city', 'edit', 'delete'];
     dataSource = new MatTableDataSource<Fair>();
     pageSize = 10;
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -53,6 +53,34 @@ export class FairListComponent implements OnInit, AfterViewInit {
                 } else {
                     this.hasSearch = true;
                     this.showMessage = false;
+                }
+            });
+    }
+
+    delete(_id: string) {
+        swal({
+            text: 'Deseja realmente apagar a feira?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: 'Apagar',
+            cancelButtonText: 'Cancelar',
+            closeOnConfirm: false,
+            closeOnCancel: false
+        })
+            .then((isConfirm) => {
+                if (isConfirm) {
+                    this.fairService.delete(_id)
+                        .subscribe((data: any) => {
+                            if (data === 'Feira deletada com sucesso.') {
+                                swal({
+                                    text: `Feira deletada com sucesso!`,
+                                    type: 'success'
+                                }).then(() => {
+                                    this.getAll();
+                                });
+                            }
+                        });
                 }
             });
     }

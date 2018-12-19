@@ -35,30 +35,35 @@ export class LayoutComponent implements OnInit {
       const urlItems = _.remove(_.split(this.activeUrl, '/'), (x) => {
         return x;
       });
-      if (urlItems) {
-        this.urlItem = _.first(urlItems);
-        document.getElementById(this.urlItem).className = 'menu-item-has-children dropdown show';
+      try {
+        if (urlItems) {
+          this.urlItem = _.first(urlItems);
+          document.getElementById(this.urlItem).className = 'menu-item-has-children dropdown show';
 
-        if (urlItems.length > 1) {
-          this.urlSubItem = _.last(urlItems);
-          const htmlItem: any = document.getElementById(this.urlItem).getElementsByTagName('ul')[0];
-          htmlItem.className = 'sub-menu children dropdown-menu show';
-          const removeSubItem = document.getElementsByClassName('action-sub-menu');
-          if (removeSubItem && removeSubItem.length > 0) {
-            document.getElementsByClassName('action-sub-menu')[0].classList.remove('action-sub-menu');
-          }
-
-          if (!this.urlSubItem.indexOf('-')) {
-            document.getElementById(this.urlSubItem).className = 'action-sub-menu';
-          } else {
-            let subMenuName = _.first(_.split(this.urlSubItem, '-'));
-            if (this.urlSubItem.indexOf('?')) {
-              subMenuName = _.first(_.split(this.urlSubItem, '?'));
+          if (urlItems.length > 1) {
+            this.urlSubItem = _.last(urlItems);
+            const htmlItem: any = document.getElementById(this.urlItem).getElementsByTagName('ul')[0];
+            htmlItem.className = 'sub-menu children dropdown-menu show';
+            const removeSubItem = document.getElementsByClassName('action-sub-menu');
+            if (removeSubItem && removeSubItem.length > 0) {
+              document.getElementsByClassName('action-sub-menu')[0].classList.remove('action-sub-menu');
             }
-            document.getElementById(subMenuName).className = 'action-sub-menu';
+
+            if (!this.urlSubItem.indexOf('-')) {
+              document.getElementById(this.urlSubItem).className = 'action-sub-menu';
+            } else {
+              let subMenuName = _.first(_.split(this.urlSubItem, '-'));
+              if (this.urlSubItem.indexOf('?') >= 0 ) {
+                subMenuName = _.first(_.split(this.urlSubItem, '?'));
+              }
+              document.getElementById(subMenuName).className = 'action-sub-menu';
+            }
           }
         }
+      } catch (err) {
+        console.log(err);
       }
+
     }, 0);
   }
 }
