@@ -7,6 +7,8 @@ import { AlertService } from 'ngx-alerts';
 import { ZipcodeService } from 'src/app/shared/services/zipcode.service';
 import { Zipcode } from 'src/app/shared/classes/zipcode.classe';
 
+declare var swal: any;
+
 @Component({
     selector: 'app-fair',
     templateUrl: './fair.component.html'
@@ -17,7 +19,6 @@ export class FairComponent implements OnInit {
     zipcodeLoading: Boolean = false;
     constructor(private formBuilder: FormBuilder,
         private fairService: FairService,
-        private alertService: AlertService,
         private zipcodeService: ZipcodeService) {
     }
 
@@ -84,10 +85,17 @@ export class FairComponent implements OnInit {
         const request = this.form.value;
         this.fairService.createOrUpdateFair(request)
             .subscribe((response) => {
-                this.alertService.success('Feira criada com sucesso!');
-                this.createForm();
+                swal({
+                    text: 'Feira criada com sucesso!',
+                    type: 'success'
+                }).then(() => {
+                    this.createForm();
+                });
             }, (error) => {
-                this.alertService.danger('Erro para criar Feira!');
+                swal({
+                    text: 'Erro para criar Feira!',
+                    type: 'error'
+                });
             });
     }
 }

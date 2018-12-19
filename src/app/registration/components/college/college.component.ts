@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'ngx-alerts';
+declare var swal: any;
 
 // services
 import { CollegeService } from '../../services/college.service';
@@ -44,10 +45,17 @@ export class CollegeComponent implements OnInit {
         const request = this.form.value;
         this.collegeService.createOrUpdateCollege(request)
             .subscribe((response) => {
-                this.alertService.success('Colégio criada com sucesso!');
-                this.form.reset();
+                swal({
+                    text: 'Colégio criada com sucesso!',
+                    type: 'success'
+                }).then(() => {
+                    this.form.reset();
+                });
             }, (error) => {
-                this.alertService.danger('Erro para criar Colégio!');
+                swal({
+                    text: 'Erro para criar Colégio!',
+                    type: 'error'
+                });
             });
     }
 }
