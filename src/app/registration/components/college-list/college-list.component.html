@@ -1,0 +1,109 @@
+<app-breadcrumb [title]="'Colégio'" [domain]="'Cadastro'" [page]="'Pesquisa Colégios'"></app-breadcrumb>
+
+<div class="content">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-12 col-sm-12">
+                <article class="article">
+                    <button class="pull-right btn-new" color="primary" mat-raised-button [routerLink]="['/registration/college']">Novo
+                        Colégio
+                    </button>
+                </article>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-12">
+
+                <div *ngIf="showMessage">
+                    <app-message [message]="titleMsg" [type]="'info'"></app-message>
+                </div>
+
+                <div class="table-container mat-elevation-z8" [hidden]="!hasSearch">
+
+                    <div class="table-header">
+                        <mat-form-field>
+                            <input matInput (keyup)="applyFilter($event.target.value, dataSource)" placeholder="Pesquisar">
+                        </mat-form-field>
+                    </div>
+
+                    <mat-table #table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc"
+                        matSortDisableClear>
+
+                        <!-- Name -->
+                        <ng-container matColumnDef="name">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header="name">
+                                <mat-icon class="tooltip-table" matTooltip="'Clique na seta para alterar a ordem de ordenação da tabela'"
+                                    [matTooltipPosition]="'above'">help</mat-icon>
+                                Nome
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let college"> {{college.name}} </mat-cell>
+                        </ng-container>
+
+                        <!-- electoralzone -->
+                        <ng-container matColumnDef="electoralzone">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header="electoralzone">
+                                <mat-icon class="tooltip-table" matTooltip="'Clique na seta para alterar a ordem de ordenação da tabela'"
+                                    [matTooltipPosition]="'above'">help</mat-icon>
+                                Zona
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let college"> {{college.electoralzone}} </mat-cell>
+                        </ng-container>
+
+                        <!-- section -->
+                        <ng-container matColumnDef="section">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header="section">
+                                <mat-icon class="tooltip-table" matTooltip="'Clique na seta para alterar a ordem de ordenação da tabela'"
+                                    [matTooltipPosition]="'above'">help</mat-icon>
+                                Seção
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let college"> {{college.section}} </mat-cell>
+                        </ng-container>
+
+                        <!-- neighborhood -->
+                        <ng-container matColumnDef="neighborhood">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header="neighborhood">
+                                <mat-icon class="tooltip-table" matTooltip="'Clique na seta para alterar a ordem de ordenação da tabela'"
+                                    [matTooltipPosition]="'above'">help</mat-icon>
+                                Bairro
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let college"> {{college.neighborhood}} </mat-cell>
+                        </ng-container>
+
+                        <!-- city -->
+                        <ng-container matColumnDef="city">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header="city">
+                                <mat-icon class="tooltip-table" matTooltip="'Clique na seta para alterar a ordem de ordenação da tabela'"
+                                    [matTooltipPosition]="'above'">help</mat-icon>
+                                Cidade
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let college"> {{college.city}} </mat-cell>
+                        </ng-container>
+
+
+                        <ng-container matColumnDef="edit">
+                            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                            <mat-cell *matCellDef="let college">
+                                <mat-icon class="cursor-pointer" mat-button [routerLink]="['/registration/college']"
+                                    [queryParams]="{_id: college._id}" matTooltip="Editar">mode_edit</mat-icon>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="delete">
+                            <mat-header-cell *matHeaderCellDef style="flex: 0 0 15%"></mat-header-cell>
+                            <mat-cell *matCellDef="let college" style="flex: 0 0 15%">
+                                <mat-icon style="color: #DD6B55;" class="cursor-pointer" mat-button (click)="delete(college._id)"
+                                    matTooltip="Apagar">delete</mat-icon>
+                            </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+
+                    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

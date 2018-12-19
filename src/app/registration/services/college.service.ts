@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { College } from '../classes/college.class';
 
 // Services
 import { StartupConfigService } from '../../shared/services/startup.config.service';
@@ -14,44 +15,28 @@ export class CollegeService {
 
     constructor(private http: HttpClient, private apiConfig: StartupConfigService, @Inject('LocalStorage') localStorage) { }
 
-    //   getAddresses(status: string = ''): Observable<any[]> {
+    getAll(): Observable<College[]> {
+        const url = `${this.apiConfig.domain}api/colegio`;
+        return this.http.get<College[]>(url, httpOptions);
+    }
 
-    //     const clientData = JSON.parse(localStorage.getItem('clientData'));
-    //     const url = `${this.apiConfig.value}api/CMS/address/${clientData.id}/${status}`;
+    getById(_id: string): Observable<College[]> {
+        const url = `${this.apiConfig.domain}api/colegio/${_id}`;
+        return this.http.get<College[]>(url, httpOptions);
+    }
 
-    //     return this.http.get<any[]>(url, httpOptions);
-    //   }
+    createOrUpdateCollege(college: College): Observable<any> {
+        const url = `${this.apiConfig.domain}api/colegio`;
 
-    createOrUpdateCollege(college: any): Observable<any> {
-        const url = `${this.apiConfig.domain}api/feira`;
-
-        if (college.id) {
-            return this.http.put(url, college, httpOptions);
+        if (college._id) {
+            return this.http.put(`${url}/${college._id}`, college, httpOptions);
         } else {
             return this.http.post(url, college, httpOptions);
         }
     }
 
-    //   getAddressById(id: number): Observable<Address> {
-
-    //     const clientData = JSON.parse(localStorage.getItem('clientData'));
-    //     const url = `${this.apiConfig.value}api/CMS/address/id/${id}/${clientData.id}`;
-
-    //     return this.http.get<Address>(url, httpOptions);
-    //   }
-
-    //   toggleStatus(id: number, isActive: boolean): Observable<any> {
-
-    //     const clientData = JSON.parse(localStorage.getItem('clientData'));
-    //     let url = '';
-
-    //     if (isActive) {
-    //       url = `${this.apiConfig.value}api/CMS/address/${id}/${clientData.id}/deactivate`;
-    //     } else {
-    //       url = `${this.apiConfig.value}api/CMS/address/${id}/${clientData.id}/activate`;
-    //     }
-
-    //     return this.http.put<any>(url, httpOptions);
-    //   }
-
+    delete(_id: string): Observable<any> {
+        const url = `${this.apiConfig.domain}api/colegio/${_id}`;
+        return this.http.delete(url, httpOptions);
+    }
 }

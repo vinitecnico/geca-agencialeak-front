@@ -9,6 +9,7 @@ import { EnterpriseComponent } from './components/enterprise/enterprise.componen
 import { FairComponent } from './components/fair/fair.component';
 import { CollegeComponent } from './components/college/college.component';
 import { FairListComponent } from './components/fair-list/fair-list.component';
+import { CollegeListComponent } from './components/college-list/college-list.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
             { path: 'enterprise', component: EnterpriseComponent },
             { path: 'fair', component: FairComponent},
             { path: 'fair-list', component: FairListComponent},
-            { path: 'college', component: CollegeComponent}
+            { path: 'college', component: CollegeComponent},
+            { path: 'college-list', component: CollegeListComponent}
         ]
     }
 ];

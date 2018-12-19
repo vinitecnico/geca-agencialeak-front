@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
 
 // Services
 import { FairService } from '../../services/fair.service';
-import { AlertService } from 'ngx-alerts';
 import { ZipcodeService } from 'src/app/shared/services/zipcode.service';
 import { Zipcode } from 'src/app/shared/classes/zipcode.classe';
 

@@ -28,11 +28,11 @@ import { RegistrationRoutingModule } from './registration-routing.module';
 import { FairComponent } from './components/fair/fair.component';
 import { CollegeComponent } from './components/college/college.component';
 import { FairListComponent } from './components/fair-list/fair-list.component';
+import { CollegeListComponent } from './components/college-list/college-list.component';
 
 // Services
 import { FairService } from './services/fair.service';
 import { CollegeService } from './services/college.service';
-
 
 @NgModule({
     imports: [
@@ -60,7 +60,8 @@ import { CollegeService } from './services/college.service';
         EnterpriseComponent,
         FairComponent,
         CollegeComponent,
-        FairListComponent
+        FairListComponent,
+        CollegeListComponent
     ],
     entryComponents: [
     ],
