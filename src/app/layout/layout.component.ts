@@ -21,6 +21,11 @@ export class LayoutComponent implements OnInit {
 
   }
 
+  logout() {
+    localStorage.setItem('authData', null);
+    this.router.navigateByUrl('/login');
+  }
+
   changeRouter() {
     setTimeout(() => {
       if (this.activeUrl === '/app/information') {
