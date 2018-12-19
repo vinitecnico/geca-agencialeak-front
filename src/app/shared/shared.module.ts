@@ -16,12 +16,12 @@ import {
 
 // Components
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { MessageComponent } from './components/message/message.component';
+import { ZipcodeComponent } from './components/zipcode/zipcode.component';
 
 // Services
 import { StartupConfigService } from './services/startup.config.service';
 import { ZipcodeService } from './services/zipcode.service';
-import { ZipcodeComponent } from './components/zipcode/zipcode.component';
-
 
 @NgModule({
     imports: [
@@ -40,11 +40,13 @@ import { ZipcodeComponent } from './components/zipcode/zipcode.component';
     ],
     declarations: [
         BreadcrumbComponent,
-        ZipcodeComponent
+        ZipcodeComponent,
+        MessageComponent
     ],
     exports: [
         BreadcrumbComponent,
-        ZipcodeComponent
+        ZipcodeComponent,
+        MessageComponent
     ],
     providers: [
         StartupConfigService,

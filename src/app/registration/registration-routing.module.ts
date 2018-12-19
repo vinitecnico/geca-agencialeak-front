@@ -8,6 +8,7 @@ import { PeopleComponent } from './components/people/people.component';
 import { EnterpriseComponent } from './components/enterprise/enterprise.component';
 import { FairComponent } from './components/fair/fair.component';
 import { CollegeComponent } from './components/college/college.component';
+import { FairListComponent } from './components/fair-list/fair-list.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
             { path: 'people', component: PeopleComponent },
             { path: 'enterprise', component: EnterpriseComponent },
             { path: 'fair', component: FairComponent},
+            { path: 'fair-list', component: FairListComponent},
             { path: 'college', component: CollegeComponent}
         ]
     }

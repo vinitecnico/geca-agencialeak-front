@@ -2,8 +2,12 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+// Class
+import { Fair } from '../classes/fair.class';
+
 // Services
 import { StartupConfigService } from '../../shared/services/startup.config.service';
+
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,18 +18,16 @@ export class FairService {
 
     constructor(private http: HttpClient, private apiConfig: StartupConfigService, @Inject('LocalStorage') localStorage) { }
 
-    //   getAddresses(status: string = ''): Observable<any[]> {
-
-    //     const clientData = JSON.parse(localStorage.getItem('clientData'));
-    //     const url = `${this.apiConfig.value}api/CMS/address/${clientData.id}/${status}`;
-
-    //     return this.http.get<any[]>(url, httpOptions);
-    //   }
-
-    createOrUpdateFair(fair: any): Observable<any> {
+    getAll(status: string = ''): Observable<Fair[]> {
         const url = `${this.apiConfig.domain}api/feira`;
 
-        if (fair.id) {
+        return this.http.get<Fair[]>(url, httpOptions);
+    }
+
+    createOrUpdateFair(fair: Fair): Observable<any> {
+        const url = `${this.apiConfig.domain}api/feira`;
+
+        if (fair._id) {
             return this.http.put(url, fair, httpOptions);
         } else {
             return this.http.post(url, fair, httpOptions);

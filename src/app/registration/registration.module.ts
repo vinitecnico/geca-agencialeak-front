@@ -14,7 +14,8 @@ import {
         MatRadioModule,
         MatStepperModule,
         MatSelectModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatTooltipModule
 } from '@angular/material';
 
 // Components
@@ -22,17 +23,16 @@ import { PeopleComponent } from './components/people/people.component';
 import { EnterpriseComponent } from './components/enterprise/enterprise.component';
 import { SharedModule } from '../shared/shared.module';
 
-// Services
-
-
-// Router
+// components
 import { RegistrationRoutingModule } from './registration-routing.module';
 import { FairComponent } from './components/fair/fair.component';
 import { CollegeComponent } from './components/college/college.component';
+import { FairListComponent } from './components/fair-list/fair-list.component';
 
 // Services
 import { FairService } from './services/fair.service';
 import { CollegeService } from './services/college.service';
+
 
 @NgModule({
     imports: [
@@ -50,6 +50,7 @@ import { CollegeService } from './services/college.service';
         MatStepperModule,
         MatSelectModule,
         MatCheckboxModule,
+        MatTooltipModule,
         SharedModule,
         FormsModule,
         ReactiveFormsModule
@@ -58,7 +59,8 @@ import { CollegeService } from './services/college.service';
         PeopleComponent,
         EnterpriseComponent,
         FairComponent,
-        CollegeComponent
+        CollegeComponent,
+        FairListComponent
     ],
     entryComponents: [
     ],

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 // Services
 import { FairService } from '../../services/fair.service';
@@ -17,7 +18,8 @@ declare var swal: any;
 export class FairComponent implements OnInit {
     form: any;
     zipcodeLoading: Boolean = false;
-    constructor(private formBuilder: FormBuilder,
+    constructor(private router: Router,
+        private formBuilder: FormBuilder,
         private fairService: FairService,
         private zipcodeService: ZipcodeService) {
     }
@@ -89,7 +91,7 @@ export class FairComponent implements OnInit {
                     text: 'Feira criada com sucesso!',
                     type: 'success'
                 }).then(() => {
-                    this.createForm();
+                    this.router.navigateByUrl('/registration/fair-list');
                 });
             }, (error) => {
                 swal({

@@ -42,7 +42,16 @@ export class LayoutComponent implements OnInit {
           if (removeSubItem && removeSubItem.length > 0) {
             document.getElementsByClassName('action-sub-menu')[0].classList.remove('action-sub-menu');
           }
-          document.getElementById(this.urlSubItem).className = 'action-sub-menu';
+
+          if (!this.urlSubItem.indexOf('-')) {
+            document.getElementById(this.urlSubItem).className = 'action-sub-menu';
+          } else {
+            let subMenuName = _.first(_.split(this.urlSubItem, '-'));
+            if (this.urlSubItem.indexOf('?')) {
+              subMenuName = _.first(_.split(this.urlSubItem, '?'));
+            }
+            document.getElementById(subMenuName).className = 'action-sub-menu';
+          }
         }
       }
     }, 0);

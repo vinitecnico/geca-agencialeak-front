@@ -1,0 +1,7 @@
+<div class="alert alert-{{type}}">
+  <mat-icon *ngIf="type == 'danger'" class="material-icons" style="position: relative;top:5px;">error</mat-icon> 
+  <mat-icon *ngIf="type == 'success'" class="material-icons" style="position: relative;top:5px;">check_circle</mat-icon> 
+  <mat-icon *ngIf="type == 'info'" class="material-icons" style="position: relative;top:5px;">info</mat-icon> 
+  <mat-icon *ngIf="type == 'warning'" class="material-icons" style="position: relative;top:5px;">warning</mat-icon> 
+  <span> {{message}}</span>
+</div>
