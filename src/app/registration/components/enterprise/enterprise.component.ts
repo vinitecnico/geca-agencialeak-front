@@ -24,6 +24,7 @@ export class EnterpriseComponent implements OnInit {
             neighborhood: [null],
             city: [null],
             state: [null],
+            gps: [null],
             mainContact: [null],
             phone: [null],
             mobile: [null],
