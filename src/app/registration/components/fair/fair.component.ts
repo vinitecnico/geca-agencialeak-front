@@ -5,8 +5,6 @@ import * as _ from 'lodash';
 
 // Services
 import { FairService } from '../../services/fair.service';
-import { ZipcodeService } from 'src/app/shared/services/zipcode.service';
-import { Zipcode } from 'src/app/shared/classes/zipcode.classe';
 
 declare var swal: any;
 
@@ -22,8 +20,7 @@ export class FairComponent implements OnInit {
     constructor(private router: Router,
         private route: ActivatedRoute,
         private formBuilder: FormBuilder,
-        private fairService: FairService,
-        private zipcodeService: ZipcodeService) {
+        private fairService: FairService) {
         this.route.queryParams.subscribe(params => {
             this._id = params['_id'];
         });
@@ -60,41 +57,6 @@ export class FairComponent implements OnInit {
         };
 
         this.form.setValue(data);
-    }
-
-    getZipcode() {
-        setTimeout(() => {
-            const request: any = this.form.value;
-            if (request.zipcode.length >= 8) {
-                this.zipcodeLoading = true;
-                this.zipcodeService.getZipCode(request.zipcode)
-                    .subscribe(data => {
-                        this.zipcodeLoading = false;
-                        const zipcode = this.zipcodeResponse(data);
-
-                        this.form.controls.zipcode.setValue(zipcode.zipcode);
-                        this.form.controls.address.setValue(zipcode.address);
-                        this.form.controls.complement.setValue(zipcode.complement);
-                        this.form.controls.neighborhood.setValue(zipcode.neighborhood);
-                        this.form.controls.city.setValue(zipcode.city);
-                        this.form.controls.state.setValue(zipcode.state);
-                    }, (error) => {
-                        this.zipcodeLoading = false;
-                    });
-            }
-        }, 400);
-    }
-
-    private zipcodeResponse(data): Zipcode {
-        const zipcode = new Zipcode();
-        zipcode.zipcode = data.cep;
-        zipcode.address = data.logradouro;
-        zipcode.complement = data.complemento;
-        zipcode.neighborhood = data.bairro;
-        zipcode.city = data.localidade;
-        zipcode.state = data.uf;
-
-        return zipcode;
     }
 
     createForm() {
