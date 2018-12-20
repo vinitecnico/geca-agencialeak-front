@@ -11,6 +11,7 @@ import { CollegeComponent } from './components/college/college.component';
 import { FairListComponent } from './components/fair-list/fair-list.component';
 import { CollegeListComponent } from './components/college-list/college-list.component';
 import { EnterpriseListComponent } from './components/enterprise-list/enterprise-list.component';
+import { PeopleListComponent } from './components/people-list/people-list.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         children: [
             { path: 'people', component: PeopleComponent },
+            { path: 'people-list', component: PeopleListComponent},
             { path: 'enterprise', component: EnterpriseComponent },
             { path: 'enterprise-list', component: EnterpriseListComponent },
             { path: 'fair', component: FairComponent},

@@ -46,7 +46,7 @@ export class EnterpriseListComponent implements OnInit, AfterViewInit {
             .subscribe((data: any) => {
                 this.dataSource.data = data;
 
-                if (!data || !_.isArray(data) ) {
+                if (!data || !_.isArray(data)) {
                     this.showMessage = true;
                     this.hasSearch = false;
                     return;
@@ -83,6 +83,8 @@ export class EnterpriseListComponent implements OnInit, AfterViewInit {
                                     this.getAll();
                                 });
                             }
+                        }, () => {
+                            this.getAll();
                         });
                 }
             });

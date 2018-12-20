@@ -1,0 +1,89 @@
+<app-breadcrumb [title]="'Cadastrar Pessoa'" [domain]="'Cadastro'" [page]="'Pessoa'"></app-breadcrumb>
+
+<div class="content">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-12 col-sm-12">
+                <article class="article">
+                    <button class="pull-right btn-new" color="primary" mat-raised-button [routerLink]="['/registration/people']">Nova
+                        Pessoa
+                    </button>
+                </article>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-12">
+
+                <div *ngIf="showMessage">
+                    <app-message [message]="titleMsg" [type]="'info'"></app-message>
+                </div>
+
+                <div class="table-container mat-elevation-z8" [hidden]="!hasSearch">
+
+                    <div class="table-header">
+                        <mat-form-field>
+                            <input matInput (keyup)="applyFilter($event.target.value, dataSource)" placeholder="Pesquisar">
+                        </mat-form-field>
+                    </div>
+
+                    <mat-table #table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc"
+                        matSortDisableClear>
+
+                        <!-- Name -->
+                        <ng-container matColumnDef="name">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header="name">
+                                <mat-icon class="tooltip-table" matTooltip="'Clique na seta para alterar a ordem de ordenação da tabela'"
+                                    [matTooltipPosition]="'above'">help</mat-icon>
+                                Nome
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let people"> {{people?.dados_pessoais?.name}} </mat-cell>
+                        </ng-container>
+
+                        <!-- cpf -->
+                        <ng-container matColumnDef="cpf">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header="cpf">
+                                <mat-icon class="tooltip-table" matTooltip="'Clique na seta para alterar a ordem de ordenação da tabela'"
+                                    [matTooltipPosition]="'above'">help</mat-icon>
+                                CPF
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let people"> {{people?.dados_pessoais?.cpf}} </mat-cell>
+                        </ng-container>
+
+                        <!-- city -->
+                        <ng-container matColumnDef="city">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header="city">
+                                <mat-icon class="tooltip-table" matTooltip="'Clique na seta para alterar a ordem de ordenação da tabela'"
+                                    [matTooltipPosition]="'above'">help</mat-icon>
+                                Cidade
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let people"> {{people?.endereco_contato?.city}} </mat-cell>
+                        </ng-container>
+
+
+                        <ng-container matColumnDef="edit">
+                            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                            <mat-cell *matCellDef="let people">
+                                <mat-icon class="cursor-pointer" mat-button [routerLink]="['/registration/people']"
+                                    [queryParams]="{_id: people._id}" matTooltip="Editar">mode_edit</mat-icon>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="delete">
+                            <mat-header-cell *matHeaderCellDef style="flex: 0 0 15%"></mat-header-cell>
+                            <mat-cell *matCellDef="let people" style="flex: 0 0 15%">
+                                <mat-icon style="color: #DD6B55;" class="cursor-pointer" mat-button (click)="delete(people._id)"
+                                    matTooltip="Apagar">delete</mat-icon>
+                            </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+
+                    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

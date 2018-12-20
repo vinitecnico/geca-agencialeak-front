@@ -30,11 +30,13 @@ import { CollegeComponent } from './components/college/college.component';
 import { FairListComponent } from './components/fair-list/fair-list.component';
 import { CollegeListComponent } from './components/college-list/college-list.component';
 import { EnterpriseListComponent } from './components/enterprise-list/enterprise-list.component';
+import { PeopleListComponent } from './components/people-list/people-list.component';
 
 // Services
 import { FairService } from './services/fair.service';
 import { CollegeService } from './services/college.service';
 import { EnterpriseService } from './services/enterprise.service';
+import { PeopleService } from './services/people.service';
 
 @NgModule({
     imports: [
@@ -64,10 +66,11 @@ import { EnterpriseService } from './services/enterprise.service';
         CollegeComponent,
         FairListComponent,
         CollegeListComponent,
-        EnterpriseListComponent
+        EnterpriseListComponent,
+        PeopleListComponent
     ],
     entryComponents: [
     ],
-    providers: [FairService, CollegeService, EnterpriseService]
+    providers: [FairService, CollegeService, EnterpriseService, PeopleService]
 })
 export class RegistrationModule { }

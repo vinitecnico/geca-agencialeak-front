@@ -5,18 +5,18 @@ import * as _ from 'lodash';
 import { Fair } from '../../classes/fair.class';
 
 // Services
-import { FairService } from '../../services/fair.service';
+import { PeopleService } from '../../services/people.service';
 
 declare var swal: any;
 
 @Component({
-    selector: 'app-fair-list',
-    templateUrl: './fair-list.component.html'
+    selector: 'app-people-list',
+    templateUrl: './people-list.component.html'
 })
 
-export class FairListComponent implements OnInit, AfterViewInit {
+export class PeopleListComponent implements OnInit, AfterViewInit {
     // Table elements
-    displayedColumns = ['name', 'weekday', 'city', 'edit', 'delete'];
+    displayedColumns = ['name', 'cpf', 'city', 'edit', 'delete'];
     dataSource = new MatTableDataSource<Fair>();
     pageSize = 10;
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -25,7 +25,7 @@ export class FairListComponent implements OnInit, AfterViewInit {
     showMessage: boolean;
     hasSearch: boolean;
 
-    constructor(private router: Router, private fairService: FairService) {
+    constructor(private router: Router, private peopleService: PeopleService) {
     }
 
     applyFilter(filterValue: string, data: any): void {
@@ -43,7 +43,7 @@ export class FairListComponent implements OnInit, AfterViewInit {
     }
 
     getAll(): void {
-        this.fairService.getAll()
+        this.peopleService.getAll()
             .subscribe((data: any) => {
                 this.dataSource.data = data;
 
@@ -63,7 +63,7 @@ export class FairListComponent implements OnInit, AfterViewInit {
 
     delete(_id: string) {
         swal({
-            text: 'Deseja realmente apagar a feira?',
+            text: 'Deseja realmente apagar pessoa?',
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#DD6B55',
@@ -74,11 +74,11 @@ export class FairListComponent implements OnInit, AfterViewInit {
         })
             .then((isConfirm) => {
                 if (isConfirm) {
-                    this.fairService.delete(_id)
+                    this.peopleService.delete(_id)
                         .subscribe((data: any) => {
                             if (data === 'Feira deletada com sucesso.') {
                                 swal({
-                                    text: `Feira deletada com sucesso!`,
+                                    text: `Pessoa deletada com sucesso!`,
                                     type: 'success'
                                 }).then(() => {
                                     this.getAll();

@@ -83,6 +83,8 @@ export class CollegeListComponent implements OnInit, AfterViewInit {
                                     this.getAll();
                                 });
                             }
+                        }, () => {
+                            this.getAll();
                         });
                 }
             });
