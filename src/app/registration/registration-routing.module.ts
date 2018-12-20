@@ -10,6 +10,7 @@ import { FairComponent } from './components/fair/fair.component';
 import { CollegeComponent } from './components/college/college.component';
 import { FairListComponent } from './components/fair-list/fair-list.component';
 import { CollegeListComponent } from './components/college-list/college-list.component';
+import { EnterpriseListComponent } from './components/enterprise-list/enterprise-list.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
         children: [
             { path: 'people', component: PeopleComponent },
             { path: 'enterprise', component: EnterpriseComponent },
+            { path: 'enterprise-list', component: EnterpriseListComponent },
             { path: 'fair', component: FairComponent},
             { path: 'fair-list', component: FairListComponent},
             { path: 'college', component: CollegeComponent},

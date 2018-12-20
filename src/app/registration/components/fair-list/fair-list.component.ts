@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import * as _ from 'lodash';
 import { Fair } from '../../classes/fair.class';
 
 // Services
@@ -46,7 +47,7 @@ export class FairListComponent implements OnInit, AfterViewInit {
             .subscribe((data: any) => {
                 this.dataSource.data = data;
 
-                if (!data || data.length === 0) {
+                if (!data || !_.isArray(data)) {
                     this.showMessage = true;
                     this.hasSearch = false;
                     return;
@@ -54,6 +55,9 @@ export class FairListComponent implements OnInit, AfterViewInit {
                     this.hasSearch = true;
                     this.showMessage = false;
                 }
+            }, (erro) => {
+                this.showMessage = true;
+                this.hasSearch = false;
             });
     }
 

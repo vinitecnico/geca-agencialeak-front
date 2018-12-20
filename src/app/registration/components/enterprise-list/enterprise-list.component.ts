@@ -2,19 +2,20 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { College } from '../../classes/college.class';
+import * as _ from 'lodash';
 declare var swal: any;
 
 // services
-import { CollegeService } from '../../services/college.service';
+import { EnterpriseService } from '../../services/enterprise.service';
 
 @Component({
-    selector: 'app-college-list',
-    templateUrl: './college-list.component.html'
+    selector: 'app-enterprise-list',
+    templateUrl: './enterprise-list.component.html'
 })
 
-export class CollegeListComponent implements OnInit, AfterViewInit {
+export class EnterpriseListComponent implements OnInit, AfterViewInit {
     // Table elements
-    displayedColumns = ['name', 'electoralzone', 'section', 'neighborhood', 'city', 'edit', 'delete'];
+    displayedColumns = ['name', 'cnpj', 'city', 'mainContact', 'phone', 'mobile', 'edit', 'delete'];
     dataSource = new MatTableDataSource<College>();
     pageSize = 10;
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -23,7 +24,7 @@ export class CollegeListComponent implements OnInit, AfterViewInit {
     showMessage: boolean;
     hasSearch: boolean;
 
-    constructor(private router: Router, private collegeService: CollegeService) {
+    constructor(private router: Router, private enterpriseService: EnterpriseService) {
     }
 
     applyFilter(filterValue: string, data: any): void {
@@ -41,11 +42,11 @@ export class CollegeListComponent implements OnInit, AfterViewInit {
     }
 
     getAll(): void {
-        this.collegeService.getAll()
+        this.enterpriseService.getAll()
             .subscribe((data: any) => {
                 this.dataSource.data = data;
 
-                if (!data || data.length === 0) {
+                if (!data || !_.isArray(data) ) {
                     this.showMessage = true;
                     this.hasSearch = false;
                     return;
@@ -53,6 +54,9 @@ export class CollegeListComponent implements OnInit, AfterViewInit {
                     this.hasSearch = true;
                     this.showMessage = false;
                 }
+            }, () => {
+                this.showMessage = true;
+                this.hasSearch = false;
             });
     }
 
@@ -69,7 +73,7 @@ export class CollegeListComponent implements OnInit, AfterViewInit {
         })
             .then((isConfirm) => {
                 if (isConfirm) {
-                    this.collegeService.delete(_id)
+                    this.enterpriseService.delete(_id)
                         .subscribe((data: any) => {
                             if (data) {
                                 swal({

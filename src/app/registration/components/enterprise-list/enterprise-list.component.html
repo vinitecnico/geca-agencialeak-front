@@ -5,8 +5,8 @@
         <div class="row">
             <div class="col-12 col-sm-12">
                 <article class="article">
-                    <button class="pull-right btn-new" color="primary" mat-raised-button [routerLink]="['/registration/college']">Novo
-                        Colégio
+                    <button class="pull-right btn-new" color="primary" mat-raised-button [routerLink]="['/registration/enterprise']">Nova
+                        Empresa
                     </button>
                 </article>
             </div>
@@ -36,37 +36,17 @@
                                     [matTooltipPosition]="'above'">help</mat-icon>
                                 Nome
                             </mat-header-cell>
-                            <mat-cell *matCellDef="let college"> {{college.name}} </mat-cell>
+                            <mat-cell *matCellDef="let enterprise"> {{enterprise.name}} </mat-cell>
                         </ng-container>
 
-                        <!-- electoralzone -->
-                        <ng-container matColumnDef="electoralzone">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header="electoralzone">
+                        <!-- cnpj -->
+                        <ng-container matColumnDef="cnpj">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header="cnpj">
                                 <mat-icon class="tooltip-table" matTooltip="'Clique na seta para alterar a ordem de ordenação da tabela'"
                                     [matTooltipPosition]="'above'">help</mat-icon>
-                                Zona
+                                CNPJ
                             </mat-header-cell>
-                            <mat-cell *matCellDef="let college"> {{college.electoralzone}} </mat-cell>
-                        </ng-container>
-
-                        <!-- section -->
-                        <ng-container matColumnDef="section">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header="section">
-                                <mat-icon class="tooltip-table" matTooltip="'Clique na seta para alterar a ordem de ordenação da tabela'"
-                                    [matTooltipPosition]="'above'">help</mat-icon>
-                                Seção
-                            </mat-header-cell>
-                            <mat-cell *matCellDef="let college"> {{college.section}} </mat-cell>
-                        </ng-container>
-
-                        <!-- neighborhood -->
-                        <ng-container matColumnDef="neighborhood">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header="neighborhood">
-                                <mat-icon class="tooltip-table" matTooltip="'Clique na seta para alterar a ordem de ordenação da tabela'"
-                                    [matTooltipPosition]="'above'">help</mat-icon>
-                                Bairro
-                            </mat-header-cell>
-                            <mat-cell *matCellDef="let college"> {{college.neighborhood}} </mat-cell>
+                            <mat-cell *matCellDef="let enterprise"> {{enterprise.cnpj}} </mat-cell>
                         </ng-container>
 
                         <!-- city -->
@@ -76,22 +56,51 @@
                                     [matTooltipPosition]="'above'">help</mat-icon>
                                 Cidade
                             </mat-header-cell>
-                            <mat-cell *matCellDef="let college"> {{college.city}} </mat-cell>
+                            <mat-cell *matCellDef="let enterprise"> {{enterprise.city}} </mat-cell>
                         </ng-container>
 
+                        <!-- mainContact -->
+                        <ng-container matColumnDef="mainContact">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header="mainContact">
+                                <mat-icon class="tooltip-table" matTooltip="'Clique na seta para alterar a ordem de ordenação da tabela'"
+                                    [matTooltipPosition]="'above'">help</mat-icon>
+                                Contato
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let enterprise"> {{enterprise.mainContact}} </mat-cell>
+                        </ng-container>
+
+                        <!-- phone -->
+                        <ng-container matColumnDef="phone">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header="phone">
+                                <mat-icon class="tooltip-table" matTooltip="'Clique na seta para alterar a ordem de ordenação da tabela'"
+                                    [matTooltipPosition]="'above'">help</mat-icon>
+                                Telefone
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let enterprise"> {{enterprise.phone}} </mat-cell>
+                        </ng-container>
+
+                        <!-- mobile -->
+                        <ng-container matColumnDef="mobile">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header="mobile">
+                                <mat-icon class="tooltip-table" matTooltip="'Clique na seta para alterar a ordem de ordenação da tabela'"
+                                    [matTooltipPosition]="'above'">help</mat-icon>
+                                Celular
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let enterprise"> {{enterprise.mobile}} </mat-cell>
+                        </ng-container>
 
                         <ng-container matColumnDef="edit">
                             <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                            <mat-cell *matCellDef="let college">
-                                <mat-icon class="cursor-pointer" mat-button [routerLink]="['/registration/college']"
-                                    [queryParams]="{_id: college._id}" matTooltip="Editar">mode_edit</mat-icon>
+                            <mat-cell *matCellDef="let enterprise">
+                                <mat-icon class="cursor-pointer" mat-button [routerLink]="['/registration/enterprise']"
+                                    [queryParams]="{_id: enterprise.cnpj}" matTooltip="Editar">mode_edit</mat-icon>
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="delete">
                             <mat-header-cell *matHeaderCellDef style="flex: 0 0 15%"></mat-header-cell>
-                            <mat-cell *matCellDef="let college" style="flex: 0 0 15%">
-                                <mat-icon style="color: #DD6B55;" class="cursor-pointer" mat-button (click)="delete(college._id)"
+                            <mat-cell *matCellDef="let enterprise" style="flex: 0 0 15%">
+                                <mat-icon style="color: #DD6B55;" class="cursor-pointer" mat-button (click)="delete(enterprise.cnpj)"
                                     matTooltip="Apagar">delete</mat-icon>
                             </mat-cell>
                         </ng-container>
