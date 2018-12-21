@@ -92,4 +92,47 @@
     </div>
     <!--  /Traffic -->
     <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <div class="card">
+                <div class="card-body" style="min-height: 357px;">
+                    <!-- <h4 class="box-title">Chandler</h4> -->
+                    <div class="calender-cont widget-calender">
+                        <div id="calendar"></div>
+                    </div>
+                </div>
+            </div><!-- /.card -->
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            <div class="card weather-box">
+                <h4 class="weather-title box-title">Clima</h4>
+                <div class="card-body">
+                    <div class="weather-widget">
+                        <div id="weather-one" class="weather-one"></div>
+                    </div>
+                </div>
+            </div><!-- /.card -->
+        </div>
+    </div>
+    <!-- /Calender Chart Weather -->
+    <!-- Modal - Calendar - Add New Event -->
+    <div class="modal fade none-border" id="event-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><strong>Add New Event</strong></h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success save-event waves-effect waves-light">Create event</button>
+                    <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-dismiss="modal">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#event-modal -->    
 </div>
