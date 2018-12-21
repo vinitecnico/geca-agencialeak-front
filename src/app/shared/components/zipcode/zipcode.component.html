@@ -3,7 +3,7 @@
         <div class="col-12 col-sm-3">
             <mat-form-field class="full-width">
                 <i matPrefix class="fa fa-spinner fa-spin" *ngIf="zipcodeLoading">&nbsp;</i>
-                <input matInput placeholder="CEP" formControlName="zipcode" (change)="getZipcode()">
+                <input matInput placeholder="CEP" formControlName="zipcode" (change)="getZipcode()" required>
                 <mat-error>
                     Campo obrigatório
                 </mat-error>

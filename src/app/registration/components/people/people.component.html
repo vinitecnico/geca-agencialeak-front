@@ -5,65 +5,36 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12">
                 <div class="card-body card-block">
-                    <mat-horizontal-stepper labelPosition="bottom" #stepper>
-                        <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
+
+                    <mat-horizontal-stepper labelPosition="bottom" linear #stepper>
+                        <mat-step [stepControl]="firstFormGroup" errorMessage="Campo obrigatório.">
                             <form [formGroup]="firstFormGroup">
                                 <ng-template matStepLabel>Dados pessoais</ng-template>
                                 <div class="form-group col-md-12">
                                     <div class="row">
                                         <div class="col-12 col-sm-6">
                                             <mat-form-field class="full-width">
-                                                <input matInput placeholder="Nome" formControlName="name">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
+                                                <input matInput placeholder="Nome" formControlName="name" required>
                                             </mat-form-field>
                                         </div>
                                         <div class="col-12 col-sm-3">
                                             <mat-form-field class="full-width">
-                                                <input matInput placeholder="CPF" formControlName="cpf">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
+                                                <input matInput placeholder="CPF" formControlName="cpf" required>
                                             </mat-form-field>
                                         </div>
                                         <div class="col-12 col-sm-3">
                                             <mat-form-field class="full-width">
                                                 <input matInput placeholder="RG" formControlName="rg">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
                                             </mat-form-field>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-12 col-sm-3">
                                             <mat-form-field class="full-width">
-                                                <input matInput placeholder="Data nascimento" formControlName="birthDate">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
+                                                <input matInput placeholder="Data nascimento" formControlName="birthDate"
+                                                    required>
                                             </mat-form-field>
                                         </div>
-                                        <div class="col-12 col-sm-3">
-                                            <mat-form-field class="full-width">
-                                                <mat-select placeholder="Etnia" formControlName="etnia">
-                                                    <mat-option *ngFor="let etnia of etnias" [value]="etnia">
-                                                        {{etnia}}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-                                        <div class="col-12 col-sm-6">
-                                            <mat-form-field class="full-width">
-                                                <input matInput placeholder="Nome da mãe" formControlName="motherName">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-12 col-sm-3">
                                             <mat-form-field class="full-width">
                                                 <mat-select placeholder="Sexo" formControlName="sexo">
@@ -73,11 +44,27 @@
                                                 </mat-select>
                                             </mat-form-field>
                                         </div>
+                                        <div class="col-12 col-sm-6">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="Nome da mãe" formControlName="motherName">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-3">
+                                            <mat-form-field class="full-width">
+                                                <mat-select placeholder="Etnia" formControlName="etnia">
+                                                    <mat-option *ngFor="let item of etnias" [value]="item">
+                                                        {{item}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
                                         <div class="col-12 col-sm-3">
                                             <mat-form-field class="full-width">
                                                 <mat-select placeholder="Transgênero" formControlName="transgenero">
-                                                    <mat-option *ngFor="let transgenero of transgeneros" [value]="transgenero">
-                                                        {{transgenero}}
+                                                    <mat-option *ngFor="let item of transgeneros" [value]="item">
+                                                        {{item}}
                                                     </mat-option>
                                                 </mat-select>
                                             </mat-form-field>
@@ -85,9 +72,8 @@
                                         <div class="col-12 col-sm-6">
                                             <mat-form-field class="full-width">
                                                 <mat-select placeholder="Orientação sexual" formControlName="orientacosexusal">
-                                                    <mat-option *ngFor="let orientacaoSexual of orientacaoSexuals"
-                                                        [value]="orientacaoSexual">
-                                                        {{orientacaoSexual}}
+                                                    <mat-option *ngFor="let item of orientacaoSexuals" [value]="item">
+                                                        {{item}}
                                                     </mat-option>
                                                 </mat-select>
                                             </mat-form-field>
@@ -98,9 +84,6 @@
                                             <mat-form-field class="full-width">
                                                 <input matInput placeholder="Nome social (tratamento opcional garantido a pessoa trans)"
                                                     formControlName="socialName">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
                                             </mat-form-field>
                                         </div>
                                     </div>
@@ -112,7 +95,7 @@
                                 </div>
                             </form>
                         </mat-step>
-                        <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+                        <mat-step [stepControl]="secondFormGroup" errorMessage="Campo obrigatório.">
                             <form [formGroup]="secondFormGroup">
                                 <ng-template matStepLabel>Endereço & contato</ng-template>
                                 <div class="form-group col-md-12">
@@ -122,26 +105,17 @@
                                             <mat-form-field class="full-width">
                                                 <i matPrefix class="fa fa-phone">&nbsp;</i>
                                                 <input matInput placeholder="Telefone" formControlName="phone">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
                                             </mat-form-field>
                                         </div>
                                         <div class="col-12 col-sm-3">
                                             <mat-form-field class="full-width">
                                                 <i matPrefix class="fa fa-mobile">&nbsp;</i>
                                                 <input matInput placeholder="Celular" formControlName="mobile">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
                                             </mat-form-field>
                                         </div>
                                         <div class="col-12 col-sm-6">
                                             <mat-form-field class="full-width">
                                                 <input matInput placeholder="E-mail" formControlName="email">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
                                             </mat-form-field>
                                         </div>
                                     </div>
@@ -150,27 +124,18 @@
                                             <mat-form-field class="full-width">
                                                 <i style="color:#3954a1;" matPrefix class="fa fa-facebook-official">&nbsp;</i>
                                                 <input matInput placeholder="Facebook" formControlName="facebook">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
                                             </mat-form-field>
                                         </div>
                                         <div class="col-12 col-sm-4">
                                             <mat-form-field class="full-width">
                                                 <i style="color:#cf2d8e;" matPrefix class="fa fa-instagram">&nbsp;</i>
                                                 <input matInput placeholder="Instagram" formControlName="instagram">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
                                             </mat-form-field>
                                         </div>
                                         <div class="col-12 col-sm-4">
                                             <mat-form-field class="full-width">
                                                 <i style="color:#1da1f2;" matPrefix class="fa fa-twitter">&nbsp;</i>
                                                 <input matInput placeholder="Twitter" formControlName="twitter">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
                                             </mat-form-field>
                                         </div>
                                     </div>
@@ -183,7 +148,7 @@
                                 </div>
                             </form>
                         </mat-step>
-                        <mat-step [stepControl]="thirdFormGroup" [editable]="isEditable">
+                        <mat-step [stepControl]="thirdFormGroup" errorMessage="Campo obrigatório.">
                             <form [formGroup]="thirdFormGroup">
                                 <ng-template matStepLabel>Profissional & eleitoral</ng-template>
                                 <div class="form-group col-md-12">
@@ -191,25 +156,16 @@
                                         <div class="col-12 col-sm-6">
                                             <mat-form-field class="full-width">
                                                 <input matInput placeholder="Empresa" formControlName="company">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
                                             </mat-form-field>
                                         </div>
                                         <div class="col-12 col-sm-3">
                                             <mat-form-field class="full-width">
                                                 <input matInput placeholder="Data de admissão" formControlName="admissionDate">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
                                             </mat-form-field>
                                         </div>
                                         <div class="col-12 col-sm-3">
                                             <mat-form-field class="full-width">
                                                 <input matInput placeholder="Data de demissão" formControlName="terminationDate">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
                                             </mat-form-field>
                                         </div>
                                     </div>
@@ -217,23 +173,17 @@
                                         <div class="col-12 col-sm-3">
                                             <mat-form-field class="full-width">
                                                 <input matInput placeholder="Função exercida" formControlName="positionCompany">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
                                             </mat-form-field>
                                         </div>
                                         <div class="col-12 col-sm-3">
                                             <mat-form-field class="full-width">
                                                 <i matPrefix class="fa fa-map-marker">&nbsp;</i>
                                                 <input matInput placeholder="Local de Trabalho" formControlName="workplace">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
                                             </mat-form-field>
                                         </div>
                                         <div class="col-12 col-sm-3">
                                             <mat-form-field class="full-width">
-                                                <mat-select placeholder="Sindcalizado" formControlName="sindcalizado">
+                                                <mat-select placeholder="Sindcalizado" formControlName="Sindicalizado">
                                                     <mat-option value="true">Sim</mat-option>
                                                     <mat-option value="false">Não</mat-option>
                                                 </mat-select>
@@ -242,9 +192,6 @@
                                         <div class="col-12 col-sm-3">
                                             <mat-form-field class="full-width">
                                                 <input matInput placeholder="Nº de associação" formControlName="associationNumber">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
                                             </mat-form-field>
                                         </div>
                                     </div>
@@ -259,54 +206,36 @@
                                         </div>
                                         <div class="col-12 col-sm-3">
                                             <mat-form-field class="full-width">
-                                                <input matInput placeholder="Indicação diretor" formControlName="indicacaoDiretor">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
+                                                <input matInput placeholder="Indicação diretor" formControlName="directorsindication">
                                             </mat-form-field>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-12 col-sm-6">
                                             <mat-form-field class="full-width">
-                                                <input matInput placeholder="Título Eleitoral" formControlName="tituloEleitoral">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
+                                                <input matInput placeholder="Título Eleitoral" formControlName="electoraltitle">
                                             </mat-form-field>
                                         </div>
                                         <div class="col-12 col-sm-3">
                                             <mat-form-field class="full-width">
-                                                <input matInput placeholder="Zona" formControlName="zona">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
+                                                <input matInput placeholder="Zona" formControlName="zone">
                                             </mat-form-field>
                                         </div>
                                         <div class="col-12 col-sm-3">
                                             <mat-form-field class="full-width">
-                                                <input matInput placeholder="Seção" formControlName="secao">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
+                                                <input matInput placeholder="Seção" formControlName="section">
                                             </mat-form-field>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-12 col-sm-3">
                                             <mat-form-field class="full-width">
-                                                <input matInput placeholder="Município" formControlName="municipio">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
+                                                <input matInput placeholder="Cidade" formControlName="county">
                                             </mat-form-field>
                                         </div>
                                         <div class="col-12 col-sm-3">
                                             <mat-form-field class="full-width">
                                                 <input matInput placeholder="UF" formControlName="state">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
                                             </mat-form-field>
                                         </div>
                                     </div>
@@ -316,10 +245,11 @@
                                             <button mat-raised-button color="primary" matStepperNext>Próximo</button>
                                         </div>
                                     </div>
+
                                 </div>
                             </form>
                         </mat-step>
-                        <mat-step [stepControl]="fourthFormGroup" [editable]="isEditable">
+                        <mat-step [stepControl]="fourthFormGroup" errorMessage="Campo obrigatório.">
                             <form [formGroup]="fourthFormGroup">
                                 <ng-template matStepLabel>Notificações e anotações</ng-template>
                                 <div class="form-group col-md-12">
@@ -330,20 +260,17 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12 col-sm-12">
-                                            <mat-checkbox class="example-ripple-checkbox">Correios </mat-checkbox>
-                                            <mat-checkbox class="example-ripple-checkbox">Telefones </mat-checkbox>
-                                            <mat-checkbox class="example-ripple-checkbox">SMS </mat-checkbox>
-                                            <mat-checkbox class="example-ripple-checkbox">Whatsapp </mat-checkbox>
-                                            <mat-checkbox class="example-ripple-checkbox">E-mail </mat-checkbox>
+                                            <mat-checkbox class="example-ripple-checkbox" formControlName="correios">Correios </mat-checkbox>
+                                            <mat-checkbox class="example-ripple-checkbox" formControlName="telefone">Telefones </mat-checkbox>
+                                            <mat-checkbox class="example-ripple-checkbox" formControlName="sms">SMS </mat-checkbox>
+                                            <mat-checkbox class="example-ripple-checkbox" formControlName="whatsapp">Whatsapp </mat-checkbox>
+                                            <mat-checkbox class="example-ripple-checkbox" formControlName="email">E-mail </mat-checkbox>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-12 col-sm-3">
                                             <mat-form-field class="full-width">
                                                 <input matInput placeholder="Pontuação" formControlName="score" type="number">
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
                                             </mat-form-field>
                                         </div>
                                     </div>
@@ -351,9 +278,6 @@
                                         <div class="col-12 col-sm-12">
                                             <mat-form-field class="full-width">
                                                 <textarea matInput placeholder="Histórico" formControlName="history"></textarea>
-                                                <mat-error>
-                                                    Campo obrigatório
-                                                </mat-error>
                                             </mat-form-field>
                                         </div>
                                     </div>
@@ -366,34 +290,22 @@
                                 </div>
                             </form>
                         </mat-step>
-                        <mat-step [stepControl]="fifthFormGroup" [editable]="isEditable">
-                            <form [formGroup]="fifthFormGroup">
-                                <ng-template matStepLabel>Finalizar</ng-template>
-                                <div class="form-group col-md-12">
-                                    <div class="row">
-                                        <div class="col-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label>Inserir foto</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-btn">
-                                                        <span class="btn btn-default btn-file">
-                                                            Browse… <input type="file" id="imgInp">
-                                                        </span>
-                                                    </span>
-                                                    <input type="text" class="form-control" readonly>
-                                                </div>
-                                                <img id='img-upload' />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 col-sm-12 actionBar" style="text-align: right;">
-                                            <button mat-raised-button matStepperPrevious>Voltar</button>
-                                            <button mat-raised-button color="primary" (click)="stepper.reset()">Finalizar</button>
-                                        </div>
+
+                        <mat-step>
+                            <ng-template matStepLabel>Finalizar</ng-template>
+                            <div class="form-group col-md-12">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12">
+                                        Deseja finalizar cadastro?.
                                     </div>
                                 </div>
-                            </form>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 actionBar" style="text-align: right;">
+                                        <button mat-raised-button matStepperPrevious>Voltar</button>
+                                        <button mat-raised-button color="primary" (click)="save()">Salvar</button>
+                                    </div>
+                                </div>
+                            </div>
                         </mat-step>
                     </mat-horizontal-stepper>
 

@@ -64,14 +64,14 @@
                             <mat-header-cell *matHeaderCellDef></mat-header-cell>
                             <mat-cell *matCellDef="let people">
                                 <mat-icon class="cursor-pointer" mat-button [routerLink]="['/registration/people']"
-                                    [queryParams]="{_id: people._id}" matTooltip="Editar">mode_edit</mat-icon>
+                                    [queryParams]="{_id: people?.dados_pessoais?.cpf}" matTooltip="Editar">mode_edit</mat-icon>
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="delete">
                             <mat-header-cell *matHeaderCellDef style="flex: 0 0 15%"></mat-header-cell>
                             <mat-cell *matCellDef="let people" style="flex: 0 0 15%">
-                                <mat-icon style="color: #DD6B55;" class="cursor-pointer" mat-button (click)="delete(people._id)"
+                                <mat-icon style="color: #DD6B55;" class="cursor-pointer" mat-button (click)="delete(people?.dados_pessoais?.cpf)"
                                     matTooltip="Apagar">delete</mat-icon>
                             </mat-cell>
                         </ng-container>

@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MatStepper } from '@angular/material';
+import { MAT_STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import * as _ from 'lodash';
+
+// Class
+import { People } from '../../classes/people.class';
 
 // Services
 import { PeopleService } from '../../services/people.service';
@@ -10,21 +15,24 @@ declare var swal: any;
 
 @Component({
     selector: 'app-people',
-    templateUrl: './people.component.html'
+    templateUrl: './people.component.html',
+    providers: [{
+        provide: MAT_STEPPER_GLOBAL_OPTIONS, useValue: { showError: true }
+    }]
 })
 
 export class PeopleComponent implements OnInit {
+    @ViewChild('stepper') stepper;
     genders: any = ['Masculino', 'Feminino'];
     transgeneros: any = ['Travesti', 'Transexual'];
     orientacaoSexuals: any = [' Heterosexual', 'Homossexual', 'Bissexual'];
     etnias: any = ['Negro', 'Indígena', 'Mulato/Pardo', 'Asiático', 'Indiano', 'Latino/Hispânico',
         'Branco', 'Árabe/Oriente Médio', 'Outra'];
-    firstFormGroup: any;
-    secondFormGroup: any;
-    thirdFormGroup: any;
-    fourthFormGroup: any;
-    fifthFormGroup: any;
-    isEditable = true;
+    firstFormGroup: FormGroup;
+    secondFormGroup: FormGroup;
+    thirdFormGroup: FormGroup;
+    fourthFormGroup: FormGroup;
+    isEditable = false;
     _id: string;
 
     constructor(private router: Router,
@@ -36,71 +44,111 @@ export class PeopleComponent implements OnInit {
         });
     }
 
+    changeStep(stepper: MatStepper, form: FormGroup) {
+        stepper.next();
+    }
+
     ngOnInit() {
         this.firstFormGroup = this.formBuilder
             .group({
-                name: [null, Validators.required],
-                cpf: [null, Validators.required],
-                rg: [null],
-                birthDate: [null, Validators.required],
-                etnia: [null, Validators.required],
-                motherName: [null],
+                name: ['', Validators.required],
+                cpf: ['', Validators.required],
+                rg: '',
+                birthDate: '',
+                etnia: '',
+                motherName: '',
                 sexo: [null, Validators.required],
-                transgenero: [null],
-                orientacosexusal: [null],
-                socialName: [null]
+                transgenero: '',
+                orientacosexusal: '',
+                socialName: ''
             });
 
         this.secondFormGroup = this.formBuilder
             .group({
-                zipcode: [null, Validators.required],
-                address: [null],
-                numberAddress: [null],
-                complement: [null],
-                neighborhood: [null],
-                city: [null],
-                state: [null],
-                gps: [null],
-                phone: [null],
-                mobile: [null],
-                email: [null, Validators.email],
-                facebook: [null],
-                instagram: [null],
-                twitter: [null]
+                zipcode: ['', Validators.required],
+                address: '',
+                numberAddress: '',
+                complement: '',
+                neighborhood: '',
+                city: '',
+                state: '',
+                gps: '',
+                phone: '',
+                mobile: '',
+                email: ['', Validators.email],
+                facebook: '',
+                instagram: '',
+                twitter: ''
             });
 
         this.thirdFormGroup = this.formBuilder
             .group({
-                company: [null],
-                admissionDate: [null],
-                terminationDate: [null],
-                positionCompany: [null],
-                workplace: [null],
-                sindcalizado: [null],
-                associationNumber: [null],
-                militante: [null],
-                indicacaoDiretor: [null],
-                tituloEleitoral: [null],
-                zona: [null],
-                secao: [null],
-                municipio: [null],
-                state: [null]
+                company: '',
+                admissionDate: '',
+                terminationDate: '',
+                positionCompany: '',
+                workplace: '',
+                Sindicalizado: '',
+                associationNumber: '',
+                militante: '',
+                directorsindication: '',
+                electoraltitle: '',
+                zone: '',
+                section: '',
+                county: '',
+                state: ''
             });
 
         this.fourthFormGroup = this.formBuilder
             .group({
-                score: [null],
-                history: [null]
+                correios: '',
+                telefone: '',
+                sms: '',
+                whatsapp: '',
+                email: '',
+                score: '',
+                history: ''
             });
+
+        if (this._id) {
+            this.peopleService.getById(this._id)
+                .subscribe((response) => {
+                    if (_.isArray(response)) {
+                        this.setValueData(_.first(response));
+                    } else {
+                        this.router.navigateByUrl('/registration/people-list');
+                    }
+                }, () => {
+                    this.router.navigateByUrl('/registration/people-list');
+                });
+        }
+    }
+
+    setValueData(request: People): void {
+        this.firstFormGroup.setValue(request.dados_pessoais);
+        this.secondFormGroup.setValue(request.endereco_contato);
+        this.thirdFormGroup.setValue(request.profissional_eleitoral);
+        this.fourthFormGroup.setValue(request.notificacoes_anotacoes);
     }
 
     save() {
-        if (!this.firstFormGroup.valid) {
-            // this.formService.validateAllFormFields(this.form);
+        if (!this.firstFormGroup.valid || !this.secondFormGroup.valid ||
+            !this.thirdFormGroup.valid || !this.fourthFormGroup.valid) {
+            swal({
+                text: 'Por favor validar todos os campos antes de finalizar cadastro!',
+                type: 'warning'
+            });
             return;
         }
 
-        const request = this.firstFormGroup.value;
+        const request = {
+            _id: this._id,
+            dados_pessoais: this.firstFormGroup.value,
+            endereco_contato: this.secondFormGroup.value,
+            profissional_eleitoral: this.thirdFormGroup.value,
+            notificacoes_anotacoes: this.fourthFormGroup.value
+        };
+
         this.peopleService.createOrUpdatePeople(request)
             .subscribe((response) => {
                 swal({
