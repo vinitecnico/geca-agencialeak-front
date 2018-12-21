@@ -21,6 +21,7 @@ import { UserSettingsModule } from './settings/settings.module';
 import { RegistrationModule } from './registration/registration.module';
 import { SharedModule } from './shared/shared.module';
 import { MapModule } from './map/map.module';
+import { MarketingModule } from './marketing/marketing.module';
 
 // Layout
 import { LayoutComponent } from './layout/layout.component';
@@ -123,6 +124,7 @@ export function getLocalStorage() {
     RegistrationModule,
     SharedModule,
     MapModule,
+    MarketingModule,
     BlockUIModule.forRoot(),
     BlockUIHttpModule.forRoot({
       requestFilters: []

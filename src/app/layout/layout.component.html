@@ -22,7 +22,12 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="menu-icon fa fa-bar-chart"></i>Marketing</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <!-- <li id="map"><i class="menu-icon fa fa-map-o"></i><a href="charts-chartjs.html">Mapa</a></li> -->
+                            <li id="email">
+                                <i class="menu-icon fa fa-envelope"></i>
+                                <a [routerLink]="['/marketing/email']">
+                                    E-mail
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li id="map" class="menu-item-has-children dropdown">
