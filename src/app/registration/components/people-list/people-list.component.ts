@@ -17,7 +17,7 @@ declare var swal: any;
 export class PeopleListComponent implements OnInit, AfterViewInit {
     // Table elements
     displayedColumns = ['name', 'cpf', 'city', 'edit', 'delete'];
-    dataSource = new MatTableDataSource<Fair>();
+    dataSource = new MatTableDataSource<any>();
     pageSize = 10;
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -45,8 +45,6 @@ export class PeopleListComponent implements OnInit, AfterViewInit {
     getAll(): void {
         this.peopleService.getAll()
             .subscribe((data: any) => {
-                this.dataSource.data = data;
-
                 if (!data || !_.isArray(data)) {
                     this.showMessage = true;
                     this.hasSearch = false;
@@ -54,6 +52,14 @@ export class PeopleListComponent implements OnInit, AfterViewInit {
                 } else {
                     this.hasSearch = true;
                     this.showMessage = false;
+
+                    this.dataSource.data = _.map(data, (x) => {
+                        return {
+                            name: x.dados_pessoais.name,
+                            cpf: x.dados_pessoais.cpf,
+                            city: x.endereco_contato.city
+                        };
+                    });
                 }
             }, (erro) => {
                 this.showMessage = true;
