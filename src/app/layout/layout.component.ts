@@ -28,7 +28,7 @@ export class LayoutComponent implements OnInit {
 
   changeRouter() {
     setTimeout(() => {
-      if (this.activeUrl === '/app/information') {
+      if (this.activeUrl === '/' || this.activeUrl === '/app/dashboard') {
         return;
       }
 

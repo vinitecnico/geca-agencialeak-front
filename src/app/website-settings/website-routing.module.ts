@@ -4,7 +4,7 @@ import { LayoutComponent } from '../layout/layout.component';
 import { AuthGuard } from '../authentication/services/auth-guard.service';
 
 // Website settings
-import { InformationComponent } from '../website-settings/components/information/information.component';
+import { DashboardComponent } from '../website-settings/components/dashboard/dashboard.component';
 
 
 const routes: Routes = [
@@ -13,7 +13,7 @@ const routes: Routes = [
         component: LayoutComponent,
         canActivate: [AuthGuard],
         children: [
-            { path: 'information', component: InformationComponent }
+            { path: 'dashboard', component: DashboardComponent }
         ]
     }
 ];

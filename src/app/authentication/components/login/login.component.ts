@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
           return;
         }
         localStorage.setItem('authData', JSON.stringify({ expires_in: moment().add(30, 'minutes') }));
-        this.router.navigateByUrl('/app/information');
+        this.router.navigateByUrl('/app/dashboard');
       }, (error) => {
         console.log(error);
       });

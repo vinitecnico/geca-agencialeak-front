@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MouseEvent } from '@agm/core';
 
 // import { } from '@types/googlemaps';
@@ -11,8 +11,8 @@ import * as _ from 'lodash';
 import { PeopleMap } from '../../classes/people-map.class';
 
 // services
-import { MapService } from '../services/map.service';
 import { Marker } from '@agm/core/services/google-maps-types';
+import { MapService } from '../../services/map.service';
 
 @Component({
     selector: 'app-map-people',
@@ -20,6 +20,7 @@ import { Marker } from '@agm/core/services/google-maps-types';
 })
 
 export class MapPeopleComponent implements OnInit {
+    @Input() isNotPage: Boolean;
     // google maps zoom level
     zoom: Number = 10;
 

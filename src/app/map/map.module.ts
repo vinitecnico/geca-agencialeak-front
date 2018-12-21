@@ -12,7 +12,7 @@ import { MapRoutingModule } from './map-routing.module';
 import { MapPeopleComponent } from './components/map-people/map-people.component';
 
 // services
-import { MapService } from './components/services/map.service';
+import { MapService } from './services/map.service';
 
 
 @NgModule({
@@ -27,6 +27,7 @@ import { MapService } from './components/services/map.service';
     declarations: [
         MapPeopleComponent
     ],
+    exports: [MapPeopleComponent],
     entryComponents: [
     ],
     providers: [MapService]

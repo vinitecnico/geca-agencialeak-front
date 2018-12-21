@@ -8,13 +8,16 @@ import {
 } from '@angular/material';
 
 // Components
-import { InformationComponent } from './components/information/information.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 // Services
 
 
 // Router
 import { WebsiteRoutingModule } from './website-routing.module';
+
+// sub-menu
+import { MapModule } from '../map/map.module';
 
 @NgModule({
     imports: [
@@ -23,10 +26,11 @@ import { WebsiteRoutingModule } from './website-routing.module';
         MatPaginatorModule,
         MatSortModule,
         MatIconModule,
-        MatDialogModule
+        MatDialogModule,
+        MapModule
     ],
     declarations: [
-        InformationComponent
+        DashboardComponent
     ],
     entryComponents: [
     ],
