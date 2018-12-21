@@ -22,8 +22,6 @@ import {
 import { PeopleComponent } from './components/people/people.component';
 import { EnterpriseComponent } from './components/enterprise/enterprise.component';
 import { SharedModule } from '../shared/shared.module';
-
-// components
 import { RegistrationRoutingModule } from './registration-routing.module';
 import { FairComponent } from './components/fair/fair.component';
 import { CollegeComponent } from './components/college/college.component';

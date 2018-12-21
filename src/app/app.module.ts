@@ -20,6 +20,7 @@ import { WebsiteSettingsModule } from './website-settings/website-settings.modul
 import { UserSettingsModule } from './settings/settings.module';
 import { RegistrationModule } from './registration/registration.module';
 import { SharedModule } from './shared/shared.module';
+import { MapModule } from './map/map.module';
 
 // Layout
 import { LayoutComponent } from './layout/layout.component';
@@ -121,6 +122,7 @@ export function getLocalStorage() {
     WebsiteSettingsModule,
     RegistrationModule,
     SharedModule,
+    MapModule,
     BlockUIModule.forRoot(),
     BlockUIHttpModule.forRoot({
       requestFilters: []

@@ -8,8 +8,6 @@ declare var swal: any;
 // services
 import { CollegeService } from '../../services/college.service';
 
-
-
 @Component({
     selector: 'app-college',
     templateUrl: './college.component.html'
