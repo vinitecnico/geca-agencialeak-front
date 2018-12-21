@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import {CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { AgmCoreModule } from '@agm/core';
 
 // util
 import { SharedModule } from '../shared/shared.module';
@@ -18,7 +19,10 @@ import { MapService } from './components/services/map.service';
     imports: [
         CommonModule,
         MapRoutingModule,
-        SharedModule
+        SharedModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyAvcDy5ZYc2ujCS6TTtI3RYX5QmuoV8Ffw'
+        })
     ],
     declarations: [
         MapPeopleComponent
