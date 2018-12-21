@@ -3,10 +3,11 @@ import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 // Class
-import { PeopleMap } from '../../classes/people-map.class';
+import { PeopleMap } from '../classes/people-map.class';
 
 // Services
 import { StartupConfigService } from 'src/app/shared/services/startup.config.service';
+
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
