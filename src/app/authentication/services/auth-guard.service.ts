@@ -5,7 +5,7 @@ import * as moment from 'moment';
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor( @Inject('LocalStorage') localStorage, private router: Router) { }
+  constructor(@Inject('LocalStorage') localStorage, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const url: string = state.url;
@@ -22,6 +22,10 @@ export class AuthGuard implements CanActivate {
     }
 
     const authObj = JSON.parse(auth);
+    if (!authObj) {
+      return false;
+    }
+    
     const now = moment();
     const tokenData = moment(authObj.expires_in);
 
