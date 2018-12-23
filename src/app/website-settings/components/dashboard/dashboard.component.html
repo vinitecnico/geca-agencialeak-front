@@ -10,8 +10,8 @@
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                <div class="stat-text"><span class="count">23569</span></div>
-                                <div class="stat-heading">E-mails</div>
+                                <div class="stat-text" *ngIf="dashboard"><span class="count">{{dashboard?.colegios}}</span></div>
+                                <div class="stat-heading">Colégio</div>
                             </div>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                <div class="stat-text"><span class="count">3435</span></div>
+                                <div class="stat-text" *ngIf="dashboard"><span class="count">{{dashboard?.feiras}}</span></div>
                                 <div class="stat-heading">Feiras</div>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                <div class="stat-text"><span class="count">349</span></div>
+                                <div class="stat-text" *ngIf="dashboard"><span class="count">{{dashboard?.empresas}}</span></div>
                                 <div class="stat-heading">Empresas</div>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                <div class="stat-text"><span class="count">4</span></div>
+                                <div class="stat-text" *ngIf="dashboard"><span class="count">{{dashboard?.pessoa}}</span></div>
                                 <div class="stat-heading">Pessoas</div>
                             </div>
                         </div>
