@@ -25,7 +25,7 @@ export class AuthGuard implements CanActivate {
     if (!authObj) {
       return false;
     }
-    
+
     const now = moment();
     const tokenData = moment(authObj.expires_in);
 
