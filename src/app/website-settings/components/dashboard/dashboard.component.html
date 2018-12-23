@@ -1,6 +1,6 @@
 <div class="content">
     <!-- Widgets  -->
-    <div class="row">
+    <div class="row" *ngIf="dashboard">
         <div class="col-lg-3 col-md-6">
             <div class="card">
                 <div class="card-body">
@@ -10,8 +10,8 @@
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                <div class="stat-text" *ngIf="dashboard"><span class="count">{{dashboard?.colegios}}</span></div>
-                                <div class="stat-heading">Colégio</div>
+                                <div class="stat-text"><span class="count">{{dashboard?.colegios}}</span></div>
+                                <div class="stat-heading">{{dashboard?.colegios > 1 ? 'Colégios' : 'Colégio'}}</div>
                             </div>
                         </div>
                     </div>
@@ -28,8 +28,8 @@
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                <div class="stat-text" *ngIf="dashboard"><span class="count">{{dashboard?.feiras}}</span></div>
-                                <div class="stat-heading">Feiras</div>
+                                <div class="stat-text"><span class="count">{{dashboard?.feiras}}</span></div>
+                                <div class="stat-heading">{{dashboard?.feiras > 1 ? 'Feiras' : 'Feira'}}</div>
                             </div>
                         </div>
                     </div>
@@ -46,8 +46,8 @@
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                <div class="stat-text" *ngIf="dashboard"><span class="count">{{dashboard?.empresas}}</span></div>
-                                <div class="stat-heading">Empresas</div>
+                                <div class="stat-text"><span class="count">{{dashboard?.empresas}}</span></div>
+                                <div class="stat-heading">{{dashboard?.empresas > 1 ? 'Empresas' : 'Empresa'}}</div>
                             </div>
                         </div>
                     </div>
@@ -64,8 +64,8 @@
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                <div class="stat-text" *ngIf="dashboard"><span class="count">{{dashboard?.pessoa}}</span></div>
-                                <div class="stat-heading">Pessoas</div>
+                                <div class="stat-text"><span class="count">{{dashboard?.pessoa}}</span></div>
+                                <div class="stat-heading">{{dashboard?.pessoa > 1 ? 'Pessoas' : 'Pessoa'}}</div>
                             </div>
                         </div>
                     </div>
