@@ -9,7 +9,7 @@
 
                     <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)"
                         [latitude]="m.lat" [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable"
-                        (dragEnd)="markerDragEnd(m, $event)">
+                        (dragEnd)="markerDragEnd(m, $event)" [iconUrl]="ico">
 
                         <agm-info-window>
                             <strong>{{name}}</strong>

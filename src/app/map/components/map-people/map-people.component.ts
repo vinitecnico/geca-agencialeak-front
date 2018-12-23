@@ -23,6 +23,7 @@ export class MapPeopleComponent implements OnInit {
     @Input() isNotPage: Boolean;
     // google maps zoom level
     zoom: Number = 10;
+    ico: String = 'assets/images/map-people.png';
 
     // initial center position for the map
     lat: Number = -23.5489;
