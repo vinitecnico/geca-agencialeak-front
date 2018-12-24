@@ -20,8 +20,15 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
         this.dashboardService.get()
             .subscribe((response) => {
-                this.dashboard = _.last(response);
-
+                this.dashboard = {
+                    pessoa: 0,
+                    feiras: 0,
+                    empresas: 0,
+                    colegios: 0
+                };
+                setTimeout(() => {
+                    this.dashboard = _.last(response);
+                }, 600);
             }, (erro) => {
                 console.log(erro);
             });
