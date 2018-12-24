@@ -14,6 +14,8 @@ import { Enterprise } from '../../classes/enterprise.class';
 })
 
 export class EnterpriseComponent implements OnInit {
+    maskCNPJ = [/[0-9]/, /[0-9]/, '.', /[0-9]/, /[0-9]/, /[0-9]/, '.',
+        /[0-9]/, /[0-9]/, /[0-9]/, '/', /[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/, '-', /[0-9]/, /[0-9]/];
     form: any;
     _id: string;
     constructor(private router: Router,
@@ -97,6 +99,7 @@ export class EnterpriseComponent implements OnInit {
         }
 
         const request = this.form.value;
+        request.cnpj = request.cnpj.replace(/\D/g, '');
         this.enterpriseService.createOrUpdateEnterprise(request)
             .subscribe((response) => {
                 swal({

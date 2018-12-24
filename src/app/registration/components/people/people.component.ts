@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatStepper } from '@angular/material';
 import { MAT_STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import * as _ from 'lodash';
+import * as moment from 'moment';
 
 // Class
 import { People } from '../../classes/people.class';
@@ -23,6 +24,8 @@ declare var swal: any;
 
 export class PeopleComponent implements OnInit {
     @ViewChild('stepper') stepper;
+    maskDate = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
+    maskCPF = [/[0-9]/, /[0-9]/, /[0-9]/, '.', /[0-9]/, /[0-9]/, /[0-9]/, '.', /[0-9]/, /[0-9]/, /[0-9]/, '-', /[0-9]/, /[0-9]/];
     genders: any = ['Masculino', 'Feminino'];
     transgeneros: any = ['Travesti', 'Transexual'];
     orientacaoSexuals: any = [' Heterosexual', 'Homossexual', 'Bissexual'];
@@ -125,8 +128,20 @@ export class PeopleComponent implements OnInit {
     }
 
     setValueData(request: People): void {
+        if (request.dados_pessoais && request.dados_pessoais.birthDate) {
+            request.dados_pessoais.birthDate = moment(request.dados_pessoais.birthDate, 'YYYY-MM-DD')
+                .format('DD/MM/YYYY');
+        }
         this.firstFormGroup.setValue(request.dados_pessoais);
         this.secondFormGroup.setValue(request.endereco_contato);
+        if (request.profissional_eleitoral && request.profissional_eleitoral.admissionDate) {
+            request.profissional_eleitoral.admissionDate = moment(request.profissional_eleitoral.admissionDate, 'YYYY-MM-DD')
+                .format('DD/MM/YYYY');
+        }
+        if (request.profissional_eleitoral && request.profissional_eleitoral.terminationDate) {
+            request.profissional_eleitoral.terminationDate = moment(request.profissional_eleitoral.terminationDate, 'YYYY-MM-DD')
+                .format('DD/MM/YYYY');
+        }
         this.thirdFormGroup.setValue(request.profissional_eleitoral);
         this.fourthFormGroup.setValue(request.notificacoes_anotacoes);
     }
@@ -148,6 +163,22 @@ export class PeopleComponent implements OnInit {
             profissional_eleitoral: this.thirdFormGroup.value,
             notificacoes_anotacoes: this.fourthFormGroup.value
         };
+
+        request.dados_pessoais.cpf = request.dados_pessoais.cpf.replace(/\D/g, '');
+        if (request.dados_pessoais.birthDate) {
+            request.dados_pessoais.birthDate = moment(request.dados_pessoais.birthDate, 'DD/MM/YYYY').format('YYYY-MM-DD');
+        }
+        if (request.profissional_eleitoral.admissionDate) {
+            request.profissional_eleitoral.admissionDate = moment(request.profissional_eleitoral.admissionDate, 'DD/MM/YYYY')
+                .format('YYYY-MM-DD');
+        }
+
+        if (request.profissional_eleitoral.terminationDate && request.profissional_eleitoral.terminationDate !== 'Invalid date') {
+            request.profissional_eleitoral.terminationDate = moment(request.profissional_eleitoral.terminationDate, 'DD/MM/YYYY')
+                .format('YYYY-MM-DD');
+        } else {
+            request.profissional_eleitoral.terminationDate = null;
+        }
 
         this.peopleService.createOrUpdatePeople(request)
             .subscribe((response) => {

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {CommonModule } from '@angular/common';
+import { TextMaskModule } from 'angular2-text-mask';
 
 import {
     MatTableModule,
@@ -55,7 +56,8 @@ import { PeopleService } from './services/people.service';
         MatTooltipModule,
         SharedModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        TextMaskModule
     ],
     declarations: [
         PeopleComponent,
