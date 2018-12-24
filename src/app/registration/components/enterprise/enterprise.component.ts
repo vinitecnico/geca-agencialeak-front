@@ -16,6 +16,8 @@ import { Enterprise } from '../../classes/enterprise.class';
 export class EnterpriseComponent implements OnInit {
     maskCNPJ = [/[0-9]/, /[0-9]/, '.', /[0-9]/, /[0-9]/, /[0-9]/, '.',
         /[0-9]/, /[0-9]/, /[0-9]/, '/', /[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/, '-', /[0-9]/, /[0-9]/];
+    maskPhone = ['+', '5', '5', ' ', '(', /[1-9]/,  /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+    maskMobile = ['+', '5', '5', ' ', '(', /[1-9]/,  /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
     form: any;
     _id: string;
     constructor(private router: Router,

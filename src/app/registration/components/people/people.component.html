@@ -105,13 +105,13 @@
                                         <div class="col-12 col-sm-3">
                                             <mat-form-field class="full-width">
                                                 <i matPrefix class="fa fa-phone">&nbsp;</i>
-                                                <input matInput placeholder="Telefone" formControlName="phone">
+                                                <input matInput placeholder="Telefone" formControlName="phone" [textMask]="{mask: maskPhone}">
                                             </mat-form-field>
                                         </div>
                                         <div class="col-12 col-sm-3">
                                             <mat-form-field class="full-width">
                                                 <i matPrefix class="fa fa-mobile">&nbsp;</i>
-                                                <input matInput placeholder="Celular" formControlName="mobile">
+                                                <input matInput placeholder="Celular" formControlName="mobile" [textMask]="{mask: maskMobile}">
                                             </mat-form-field>
                                         </div>
                                         <div class="col-12 col-sm-6">

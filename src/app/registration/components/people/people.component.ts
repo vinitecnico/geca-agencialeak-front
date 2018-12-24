@@ -26,6 +26,8 @@ export class PeopleComponent implements OnInit {
     @ViewChild('stepper') stepper;
     maskDate = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
     maskCPF = [/[0-9]/, /[0-9]/, /[0-9]/, '.', /[0-9]/, /[0-9]/, /[0-9]/, '.', /[0-9]/, /[0-9]/, /[0-9]/, '-', /[0-9]/, /[0-9]/];
+    maskPhone = ['+', '5', '5', ' ', '(', /[1-9]/,  /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+    maskMobile = ['+', '5', '5', ' ', '(', /[1-9]/,  /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
     genders: any = ['Masculino', 'Feminino'];
     transgeneros: any = ['Travesti', 'Transexual'];
     orientacaoSexuals: any = [' Heterosexual', 'Homossexual', 'Bissexual'];
