@@ -22,6 +22,7 @@ import { ZipcodeComponent } from './components/zipcode/zipcode.component';
 // Services
 import { StartupConfigService } from './services/startup.config.service';
 import { ZipcodeService } from './services/zipcode.service';
+import { UtilsService } from './services/utils.service';
 
 @NgModule({
     imports: [
@@ -50,7 +51,8 @@ import { ZipcodeService } from './services/zipcode.service';
     ],
     providers: [
         StartupConfigService,
-        ZipcodeService
+        ZipcodeService,
+        UtilsService
     ],
     entryComponents: [
     ]

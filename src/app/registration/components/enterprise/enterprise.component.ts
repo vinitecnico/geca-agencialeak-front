@@ -7,6 +7,7 @@ declare var swal: any;
 // Services
 import { EnterpriseService } from '../../services/enterprise.service';
 import { Enterprise } from '../../classes/enterprise.class';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
     selector: 'app-enterprise',
@@ -14,16 +15,16 @@ import { Enterprise } from '../../classes/enterprise.class';
 })
 
 export class EnterpriseComponent implements OnInit {
-    maskCNPJ = [/[0-9]/, /[0-9]/, '.', /[0-9]/, /[0-9]/, /[0-9]/, '.',
-        /[0-9]/, /[0-9]/, /[0-9]/, '/', /[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/, '-', /[0-9]/, /[0-9]/];
-    maskPhone = ['+', '5', '5', ' ', '(', /[1-9]/,  /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-    maskMobile = ['+', '5', '5', ' ', '(', /[1-9]/,  /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+    maskCNPJ = this.utilsService.inputMask('cnpj');
+    maskPhone = this.utilsService.inputMask('phone');
+    maskMobile = this.utilsService.inputMask('mobile');
     form: any;
     _id: string;
     constructor(private router: Router,
         private route: ActivatedRoute,
         private formBuilder: FormBuilder,
-        private enterpriseService: EnterpriseService) {
+        private enterpriseService: EnterpriseService,
+        private utilsService: UtilsService) {
         this.route.queryParams.subscribe(params => {
             this._id = params['_id'];
         });

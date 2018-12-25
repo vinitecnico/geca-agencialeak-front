@@ -11,6 +11,7 @@ import { People } from '../../classes/people.class';
 
 // Services
 import { PeopleService } from '../../services/people.service';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 declare var swal: any;
 
@@ -24,10 +25,10 @@ declare var swal: any;
 
 export class PeopleComponent implements OnInit {
     @ViewChild('stepper') stepper;
-    maskDate = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
-    maskCPF = [/[0-9]/, /[0-9]/, /[0-9]/, '.', /[0-9]/, /[0-9]/, /[0-9]/, '.', /[0-9]/, /[0-9]/, /[0-9]/, '-', /[0-9]/, /[0-9]/];
-    maskPhone = ['+', '5', '5', ' ', '(', /[1-9]/,  /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-    maskMobile = ['+', '5', '5', ' ', '(', /[1-9]/,  /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+    maskDate = this.utilsService.inputMask('date');
+    maskCPF = this.utilsService.inputMask('cpf');
+    maskPhone = this.utilsService.inputMask('phone');
+    maskMobile = this.utilsService.inputMask('mobile');
     genders: any = ['Masculino', 'Feminino'];
     transgeneros: any = ['Travesti', 'Transexual'];
     orientacaoSexuals: any = [' Heterosexual', 'Homossexual', 'Bissexual'];
@@ -43,7 +44,8 @@ export class PeopleComponent implements OnInit {
     constructor(private router: Router,
         private route: ActivatedRoute,
         private formBuilder: FormBuilder,
-        private peopleService: PeopleService) {
+        private peopleService: PeopleService,
+        private utilsService: UtilsService) {
         this.route.queryParams.subscribe(params => {
             this._id = params['_id'];
         });
