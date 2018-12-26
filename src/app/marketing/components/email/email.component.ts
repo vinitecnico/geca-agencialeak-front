@@ -5,6 +5,7 @@ import * as _ from 'lodash';
 
 // Services
 import { EmailService } from '../../services/email.service';
+import { Email } from '../../classes/email.class';
 
 declare var swal: any;
 
@@ -36,11 +37,14 @@ export class EmailComponent implements OnInit {
             return;
         }
 
-        const request = this.form.value;
-        this.emailService.sendEmail(request)
+        const data: Email = this.form.value;
+        data.text = JSON.stringify(data.text);
+        // tslint:disable-next-line:quotemark
+        data.text = data.text.replace(/"/g, "'");
+        this.emailService.sendEmail(data)
             .subscribe((response) => {
                 swal({
-                    text: `E-mail enviado com sucesso!`,
+                    text: response,
                     type: 'success'
                 });
             }, (error) => {
