@@ -28,6 +28,9 @@ import { MarketingRoutingModule } from './marketing-routing.module';
 // component
 import { EmailComponent } from './components/email/email.component';
 
+// Service
+import { EmailService } from './services/email.service';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -56,6 +59,6 @@ import { EmailComponent } from './components/email/email.component';
     exports: [],
     entryComponents: [
     ],
-    providers: []
+    providers: [EmailService]
 })
 export class MarketingModule { }
