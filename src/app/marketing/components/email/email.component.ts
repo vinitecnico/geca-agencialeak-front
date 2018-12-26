@@ -37,10 +37,12 @@ export class EmailComponent implements OnInit {
             return;
         }
 
-        const data: Email = this.form.value;
-        data.text = JSON.stringify(data.text);
+        const data: any = this.form.value;
+        const oParser = new DOMParser();
+        const oDOM = oParser.parseFromString(data.text, 'text/html');
         // tslint:disable-next-line:quotemark
-        data.text = data.text.replace(/"/g, "'");
+        data.text = oDOM.body.innerHTML.replace(/"/g, "'");
+
         this.emailService.sendEmail(data)
             .subscribe((response) => {
                 swal({
