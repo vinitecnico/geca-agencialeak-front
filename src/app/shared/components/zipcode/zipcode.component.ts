@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Zipcode } from '../../classes/zipcode.classe';
+import * as _ from 'lodash';
 
 // services
 import { ZipcodeService } from '../../services/zipcode.service';
@@ -26,15 +27,30 @@ export class ZipcodeComponent implements OnInit {
                 this.zipcodeLoading = true;
                 this.zipcodeService.getZipCode(request.zipcode)
                     .subscribe(data => {
-                        this.zipcodeLoading = false;
-                        const zipcode = this.zipcodeResponse(data);
+                        if (data && _.isObject(data)) {
+                            const zipcode = this.zipcodeResponse(data);
 
-                        this.parentForm.controls.zipcode.setValue(zipcode.zipcode);
-                        this.parentForm.controls.address.setValue(zipcode.address);
-                        this.parentForm.controls.complement.setValue(zipcode.complement);
-                        this.parentForm.controls.neighborhood.setValue(zipcode.neighborhood);
-                        this.parentForm.controls.city.setValue(zipcode.city);
-                        this.parentForm.controls.state.setValue(zipcode.state);
+                            this.parentForm.controls.zipcode.setValue(zipcode.zipcode);
+                            this.parentForm.controls.address.setValue(zipcode.address);
+                            this.parentForm.controls.complement.setValue(zipcode.complement);
+                            this.parentForm.controls.neighborhood.setValue(zipcode.neighborhood);
+                            this.parentForm.controls.city.setValue(zipcode.city);
+                            this.parentForm.controls.state.setValue(zipcode.state);
+
+                            this.zipcodeService.getLocation(zipcode.zipcode)
+                                .subscribe((dataLocation: any) => {
+                                    this.zipcodeLoading = false;
+                                    if (dataLocation && dataLocation.results && _.isArray(dataLocation.results)) {
+                                        const result: any = _.first(dataLocation.results);
+                                        if (result.geometry && result.geometry.location) {
+                                          const location = result.geometry.location;
+                                          this.parentForm.controls.gps.setValue(`${location.lat}, ${location.lng}`);
+                                        }
+                                    }
+                                }, (error) => {
+                                    this.zipcodeLoading = false;
+                                });
+                        }
                     }, (error) => {
                         this.zipcodeLoading = false;
                     });
