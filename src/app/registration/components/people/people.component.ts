@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MatStepper } from '@angular/material';
-import { MAT_STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 
@@ -17,10 +15,7 @@ declare var swal: any;
 
 @Component({
     selector: 'app-people',
-    templateUrl: './people.component.html',
-    providers: [{
-        provide: MAT_STEPPER_GLOBAL_OPTIONS, useValue: { showError: true }
-    }]
+    templateUrl: './people.component.html'
 })
 
 export class PeopleComponent implements OnInit {
