@@ -140,7 +140,14 @@ export class PeopleComponent implements OnInit {
     onSearchChangeCpf(cpf: string) {
         if (cpf.length === 14) {
             const onlyNumbers = this.utilsService.onlyNumbers(cpf);
-            this.getByCpf(onlyNumbers);
+            if (this.utilsService.validationCPF(onlyNumbers)) {
+                this.getByCpf(onlyNumbers);
+            } else {
+                swal({
+                    text: 'CPF inválido!',
+                    type: 'error'
+                });
+            }
         }
     }
 
@@ -169,10 +176,7 @@ export class PeopleComponent implements OnInit {
             swal({
                 text: 'Por favor validar todos os campos antes de finalizar cadastro!',
                 type: 'warning'
-            })
-                .then(() => {
-                    stepper.selectedIndex = 1;
-                });
+            });
             return;
         }
 
@@ -184,7 +188,17 @@ export class PeopleComponent implements OnInit {
             notificacoes_anotacoes: this.fourthFormGroup.value
         };
 
-        request.dados_pessoais.cpf = request.dados_pessoais.cpf.replace(/\D/g, '');
+        request.dados_pessoais.cpf = this.utilsService.onlyNumbers(request.dados_pessoais.cpf);
+        if (!this.utilsService.validationCPF(request.dados_pessoais.cpf)) {
+            swal({
+                text: 'CPF inválido!',
+                type: 'error'
+            }).then(() => {
+                stepper.selectedIndex = 0;
+            });
+            return;
+        }
+
         if (request.dados_pessoais.birthDate) {
             request.dados_pessoais.birthDate = moment(request.dados_pessoais.birthDate, 'DD/MM/YYYY').format('YYYY-MM-DD');
         }
