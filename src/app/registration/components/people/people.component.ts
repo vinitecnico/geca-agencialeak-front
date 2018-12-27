@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MatStepper } from '@angular/material';
+import { MAT_STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 
@@ -15,10 +17,14 @@ declare var swal: any;
 
 @Component({
     selector: 'app-people',
-    templateUrl: './people.component.html'
+    templateUrl: './people.component.html',
+    providers: [{
+        provide: MAT_STEPPER_GLOBAL_OPTIONS, useValue: { showError: true }
+    }]
 })
 
 export class PeopleComponent implements OnInit {
+    @ViewChild('stepper') stepper;
     maskDate = this.utilsService.inputMask('date');
     maskCPF = this.utilsService.inputMask('cpf');
     maskPhone = this.utilsService.inputMask('phone');
@@ -43,6 +49,10 @@ export class PeopleComponent implements OnInit {
         this.route.queryParams.subscribe(params => {
             this._id = params['_id'];
         });
+    }
+
+    changeStep(stepper: MatStepper, form: FormGroup) {
+        stepper.next();
     }
 
     ngOnInit() {
@@ -157,14 +167,6 @@ export class PeopleComponent implements OnInit {
             profissional_eleitoral: this.thirdFormGroup.value,
             notificacoes_anotacoes: this.fourthFormGroup.value
         };
-
-        if (request.notificacoes_anotacoes.email && !request.endereco_contato.email) {
-            swal({
-                text: 'Deverá ser informado um e-mail válido!',
-                type: 'warning'
-            });
-            return;
-        }
 
         request.dados_pessoais.cpf = request.dados_pessoais.cpf.replace(/\D/g, '');
         if (request.dados_pessoais.birthDate) {
