@@ -13,7 +13,7 @@ export class LayoutComponent implements OnInit {
   constructor(private router: Router) {
     router.events.subscribe((val: NavigationEnd) => {
       this.activeUrl = val.url;
-      this.changeRouter();
+      // this.changeRouter();
     });
   }
 
