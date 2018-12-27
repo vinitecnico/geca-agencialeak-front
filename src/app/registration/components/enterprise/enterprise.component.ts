@@ -106,14 +106,14 @@ export class EnterpriseComponent implements OnInit {
         this.enterpriseService.createOrUpdateEnterprise(request)
             .subscribe((response) => {
                 swal({
-                    text: `Colégio ${!request._id ? 'criado' : 'alterado'} com sucesso!`,
+                    text: `Empresa ${!request._id ? 'criada' : 'alterada'} com sucesso!`,
                     type: 'success'
                 }).then(() => {
                     this.router.navigateByUrl('/registration/enterprise-list');
                 });
             }, (error) => {
                 swal({
-                    text: 'Erro para criar Colégio!',
+                    text: 'Erro para criar empresa!',
                     type: 'error'
                 });
             });
