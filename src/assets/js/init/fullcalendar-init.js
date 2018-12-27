@@ -1,7 +1,7 @@
 
 !function ($) {
     "use strict";
-    setTimeout(() => {
+    setTimeout(function () {
         var CalendarApp = function () {
             this.$body = $("body")
             this.$modal = $('#event-modal'),
@@ -190,7 +190,7 @@
     //initializing CalendarApp
     function ($) {
         "use strict";
-        setTimeout(() => {
+        setTimeout(function () {
             $.CalendarApp.init();
         }, 3000);
     }(window.jQuery);

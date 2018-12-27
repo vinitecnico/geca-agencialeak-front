@@ -8,17 +8,18 @@
                     <form [formGroup]="form">
                         <div class="form-group col-md-12">
                             <div class="row">
-                                <div class="col-12 col-sm-8">
+                                <div class="col-12 col-sm-4">
                                     <mat-form-field class="full-width">
-                                        <input matInput placeholder="Nome fantasia" formControlName="name">
+                                        <input matInput placeholder="CNPJ" formControlName="cnpj" [textMask]="{mask: maskCNPJ}" 
+                                         (change)="onSearchChangeCnpj($event.target.value)">
                                         <mat-error>
                                             Campo obrigatório
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
-                                <div class="col-12 col-sm-4">
+                                <div class="col-12 col-sm-8">
                                     <mat-form-field class="full-width">
-                                        <input matInput placeholder="CNPJ" formControlName="cnpj" [textMask]="{mask: maskCNPJ}">
+                                        <input matInput placeholder="Nome fantasia" formControlName="name">
                                         <mat-error>
                                             Campo obrigatório
                                         </mat-error>

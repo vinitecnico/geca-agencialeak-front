@@ -8,6 +8,10 @@ export class UtilsService {
         return value.replace(/[&\/\\#,+()$~%'":*?<>{}|]/g, '');
     }
 
+    onlyNumbers(value: string) {
+        return value.replace(/\D/g, '');
+    }
+
     inputMask(type: string) {
         switch (type) {
             case 'phone':

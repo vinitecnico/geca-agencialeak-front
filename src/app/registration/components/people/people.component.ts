@@ -47,10 +47,6 @@ export class PeopleComponent implements OnInit {
         });
     }
 
-    changeStep(stepper: MatStepper, form: FormGroup) {
-        stepper.next();
-    }
-
     ngOnInit() {
         this.firstFormGroup = this.formBuilder
             .group({
@@ -127,6 +123,27 @@ export class PeopleComponent implements OnInit {
         }
     }
 
+    getByCpf(cpf: string) {
+        if (cpf) {
+            this.peopleService.getById(cpf)
+                .subscribe((response) => {
+                    if (_.isArray(response)) {
+                        this.setValueData(_.first(response));
+                        this._id = cpf;
+                    }
+                }, (error) => {
+                    console.log(error);
+                });
+        }
+    }
+
+    onSearchChangeCpf(cpf: string) {
+        if (cpf.length === 14) {
+            const onlyNumbers = this.utilsService.onlyNumbers(cpf);
+            this.getByCpf(onlyNumbers);
+        }
+    }
+
     setValueData(request: People): void {
         if (request.dados_pessoais && request.dados_pessoais.birthDate) {
             request.dados_pessoais.birthDate = moment(request.dados_pessoais.birthDate, 'YYYY-MM-DD')
@@ -146,13 +163,16 @@ export class PeopleComponent implements OnInit {
         this.fourthFormGroup.setValue(request.notificacoes_anotacoes);
     }
 
-    save() {
+    save(stepper: MatStepper) {
         if (!this.firstFormGroup.valid || !this.secondFormGroup.valid ||
             !this.thirdFormGroup.valid || !this.fourthFormGroup.valid) {
             swal({
                 text: 'Por favor validar todos os campos antes de finalizar cadastro!',
                 type: 'warning'
-            });
+            })
+                .then(() => {
+                    stepper.selectedIndex = 1;
+                });
             return;
         }
 

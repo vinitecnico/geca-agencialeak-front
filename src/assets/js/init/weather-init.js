@@ -38,7 +38,7 @@
 
 
     // init
-    setTimeout(() => {
+    setTimeout(function () {
         loadWeather('San paulo', 'pt');
     }, 3000);
 

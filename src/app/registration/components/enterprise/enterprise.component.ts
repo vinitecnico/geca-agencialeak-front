@@ -68,6 +68,27 @@ export class EnterpriseComponent implements OnInit {
         }
     }
 
+    onSearchChangeCnpj(cnpj: string) {
+        if (cnpj.length === 18) {
+            const onlyNumbers = this.utilsService.onlyNumbers(cnpj);
+            this.getByCnpj(onlyNumbers);
+        }
+    }
+
+    getByCnpj(cnpj: string) {
+        if (cnpj) {
+            this.enterpriseService.getById(cnpj)
+                .subscribe((response) => {
+                    if (_.isArray(response)) {
+                        this.setValueData(_.first(response));
+                        this._id = cnpj;
+                    }
+                }, (error) => {
+                    console.log(error);
+                });
+        }
+    }
+
     setValueData(request: Enterprise): void {
         const data = {
             _id: request._id,
