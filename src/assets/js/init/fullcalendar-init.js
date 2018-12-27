@@ -183,7 +183,7 @@
 
             //init CalendarApp
             $.CalendarApp = new CalendarApp, $.CalendarApp.Constructor = CalendarApp
-    }, 2000);
+    }, 3000);
 
 }(window.jQuery),
 
@@ -192,5 +192,5 @@
         "use strict";
         setTimeout(() => {
             $.CalendarApp.init();
-        }, 2000);
+        }, 3000);
     }(window.jQuery);

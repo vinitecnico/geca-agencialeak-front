@@ -40,7 +40,7 @@
     // init
     setTimeout(() => {
         loadWeather('San paulo', 'pt');
-    }, 2000);
+    }, 3000);
 
 
 })(jQuery);
