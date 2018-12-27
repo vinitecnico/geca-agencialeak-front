@@ -24,7 +24,6 @@ declare var swal: any;
 })
 
 export class PeopleComponent implements OnInit {
-    @ViewChild('stepper') stepper;
     maskDate = this.utilsService.inputMask('date');
     maskCPF = this.utilsService.inputMask('cpf');
     maskPhone = this.utilsService.inputMask('phone');
@@ -49,10 +48,6 @@ export class PeopleComponent implements OnInit {
         this.route.queryParams.subscribe(params => {
             this._id = params['_id'];
         });
-    }
-
-    changeStep(stepper: MatStepper, form: FormGroup) {
-        stepper.next();
     }
 
     ngOnInit() {
@@ -172,8 +167,6 @@ export class PeopleComponent implements OnInit {
             swal({
                 text: 'Deverá ser informado um e-mail válido!',
                 type: 'warning'
-            }).then(() => {
-                this.stepper.selectedIndex = 1;
             });
             return;
         }
