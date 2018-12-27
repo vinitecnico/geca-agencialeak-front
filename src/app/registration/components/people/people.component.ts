@@ -150,7 +150,7 @@ export class PeopleComponent implements OnInit {
         this.fourthFormGroup.setValue(request.notificacoes_anotacoes);
     }
 
-    save(stepper: MatStepper) {
+    save() {
         if (!this.firstFormGroup.valid || !this.secondFormGroup.valid ||
             !this.thirdFormGroup.valid || !this.fourthFormGroup.valid) {
             swal({
@@ -173,7 +173,7 @@ export class PeopleComponent implements OnInit {
                 text: 'Deverá ser informado um e-mail válido!',
                 type: 'warning'
             }).then(() => {
-                stepper.selectedIndex = 1;
+                this.stepper.selectedIndex = 1;
             });
             return;
         }
