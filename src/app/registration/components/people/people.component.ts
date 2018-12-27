@@ -150,7 +150,7 @@ export class PeopleComponent implements OnInit {
         this.fourthFormGroup.setValue(request.notificacoes_anotacoes);
     }
 
-    save() {
+    save(stepper: MatStepper) {
         if (!this.firstFormGroup.valid || !this.secondFormGroup.valid ||
             !this.thirdFormGroup.valid || !this.fourthFormGroup.valid) {
             swal({
@@ -167,6 +167,16 @@ export class PeopleComponent implements OnInit {
             profissional_eleitoral: this.thirdFormGroup.value,
             notificacoes_anotacoes: this.fourthFormGroup.value
         };
+
+        if (request.notificacoes_anotacoes.email && !request.endereco_contato.email) {
+            swal({
+                text: 'Deverá ser informado um e-mail válido!',
+                type: 'warning'
+            }).then(() => {
+                stepper.selectedIndex = 1;
+            });
+            return;
+        }
 
         request.dados_pessoais.cpf = request.dados_pessoais.cpf.replace(/\D/g, '');
         if (request.dados_pessoais.birthDate) {
