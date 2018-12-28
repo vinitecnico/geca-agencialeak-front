@@ -4,9 +4,10 @@ import { Observable } from 'rxjs';
 
 // Class
 import { PeopleMap } from '../classes/people-map.class';
+import { StartupConfigService } from './startup.config.service';
 
 // Services
-import { StartupConfigService } from 'src/app/shared/services/startup.config.service';
+
 
 
 const httpOptions = {

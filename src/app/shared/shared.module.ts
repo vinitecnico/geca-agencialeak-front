@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AgmCoreModule } from '@agm/core';
 
 import {
     MatInputModule,
@@ -18,11 +19,13 @@ import {
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { MessageComponent } from './components/message/message.component';
 import { ZipcodeComponent } from './components/zipcode/zipcode.component';
+import { MapComponent } from './components/map/map.component';
 
 // Services
 import { StartupConfigService } from './services/startup.config.service';
 import { ZipcodeService } from './services/zipcode.service';
 import { UtilsService } from './services/utils.service';
+import { MapService } from './services/map.service';
 
 @NgModule({
     imports: [
@@ -37,22 +40,28 @@ import { UtilsService } from './services/utils.service';
         MatSelectModule,
         MatTooltipModule,
         MatAutocompleteModule,
-        MatIconModule
+        MatIconModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyAdyvRIRT1iMFRzE4v8BzfGXc-Oc9OFTwk'
+        })
     ],
     declarations: [
         BreadcrumbComponent,
         ZipcodeComponent,
-        MessageComponent
+        MessageComponent,
+        MapComponent
     ],
     exports: [
         BreadcrumbComponent,
         ZipcodeComponent,
-        MessageComponent
+        MessageComponent,
+        MapComponent
     ],
     providers: [
         StartupConfigService,
         ZipcodeService,
-        UtilsService
+        UtilsService,
+        MapService
     ],
     entryComponents: [
     ]

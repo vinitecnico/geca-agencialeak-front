@@ -1,18 +1,5 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { MouseEvent } from '@agm/core';
-
-// import { } from '@types/googlemaps';
-
 import * as _ from 'lodash';
-
-// declare var GMaps: any;
-
-// class
-import { PeopleMap } from '../../classes/people-map.class';
-
-// services
-import { Marker } from '@agm/core/services/google-maps-types';
-import { MapService } from '../../services/map.service';
 
 @Component({
     selector: 'app-map-people',
@@ -20,56 +7,12 @@ import { MapService } from '../../services/map.service';
 })
 
 export class MapPeopleComponent implements OnInit {
-    @Input() isNotPage: Boolean;
     // google maps zoom level
-    zoom: Number = 10;
-    ico: String = 'assets/images/map-people.png';
-
-    // initial center position for the map
-    lat: Number = -23.5489;
-    lng: Number = -46.6388;
-    name: string;
-    data: any[];
     markers: any[];
 
-    constructor(private mapService: MapService) {
-    }
-
-    clickedMarker(label: string, index: number) {
-        this.name = _.capitalize(this.data[index].name);
-        console.log(`clicked the marker: ${name}`);
-    }
-
-    mapClicked($event: MouseEvent) {
-        this.markers.push({
-            lat: $event.coords.lat,
-            lng: $event.coords.lng,
-            draggable: false
-        });
-    }
-
-    markerDragEnd(m: Marker, $event: MouseEvent) {
-        console.log('dragEnd', m, $event);
+    constructor() {
     }
 
     ngOnInit() {
-        const mapId = document.getElementById('map');
-        this.mapService.getAllPeople()
-            .subscribe((response) => {
-                this.data = _.map(response, (x: PeopleMap) => {
-                    const position = _.split(x.endereco_contato.gps, ',');
-                    return {
-                        name: x.dados_pessoais.name,
-                        lat: parseFloat(_.trim(_.first(position))),
-                        lng: parseFloat(_.trim(_.last(position))),
-                        draggable: false
-                    };
-                });
-
-                this.markers = this.data;
-
-            }, (erro) => {
-                console.log(erro);
-            });
     }
 }
