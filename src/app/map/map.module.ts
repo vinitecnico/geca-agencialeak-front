@@ -8,7 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MapRoutingModule } from './map-routing.module';
 
 // component
-import { MapPeopleComponent } from './components/map-people/map-people.component';
+import { MapGenericComponent } from './components/map-people/map-generic.component';
 
 @NgModule({
     imports: [
@@ -17,9 +17,9 @@ import { MapPeopleComponent } from './components/map-people/map-people.component
         SharedModule
     ],
     declarations: [
-        MapPeopleComponent
+        MapGenericComponent
     ],
-    exports: [MapPeopleComponent],
+    exports: [MapGenericComponent],
     entryComponents: [
     ],
     providers: []

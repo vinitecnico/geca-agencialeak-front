@@ -4,10 +4,10 @@ import { Observable } from 'rxjs';
 
 // Class
 import { PeopleMap } from '../classes/people-map.class';
-import { StartupConfigService } from './startup.config.service';
+import { FairMap } from '../classes/Fair-map.class';
 
 // Services
-
+import { StartupConfigService } from './startup.config.service';
 
 
 const httpOptions = {
@@ -22,5 +22,10 @@ export class MapService {
     getAllPeople(): Observable<PeopleMap[]> {
         const url = `${this.apiConfig.domain}api/maps`;
         return this.http.get<PeopleMap[]>(url, httpOptions);
+    }
+
+    getAllFair(): Observable<FairMap[]> {
+        const url = `${this.apiConfig.domain}api/mapfeiras`;
+        return this.http.get<FairMap[]>(url, httpOptions);
     }
 }
