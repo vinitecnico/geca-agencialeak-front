@@ -19,6 +19,11 @@ export class MapService {
 
     constructor(private http: HttpClient, private apiConfig: StartupConfigService, @Inject('LocalStorage') localStorage) { }
 
+    getAll(): Observable<any[]> {
+        const url = `${this.apiConfig.domain}api/mapfeiraspessoas`;
+        return this.http.get<any[]>(url, httpOptions);
+    }
+
     getAllPeople(): Observable<PeopleMap[]> {
         const url = `${this.apiConfig.domain}api/maps`;
         return this.http.get<PeopleMap[]>(url, httpOptions);

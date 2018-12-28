@@ -48,40 +48,70 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.type === 'people') {
-      this.mapService.getAllPeople()
-        .subscribe((response) => {
-          this.items = _.map(response, (x: PeopleMap) => {
-            const position = _.split(x.endereco_contato.gps, ',');
-            return {
-              name: x.dados_pessoais.name,
-              lat: parseFloat(_.trim(_.first(position))),
-              lng: parseFloat(_.trim(_.last(position))),
-              icon: 'assets/images/map-people.png',
-              draggable: false
-            };
+    switch (this.type) {
+      case 'people':
+        this.mapService.getAllPeople()
+          .subscribe((data) => {
+            this.items = this.setPeople(data);
+          }, (erro) => {
+            console.log(erro);
           });
-        }, (erro) => {
-          console.log(erro);
-        });
-    } else if (this.type === 'fair') {
-      this.mapService.getAllFair()
-        .subscribe((response) => {
-          this.items = _.map(response, (x: FairMap) => {
-            const position = _.split(x.gps, ',');
-            return {
-              name: x.name,
-              lat: parseFloat(_.trim(_.first(position))),
-              lng: parseFloat(_.trim(_.last(position))),
-              icon: this.getWeekImgURL(x.weekday),
-              weekday: x.weekday,
-              draggable: false
-            };
+        break;
+      case 'fair':
+        this.mapService.getAllFair()
+          .subscribe((data) => {
+            this.items = this.setFair(data);
+          }, (erro) => {
+            console.log(erro);
           });
-        }, (erro) => {
-          console.log(erro);
-        });
+        break;
+      default:
+        this.mapService.getAll()
+          .subscribe((response) => {
+            const data = _.first(response);
+            this.items = _.union(this.setPeople(data.pessoa), this.setFair(data.feira));
+          }, (erro) => {
+            console.log(erro);
+          });
+        break;
     }
+  }
+
+  setPeople(data) {
+    return _.chain(data)
+      .filter((x: any) => {
+        return x.endereco_contato && x.endereco_contato.gps;
+      })
+      .map((x: PeopleMap) => {
+        const position = _.split(x.endereco_contato.gps, ',');
+        return {
+          name: x.dados_pessoais.name,
+          lat: parseFloat(_.trim(_.first(position))),
+          lng: parseFloat(_.trim(_.last(position))),
+          icon: 'assets/images/map-people.png',
+          draggable: false
+        };
+      })
+      .value();
+  }
+
+  setFair(data) {
+    return _.chain(data)
+      .filter((x: any) => {
+        return x.gps;
+      })
+      .map((x: FairMap) => {
+        const position = _.split(x.gps, ',');
+        return {
+          name: x.name,
+          lat: parseFloat(_.trim(_.first(position))),
+          lng: parseFloat(_.trim(_.last(position))),
+          icon: this.getWeekImgURL(x.weekday),
+          weekday: x.weekday,
+          draggable: false
+        };
+      })
+      .value();
   }
 
   clickedMarker(label: string, index: number) {
