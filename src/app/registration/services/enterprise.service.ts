@@ -28,6 +28,11 @@ export class EnterpriseService {
         return this.http.get<Enterprise[]>(url, httpOptions);
     }
 
+    getByCnpjWs(cnpj: string) {
+        const url = `https://geca-agencialeak-api.herokuapp.com/api/cnpjws/${cnpj}`;
+        return this.http.get(url, httpOptions);
+    }
+
     createOrUpdateEnterprise(fair: Enterprise): Observable<any> {
         const url = `${this.apiConfig.domain}api/empresa`;
 

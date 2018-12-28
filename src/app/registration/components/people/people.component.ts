@@ -188,6 +188,16 @@ export class PeopleComponent implements OnInit {
             notificacoes_anotacoes: this.fourthFormGroup.value
         };
 
+        if (request.notificacoes_anotacoes.email && !request.endereco_contato.email) {
+            swal({
+                text: 'E-mail deve ser informado!',
+                type: 'error'
+            }).then(() => {
+                stepper.selectedIndex = 1;
+            });
+            return;
+        }
+
         request.dados_pessoais.cpf = this.utilsService.onlyNumbers(request.dados_pessoais.cpf);
         if (!this.utilsService.validationCPF(request.dados_pessoais.cpf)) {
             swal({

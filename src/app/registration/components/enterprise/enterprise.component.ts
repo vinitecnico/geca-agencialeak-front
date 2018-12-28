@@ -8,6 +8,7 @@ declare var swal: any;
 import { EnterpriseService } from '../../services/enterprise.service';
 import { Enterprise } from '../../classes/enterprise.class';
 import { UtilsService } from 'src/app/shared/services/utils.service';
+import { ZipcodeService } from 'src/app/shared/services/zipcode.service';
 
 @Component({
     selector: 'app-enterprise',
@@ -24,7 +25,8 @@ export class EnterpriseComponent implements OnInit {
         private route: ActivatedRoute,
         private formBuilder: FormBuilder,
         private enterpriseService: EnterpriseService,
-        private utilsService: UtilsService) {
+        private utilsService: UtilsService,
+        private zipcodeService: ZipcodeService) {
         this.route.queryParams.subscribe(params => {
             this._id = params['_id'];
         });
@@ -75,6 +77,59 @@ export class EnterpriseComponent implements OnInit {
         }
     }
 
+    getByCnpjWs(cnpj: string) {
+        this.enterpriseService.getByCnpjWs(cnpj)
+            .subscribe((data: any) => {
+                this._id = null;
+                const segment: any = _.first(data.atividade_principal);
+                const activity: any = _.first(data.atividades_secundarias);
+                const mainContact: any = _.first(data.qsa);
+                const zipcode = this.utilsService.onlyNumbers(data.cep);
+                this.zipcodeService.getLocation(zipcode)
+                    .subscribe((dataLocation: any) => {
+                        let gps = null;
+                        if (dataLocation && dataLocation.results && _.isArray(dataLocation.results)) {
+                            const result: any = _.first(dataLocation.results);
+                            if (result && result.geometry && result.geometry.location) {
+                              const location = result.geometry.location;
+                              gps = `${location.lat}, ${location.lng}`;
+                            }
+                        }
+
+                        const enterprise: Enterprise = {
+                            _id: null,
+                            name: _.lowerCase(data.nome),
+                            activity: activity ? _.lowerCase(activity.text) : null,
+                            address: _.lowerCase(data.logradouro),
+                            city: _.lowerCase(data.municipio),
+                            cnpj: data.cnpj,
+                            complement: _.lowerCase(data.complemento),
+                            email: data.email,
+                            facebook: null,
+                            dataUpdate: null,
+                            datacreate: null,
+                            instagram: null,
+                            mainContact: mainContact ? _.lowerCase(mainContact.nome || mainContact.nome_rep_legal) : null,
+                            mobile: null,
+                            phone: data.telefone,
+                            neighborhood: _.lowerCase(data.bairro),
+                            numberAddress: data.numero,
+                            segment: segment ? _.lowerCase(segment.text) : null,
+                            state: data.uf,
+                            twitter: null,
+                            zipcode: zipcode,
+                            gps: gps
+                        };
+                        this.setValueData(enterprise);
+                    });
+            }, (error) => {
+                swal({
+                    text: error.message || 'Erro para buscar CNPJ!',
+                    type: 'error'
+                });
+            });
+    }
+
     getByCnpj(cnpj: string) {
         if (cnpj) {
             this.enterpriseService.getById(cnpj)
@@ -83,8 +138,12 @@ export class EnterpriseComponent implements OnInit {
                         this.setValueData(_.first(response));
                         this._id = cnpj;
                     }
-                }, (error) => {
-                    console.log(error);
+                }, (e: any) => {
+                    if (e.error === 'Empresa nao encontrada.') {
+                        this.getByCnpjWs(cnpj);
+                    } else {
+                        console.log(e);
+                    }
                 });
         }
     }
