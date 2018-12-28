@@ -90,9 +90,9 @@ export class FairComponent implements OnInit {
                 }).then(() => {
                     this.router.navigateByUrl('/registration/fair-list');
                 });
-            }, (error) => {
+            }, (e) => {
                 swal({
-                    text: 'Erro para criar Feira!',
+                    text: e.error || 'Erro para criar Feira!',
                     type: 'error'
                 });
             });
