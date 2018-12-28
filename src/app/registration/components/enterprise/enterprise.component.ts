@@ -80,6 +80,14 @@ export class EnterpriseComponent implements OnInit {
     getByCnpjWs(cnpj: string) {
         this.enterpriseService.getByCnpjWs(cnpj)
             .subscribe((data: any) => {
+                if (data && data.status === 'ERROR' && data.message === 'CNPJ inválido') {
+                    swal({
+                        text: data.message || 'Erro para buscar CNPJ!',
+                        type: 'error'
+                    });
+                    return ;
+                }
+
                 this._id = null;
                 const segment: any = _.first(data.atividade_principal);
                 const activity: any = _.first(data.atividades_secundarias);
@@ -91,8 +99,8 @@ export class EnterpriseComponent implements OnInit {
                         if (dataLocation && dataLocation.results && _.isArray(dataLocation.results)) {
                             const result: any = _.first(dataLocation.results);
                             if (result && result.geometry && result.geometry.location) {
-                              const location = result.geometry.location;
-                              gps = `${location.lat}, ${location.lng}`;
+                                const location = result.geometry.location;
+                                gps = `${location.lat}, ${location.lng}`;
                             }
                         }
 
