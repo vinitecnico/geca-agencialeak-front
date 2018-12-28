@@ -1,4 +1,4 @@
-<div *ngIf="items">
+<div class="card" *ngIf="items">
     <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false"
         (mapClick)="mapClicked($event)">
 
