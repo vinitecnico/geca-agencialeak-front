@@ -20,7 +20,7 @@ export class MapService {
     constructor(private http: HttpClient, private apiConfig: StartupConfigService, @Inject('LocalStorage') localStorage) { }
 
     getAll(): Observable<any[]> {
-        const url = `${this.apiConfig.domain}api/mapfeiraspessoas`;
+        const url = `${this.apiConfig.domain}api/mapall`;
         return this.http.get<any[]>(url, httpOptions);
     }
 
