@@ -13,7 +13,8 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         children: [
             { path: 'peoplemap', component: MapGenericComponent },
-            { path: 'fairmap', component: MapGenericComponent }
+            { path: 'fairmap', component: MapGenericComponent },
+            { path: 'enterprisemap', component: MapGenericComponent }
         ]
     }
 ];

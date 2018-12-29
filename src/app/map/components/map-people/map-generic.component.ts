@@ -19,6 +19,9 @@ export class MapGenericComponent implements OnInit {
                     case '/map/fairmap':
                         this.type = 'fair';
                         break;
+                    case '/map/enterprisemap':
+                        this.type = 'enterprise';
+                        break;
                 }
 
             }

@@ -5,11 +5,11 @@ import * as _ from 'lodash';
 // Classes
 import { Marker } from '../../classes/marker.class';
 import { PeopleMap } from '../../classes/people-map.class';
+import { FairMap } from '../../classes/fair-map.class';
+import { EnterpriseMap } from '../../classes/enterprise-map.class';
 
 // Services
 import { MapService } from '../../services/map.service';
-import { FairMap } from '../../classes/Fair-map.class';
-
 
 @Component({
   selector: 'app-map',
@@ -44,7 +44,25 @@ export class MapComponent implements OnInit {
       default:
         return 'assets/images/Feiras/feira-violeta.png';
     }
+  }
 
+  setWeekName(value) {
+    switch (value) {
+      case 'Segunda':
+        return 'Segunda-Feira';
+      case 'Terca':
+        return 'Terça-Feira';
+      case 'Quarta':
+        return 'Quarta-Feira';
+      case 'Quinta':
+        return 'Quinta-Feira';
+      case 'Sexta':
+        return 'Sexta-Feira';
+      case 'Sabado':
+        return 'Sábado';
+      case 'Domingo':
+        return 'Domingo';
+    }
   }
 
   ngOnInit() {
@@ -61,6 +79,14 @@ export class MapComponent implements OnInit {
         this.mapService.getAllFair()
           .subscribe((data) => {
             this.items = this.setFair(data);
+          }, (erro) => {
+            console.log(erro);
+          });
+        break;
+      case 'enterprise':
+        this.mapService.getAllEnterprise()
+          .subscribe((data) => {
+            this.items = this.setEnterprise(data);
           }, (erro) => {
             console.log(erro);
           });
@@ -107,7 +133,25 @@ export class MapComponent implements OnInit {
           lat: parseFloat(_.trim(_.first(position))),
           lng: parseFloat(_.trim(_.last(position))),
           icon: this.getWeekImgURL(x.weekday),
-          weekday: x.weekday,
+          weekday: this.setWeekName(x.weekday),
+          draggable: false
+        };
+      })
+      .value();
+  }
+
+  setEnterprise(data) {
+    return _.chain(data)
+      .filter((x: any) => {
+        return x && x.gps;
+      })
+      .map((x: EnterpriseMap) => {
+        const position = _.split(x.gps, ',');
+        return {
+          name: x.name,
+          lat: parseFloat(_.trim(_.first(position))),
+          lng: parseFloat(_.trim(_.last(position))),
+          icon: 'assets/images/enterprise.png',
           draggable: false
         };
       })
