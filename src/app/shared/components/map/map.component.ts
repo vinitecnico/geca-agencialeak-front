@@ -151,7 +151,7 @@ export class MapComponent implements OnInit {
           name: x.name,
           lat: parseFloat(_.trim(_.first(position))),
           lng: parseFloat(_.trim(_.last(position))),
-          icon: 'assets/images/enterprise-ico.png',
+          icon: 'assets/images/work.png',
           draggable: false
         };
       })
