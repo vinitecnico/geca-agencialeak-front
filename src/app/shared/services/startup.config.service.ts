@@ -4,5 +4,5 @@ import { Injectable } from '@angular/core';
 export class StartupConfigService {
     value: any;
     domain: String = 'https://geca-agencialeak-api.herokuapp.com/';
-    // 'http://127.0.0.1:3000/';
+    // domain: String = 'http://127.0.0.1:3000/';
 }
