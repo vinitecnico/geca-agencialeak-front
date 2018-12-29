@@ -95,7 +95,7 @@ export class MapComponent implements OnInit {
         this.mapService.getAll()
           .subscribe((response) => {
             const data = _.first(response);
-            this.items = _.union(this.setPeople(data.pessoa), this.setFair(data.feira));
+            this.items = _.union(this.setPeople(data.pessoa), this.setFair(data.feira), this.setEnterprise(data.empresa));
           }, (erro) => {
             console.log(erro);
           });
