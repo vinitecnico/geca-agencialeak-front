@@ -9,6 +9,8 @@ import * as moment from 'moment';
 // services
 import { AuthenticationService } from '../../services/authentication.service';
 
+declare var swal: any;
+
 
 @Component({
   selector: 'app-login',
@@ -47,13 +49,15 @@ export class LoginComponent implements OnInit {
       .subscribe((response) => {
         const auth = response;
         if (!auth) {
-          this.alertService.danger('Usuário ou senha inválido!');
           return;
         }
         localStorage.setItem('authData', JSON.stringify({ expires_in: moment().add(30, 'minutes') }));
         this.router.navigateByUrl('/app/dashboard');
       }, (error) => {
-        console.log(error);
+        swal({
+          text: 'Usuário ou senha inválido!',
+          type: 'warning'
+        });
       });
   }
 
