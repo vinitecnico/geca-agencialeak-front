@@ -22,6 +22,7 @@ export class MapGenericComponent implements OnInit {
                     case '/map/enterprisemap':
                         this.type = 'enterprise';
                         break;
+
                 }
 
             }
