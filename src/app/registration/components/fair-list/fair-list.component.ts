@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatTableDataSource, MatPaginator, MatSort, PageEvent } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, PageEvent, Sort } from '@angular/material';
 import * as _ from 'lodash';
 import { Fair } from '../../classes/fair.class';
 
@@ -20,10 +20,10 @@ export class FairListComponent implements OnInit {
     dataSource = new MatTableDataSource<any>();
     pageIndex = 0;
     length = 0;
-    pageSize = 10;
+    pageSize = 5;
     pageSizeOptions = [5, 10, 15, 25];
     @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
+    sort= {active: 'name', direction: 'asc'};
     titleMsg: String = 'Não foram encontrados resultados!';
     showMessage: boolean;
     hasSearch: boolean;
@@ -34,6 +34,15 @@ export class FairListComponent implements OnInit {
     applyFilter(filterValue: string, data: any): void {
         filterValue = filterValue.trim().toLowerCase();
         data.filter = filterValue;
+    }
+
+    sortData(sort: Sort) {
+        if (!sort.active || sort.direction === '') {
+            return;
+        }
+        this.sort = sort;
+        this.pageIndex = 0;
+        this.getAll(this.pageIndex, this.pageSize);
     }
 
     ngOnInit() {
@@ -47,7 +56,9 @@ export class FairListComponent implements OnInit {
     getAll(page, pageSize): void {
         const request = {
             page: page,
-            per_page: pageSize
+            per_page: pageSize,
+            active: this.sort.active,
+            direction: this.sort.direction
         };
         this.fairService.getAll(request)
             .subscribe((data: any) => {

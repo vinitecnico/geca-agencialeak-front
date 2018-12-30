@@ -27,7 +27,7 @@
                     </div>
 
                     <mat-table #table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc"
-                        matSortDisableClear>
+                        (matSortChange)="sortData($event)">
 
                         <!-- Name -->
                         <ng-container matColumnDef="name">
