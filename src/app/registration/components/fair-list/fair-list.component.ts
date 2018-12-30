@@ -58,7 +58,7 @@ export class FairListComponent implements OnInit {
             page: page,
             per_page: pageSize,
             active: this.sort.active,
-            direction: this.sort.direction
+            direction: this.sort.direction === 'asc' ? 1: -1
         };
         this.fairService.getAll(request)
             .subscribe((data: any) => {
