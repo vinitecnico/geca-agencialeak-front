@@ -22,7 +22,7 @@
 
                     <div class="table-header">
                         <mat-form-field>
-                            <input matInput (keyup)="applyFilter($event.target.value, dataSource)" placeholder="Pesquisar">
+                            <input matInput (change)="applyFilter($event.target.value, dataSource)" placeholder="Pesquisar">
                         </mat-form-field>
                     </div>
 

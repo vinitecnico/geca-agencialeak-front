@@ -6,6 +6,7 @@ import { Fair } from '../../classes/fair.class';
 
 // Services
 import { FairService } from '../../services/fair.service';
+import { Subject } from 'rxjs';
 
 declare var swal: any;
 
@@ -28,6 +29,7 @@ export class FairListComponent implements OnInit {
     showMessage: boolean;
     hasSearch: boolean;
     filterValue: string;
+    searchTextChanged = new Subject<string>();
 
     constructor(private router: Router, private fairService: FairService) {
     }
@@ -37,7 +39,7 @@ export class FairListComponent implements OnInit {
             this.filterValue = filterValue.trim().toLowerCase();
             this.pageIndex = 0;
             this.getAll(this.pageIndex, this.pageSize);
-        }, 1000);
+        }, 600);
     }
 
     sortData(sort: Sort) {
