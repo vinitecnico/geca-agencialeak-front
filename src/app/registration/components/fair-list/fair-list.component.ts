@@ -23,17 +23,21 @@ export class FairListComponent implements OnInit {
     pageSize = 5;
     pageSizeOptions = [5, 10, 15, 25];
     @ViewChild(MatPaginator) paginator: MatPaginator;
-    sort= {active: 'name', direction: 'asc'};
+    sort = { active: 'name', direction: 'asc' };
     titleMsg: String = 'Não foram encontrados resultados!';
     showMessage: boolean;
     hasSearch: boolean;
+    filterValue: string;
 
     constructor(private router: Router, private fairService: FairService) {
     }
 
     applyFilter(filterValue: string, data: any): void {
-        filterValue = filterValue.trim().toLowerCase();
-        data.filter = filterValue;
+        setTimeout(() => {
+            this.filterValue = filterValue.trim().toLowerCase();
+            this.pageIndex = 0;
+            this.getAll(this.pageIndex, this.pageSize);
+        }, 1000);
     }
 
     sortData(sort: Sort) {
@@ -58,7 +62,8 @@ export class FairListComponent implements OnInit {
             page: page + 1,
             per_page: pageSize,
             active: this.sort.active,
-            direction: this.sort.direction === 'asc' ? 1: -1
+            direction: this.sort.direction === 'asc' ? 1 : -1,
+            value: this.filterValue
         };
         this.fairService.getAll(request)
             .subscribe((response: any) => {
