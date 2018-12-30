@@ -61,12 +61,11 @@ export class FairListComponent implements OnInit {
             direction: this.sort.direction === 'asc' ? 1: -1
         };
         this.fairService.getAll(request)
-            .subscribe((data: any) => {
-                this.length = 48;
+            .subscribe((response: any) => {
+                this.length = response.total;
+                this.dataSource.data = response.data;
 
-                this.dataSource.data = data;
-
-                if (!data || !_.isArray(data)) {
+                if (this.length === 0) {
                     this.showMessage = true;
                     this.hasSearch = false;
                     return;
