@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, PageEvent } from '@angular/material';
 import * as _ from 'lodash';
 import { Fair } from '../../classes/fair.class';
 
@@ -14,11 +14,14 @@ declare var swal: any;
     templateUrl: './fair-list.component.html'
 })
 
-export class FairListComponent implements OnInit, AfterViewInit {
+export class FairListComponent implements OnInit {
     // Table elements
     displayedColumns = ['name', 'weekday', 'city', 'edit', 'delete'];
-    dataSource = new MatTableDataSource<Fair>();
+    dataSource = new MatTableDataSource<any>();
+    pageIndex = 0;
+    length = 0;
     pageSize = 10;
+    pageSizeOptions = [5, 10, 15, 25];
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
     titleMsg: String = 'Não foram encontrados resultados!';
@@ -34,17 +37,22 @@ export class FairListComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
-        this.getAll();
+        this.getAll(this.pageIndex, this.pageSize);
     }
 
-    ngAfterViewInit() {
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+    getNext(event: PageEvent) {
+        this.getAll(event.pageIndex, event.pageSize);
     }
 
-    getAll(): void {
-        this.fairService.getAll()
+    getAll(page, pageSize): void {
+        const request = {
+            page: page,
+            per_page: pageSize
+        };
+        this.fairService.getAll(request)
             .subscribe((data: any) => {
+                this.length = 48;
+
                 this.dataSource.data = data;
 
                 if (!data || !_.isArray(data)) {
@@ -81,11 +89,11 @@ export class FairListComponent implements OnInit, AfterViewInit {
                                     text: `Feira deletada com sucesso!`,
                                     type: 'success'
                                 }).then(() => {
-                                    this.getAll();
+                                    this.getAll(this.pageIndex, this.pageSize);
                                 });
                             }
                         }, () => {
-                            this.getAll();
+                            this.getAll(this.pageIndex, this.pageSize);
                         });
                 }
             });

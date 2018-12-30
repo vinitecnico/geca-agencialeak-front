@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as _ from 'lodash';
 
 // Class
 import { Fair } from '../classes/fair.class';
@@ -18,9 +19,22 @@ export class FairService {
 
     constructor(private http: HttpClient, private apiConfig: StartupConfigService, @Inject('LocalStorage') localStorage) { }
 
-    getAll(): Observable<Fair[]> {
+    private setParameters(parameters: any): HttpParams {
+        if (parameters) {
+            let Params = new HttpParams();
+            _.each(parameters, (value, key) => {
+                Params = Params.append(key, value);
+            });
+
+            return Params;
+        }
+
+        return null;
+    }
+
+    getAll(request): Observable<Fair[]> {
         const url = `${this.apiConfig.domain}api/feira`;
-        return this.http.get<Fair[]>(url, httpOptions);
+        return this.http.get<Fair[]>(url, {params: this.setParameters(request)});
     }
 
     getById(_id: string): Observable<Fair[]> {
