@@ -31,15 +31,15 @@ export class MapComponent implements OnInit {
 
   getWeekImgURL(day) {
     switch (day) {
-      case 'Terca':
+      case 'terca':
         return 'assets/images/Feiras/feira-ciano.png';
-      case 'Quarta':
+      case 'quarta':
         return 'assets/images/Feiras/feira-laranja.png';
-      case 'Quinta':
+      case 'quinta':
         return 'assets/images/Feiras/feira-magenta.png';
-      case 'Sexta':
+      case 'sexta':
         return 'assets/images/Feiras/feira-marrom.png';
-      case 'Sabado':
+      case 'sabado':
         return 'assets/images/Feiras/feira-verde.png';
       default:
         return 'assets/images/Feiras/feira-violeta.png';
@@ -48,19 +48,19 @@ export class MapComponent implements OnInit {
 
   setWeekName(value) {
     switch (value) {
-      case 'Segunda':
+      case 'segunda':
         return 'Segunda-Feira';
-      case 'Terca':
+      case 'terca':
         return 'Terça-Feira';
-      case 'Quarta':
+      case 'quarta':
         return 'Quarta-Feira';
-      case 'Quinta':
+      case 'quinta':
         return 'Quinta-Feira';
-      case 'Sexta':
+      case 'sexta':
         return 'Sexta-Feira';
-      case 'Sabado':
+      case 'sabado':
         return 'Sábado';
-      case 'Domingo':
+      case 'domingo':
         return 'Domingo';
     }
   }

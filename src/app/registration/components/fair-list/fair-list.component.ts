@@ -55,7 +55,7 @@ export class FairListComponent implements OnInit {
 
     getAll(page, pageSize): void {
         const request = {
-            page: page,
+            page: page + 1,
             per_page: pageSize,
             active: this.sort.active,
             direction: this.sort.direction === 'asc' ? 1: -1
