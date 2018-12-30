@@ -20,22 +20,22 @@ export class MapService {
     constructor(private http: HttpClient, private apiConfig: StartupConfigService, @Inject('LocalStorage') localStorage) { }
 
     getAll(): Observable<any[]> {
-        const url = `${this.apiConfig.domain}api/mapall`;
+        const url = `${this.apiConfig.domain}api/map`;
         return this.http.get<any[]>(url, httpOptions);
     }
 
     getAllPeople(): Observable<PeopleMap[]> {
-        const url = `${this.apiConfig.domain}api/maps`;
+        const url = `${this.apiConfig.domain}api/map/pessoa`;
         return this.http.get<PeopleMap[]>(url, httpOptions);
     }
 
     getAllFair(): Observable<FairMap[]> {
-        const url = `${this.apiConfig.domain}api/mapfeiras`;
+        const url = `${this.apiConfig.domain}api/map/feira`;
         return this.http.get<FairMap[]>(url, httpOptions);
     }
 
     getAllEnterprise(): Observable<EnterpriseMap[]> {
-        const url = `${this.apiConfig.domain}api/mapempresas`;
+        const url = `${this.apiConfig.domain}api/map/empresa`;
         return this.http.get<EnterpriseMap[]>(url, httpOptions);
     }
 }
