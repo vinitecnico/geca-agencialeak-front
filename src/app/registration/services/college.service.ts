@@ -1,6 +1,9 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as _ from 'lodash';
+
+// classes
 import { College } from '../classes/college.class';
 
 // Services
@@ -15,9 +18,22 @@ export class CollegeService {
 
     constructor(private http: HttpClient, private apiConfig: StartupConfigService, @Inject('LocalStorage') localStorage) { }
 
-    getAll(): Observable<College[]> {
+    private setParameters(parameters: any): HttpParams {
+        if (parameters) {
+            let Params = new HttpParams();
+            _.each(parameters, (value, key) => {
+                Params = Params.append(key, value);
+            });
+
+            return Params;
+        }
+
+        return null;
+    }
+
+    getAll(request): Observable<College[]> {
         const url = `${this.apiConfig.domain}api/colegio`;
-        return this.http.get<College[]>(url, httpOptions);
+        return this.http.get<College[]>(url, {params: this.setParameters(request)});
     }
 
     getById(_id: string): Observable<College[]> {
