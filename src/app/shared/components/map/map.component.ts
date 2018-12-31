@@ -19,7 +19,7 @@ import { MapService } from '../../services/map.service';
 export class MapComponent implements OnInit {
   @Input() type: string;
   items: any;
-  zoom: Number = 10;
+  zoom: Number = 8;
 
   // initial center position for the map
   lat: Number = -23.5489;
