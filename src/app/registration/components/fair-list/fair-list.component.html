@@ -35,7 +35,9 @@
                                     [matTooltipPosition]="'above'">help</mat-icon>
                                 Nome
                             </mat-header-cell>
-                            <mat-cell *matCellDef="let fair"> {{fair.name}} </mat-cell>
+                            <mat-cell *matCellDef="let fair">
+                                <div a-h [innerHtml]="fair.name | highlight : filterValue"></div>
+                            </mat-cell>
                         </ng-container>
 
                         <!-- weekday -->
@@ -45,7 +47,9 @@
                                     [matTooltipPosition]="'above'">help</mat-icon>
                                 Dia
                             </mat-header-cell>
-                            <mat-cell *matCellDef="let fair"> {{fair.weekday}} </mat-cell>
+                            <mat-cell *matCellDef="let fair">
+                                <div a-h [innerHtml]="fair.weekday | highlight : filterValue"></div>
+                            </mat-cell>
                         </ng-container>
 
                         <!-- city -->
@@ -55,7 +59,9 @@
                                     [matTooltipPosition]="'above'">help</mat-icon>
                                 Cidade
                             </mat-header-cell>
-                            <mat-cell *matCellDef="let fair"> {{fair.city}} </mat-cell>
+                            <mat-cell *matCellDef="let fair">
+                                <div a-h [innerHtml]="fair.city | highlight : filterValue"></div>
+                            </mat-cell>
                         </ng-container>
 
 
@@ -79,13 +85,8 @@
                         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
                     </mat-table>
 
-                    <mat-paginator #paginator 
-                        [length]="length" 
-                        [pageIndex]="pageIndex" 
-                        [pageSize]="pageSize" 
-                        [pageSizeOptions]="pageSizeOptions"
-                        (page)="getNext($event)" 
-                        showFirstLastButtons [hidden]="!hasSearch">
+                    <mat-paginator #paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+                        [pageSizeOptions]="pageSizeOptions" (page)="getNext($event)" showFirstLastButtons [hidden]="!hasSearch">
                     </mat-paginator>
                 </div>
             </div>

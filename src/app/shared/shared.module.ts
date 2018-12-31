@@ -26,6 +26,7 @@ import { StartupConfigService } from './services/startup.config.service';
 import { ZipcodeService } from './services/zipcode.service';
 import { UtilsService } from './services/utils.service';
 import { MapService } from './services/map.service';
+import { Highlight } from './pipes/highlight.pipe';
 
 @NgModule({
     imports: [
@@ -49,13 +50,15 @@ import { MapService } from './services/map.service';
         BreadcrumbComponent,
         ZipcodeComponent,
         MessageComponent,
-        MapComponent
+        MapComponent,
+        Highlight
     ],
     exports: [
         BreadcrumbComponent,
         ZipcodeComponent,
         MessageComponent,
-        MapComponent
+        MapComponent,
+        Highlight
     ],
     providers: [
         StartupConfigService,
