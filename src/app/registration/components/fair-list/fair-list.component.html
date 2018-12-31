@@ -17,7 +17,7 @@
 
                     <div class="table-header" *ngIf="noItems">
                         <mat-form-field>
-                            <input matInput (change)="applyFilter($event.target.value)" placeholder="Pesquisar">
+                            <input matInput #searchTextRef placeholder="Pesquisar">
                         </mat-form-field>
                     </div>
 

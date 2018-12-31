@@ -1,12 +1,12 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatTableDataSource, MatPaginator, MatSort, PageEvent, Sort } from '@angular/material';
+import { MatTableDataSource, MatPaginator, PageEvent, Sort } from '@angular/material';
+import { Observable } from 'rxjs';
+import 'rxjs/Rx';
 import * as _ from 'lodash';
-import { Fair } from '../../classes/fair.class';
 
 // Services
 import { FairService } from '../../services/fair.service';
-import { Subject } from 'rxjs';
 
 declare var swal: any;
 
@@ -23,24 +23,26 @@ export class FairListComponent implements OnInit {
     length = 0;
     pageSize = 5;
     pageSizeOptions = [5, 10, 15, 25];
-    @ViewChild(MatPaginator) paginator: MatPaginator;
     sort = { active: 'name', direction: 'asc' };
     titleMsg: String = 'Não foram encontrados resultados!';
     showMessage: boolean;
     hasSearch: boolean;
     filterValue: string;
-    searchTextChanged = new Subject<string>();
     noItems: boolean;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild('searchTextRef') searchTextRef: ElementRef;
 
     constructor(private router: Router, private fairService: FairService) {
     }
 
+    ngOnInit() {
+        this.getAll(this.pageIndex, this.pageSize);
+    }
+
     applyFilter(filterValue: string): void {
-        setTimeout(() => {
-            this.filterValue = filterValue.trim().toLowerCase();
-            this.pageIndex = 0;
-            this.getAll(this.pageIndex, this.pageSize);
-        }, 600);
+        this.filterValue = filterValue.trim().toLowerCase();
+        this.pageIndex = 0;
+        this.getAll(this.pageIndex, this.pageSize);
     }
 
     sortData(sort: Sort) {
@@ -49,10 +51,6 @@ export class FairListComponent implements OnInit {
         }
         this.sort = sort;
         this.pageIndex = 0;
-        this.getAll(this.pageIndex, this.pageSize);
-    }
-
-    ngOnInit() {
         this.getAll(this.pageIndex, this.pageSize);
     }
 
@@ -85,6 +83,14 @@ export class FairListComponent implements OnInit {
                     this.hasSearch = true;
                     this.noItems = true;
                     this.showMessage = false;
+
+                    setTimeout(() => {
+                        Observable.fromEvent(this.searchTextRef.nativeElement, 'keyup')
+                            .map((evt: any) => evt.target.value)
+                            .debounceTime(800)
+                            .distinctUntilChanged()
+                            .subscribe((text: string) => this.applyFilter(text));
+                    });
                 }
             }, (erro) => {
                 this.showMessage = true;
