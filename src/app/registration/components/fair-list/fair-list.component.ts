@@ -7,6 +7,7 @@ import * as _ from 'lodash';
 
 // Services
 import { FairService } from '../../services/fair.service';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 declare var swal: any;
 
@@ -32,7 +33,7 @@ export class FairListComponent implements OnInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild('searchTextRef') searchTextRef: ElementRef;
 
-    constructor(private router: Router, private fairService: FairService) {
+    constructor(private router: Router, private fairService: FairService, private utilsService: UtilsService) {
     }
 
     ngOnInit() {
@@ -40,7 +41,7 @@ export class FairListComponent implements OnInit {
     }
 
     applyFilter(filterValue: string): void {
-        this.filterValue = filterValue.trim().toLowerCase();
+        this.filterValue = filterValue ? this.utilsService.removeSpecialCharacters(filterValue.trim().toLowerCase()) : null;
         this.pageIndex = 0;
         this.getAll(this.pageIndex, this.pageSize);
     }

@@ -11,6 +11,7 @@ import { College } from '../../classes/college.class';
 
 // services
 import { CollegeService } from '../../services/college.service';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
     selector: 'app-college-list',
@@ -34,7 +35,7 @@ export class CollegeListComponent implements OnInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild('searchTextRef') searchTextRef: ElementRef;
 
-    constructor(private router: Router, private collegeService: CollegeService) {
+    constructor(private router: Router, private collegeService: CollegeService, private utilsService: UtilsService) {
     }
 
     ngOnInit() {
@@ -42,7 +43,7 @@ export class CollegeListComponent implements OnInit {
     }
 
     applyFilter(filterValue: string): void {
-        this.filterValue = filterValue.trim().toLowerCase();
+        this.filterValue = filterValue ? this.utilsService.removeSpecialCharacters(filterValue.trim().toLowerCase()) : null;
         this.pageIndex = 0;
         this.getAll(this.pageIndex, this.pageSize);
     }
