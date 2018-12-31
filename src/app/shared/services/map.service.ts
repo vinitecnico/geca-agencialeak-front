@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { PeopleMap } from '../classes/people-map.class';
 import { FairMap } from '../classes/fair-map.class';
 import { EnterpriseMap } from '../classes/enterprise-map.class';
+import { CollegeMap } from '../classes/college-map.class';
 
 // Services
 import { StartupConfigService } from './startup.config.service';
@@ -27,15 +28,20 @@ export class MapService {
     getAllPeople(): Observable<PeopleMap[]> {
         const url = `${this.apiConfig.domain}api/map/pessoa`;
         return this.http.get<PeopleMap[]>(url, httpOptions);
+    }    
+
+    getAllEnterprise(): Observable<EnterpriseMap[]> {
+        const url = `${this.apiConfig.domain}api/map/empresa`;
+        return this.http.get<EnterpriseMap[]>(url, httpOptions);
+    }
+
+    getAllCollege(): Observable<CollegeMap[]> {
+        const url = `${this.apiConfig.domain}api/map/colegio`;
+        return this.http.get<CollegeMap[]>(url, httpOptions);
     }
 
     getAllFair(): Observable<FairMap[]> {
         const url = `${this.apiConfig.domain}api/map/feira`;
         return this.http.get<FairMap[]>(url, httpOptions);
-    }
-
-    getAllEnterprise(): Observable<EnterpriseMap[]> {
-        const url = `${this.apiConfig.domain}api/map/empresa`;
-        return this.http.get<EnterpriseMap[]>(url, httpOptions);
     }
 }

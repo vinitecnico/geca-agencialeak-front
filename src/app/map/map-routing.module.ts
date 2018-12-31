@@ -4,7 +4,7 @@ import { LayoutComponent } from '../layout/layout.component';
 import { AuthGuard } from '../authentication/services/auth-guard.service';
 
 // component
-import { MapGenericComponent } from './components/map-people/map-generic.component';
+import { MapGenericComponent } from './components/map-generic/map-generic.component';
 
 const routes: Routes = [
     {
@@ -12,9 +12,10 @@ const routes: Routes = [
         component: LayoutComponent,
         canActivate: [AuthGuard],
         children: [
-            { path: 'peoplemap', component: MapGenericComponent },
-            { path: 'fairmap', component: MapGenericComponent },
-            { path: 'enterprisemap', component: MapGenericComponent }
+            { path: 'peoplemap', component: MapGenericComponent },            
+            { path: 'enterprisemap', component: MapGenericComponent },
+            { path: 'collegemap', component: MapGenericComponent },
+            { path: 'fairmap', component: MapGenericComponent }
         ]
     }
 ];

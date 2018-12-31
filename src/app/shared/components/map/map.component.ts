@@ -7,6 +7,7 @@ import { Marker } from '../../classes/marker.class';
 import { PeopleMap } from '../../classes/people-map.class';
 import { FairMap } from '../../classes/fair-map.class';
 import { EnterpriseMap } from '../../classes/enterprise-map.class';
+import { CollegeMap } from '../../classes/college-map.class';
 
 // Services
 import { MapService } from '../../services/map.service';
@@ -75,14 +76,6 @@ export class MapComponent implements OnInit {
             console.log(erro);
           });
         break;
-      case 'fair':
-        this.mapService.getAllFair()
-          .subscribe((data) => {
-            this.items = this.setFair(data);
-          }, (erro) => {
-            console.log(erro);
-          });
-        break;
       case 'enterprise':
         this.mapService.getAllEnterprise()
           .subscribe((data) => {
@@ -91,11 +84,28 @@ export class MapComponent implements OnInit {
             console.log(erro);
           });
         break;
+      case 'college':
+        this.mapService.getAllCollege()
+          .subscribe((data) => {
+            this.items = this.setCollege(data);
+          }, (erro) => {
+            console.log(erro);
+          });
+        break;
+      case 'fair':
+        this.mapService.getAllFair()
+          .subscribe((data) => {
+            this.items = this.setFair(data);
+          }, (erro) => {
+            console.log(erro);
+          });
+        break;
       default:
         this.mapService.getAll()
           .subscribe((response) => {
             const data = _.first(response);
-            this.items = _.union(this.setPeople(data.pessoa), this.setFair(data.feira), this.setEnterprise(data.empresa));
+            this.items = _.union(this.setPeople(data.pessoa), this.setFair(data.feira), this.setEnterprise(data.empresa),
+              this.setCollege(data.colegio));
           }, (erro) => {
             console.log(erro);
           });
@@ -121,6 +131,42 @@ export class MapComponent implements OnInit {
       .value();
   }
 
+  setEnterprise(data) {
+    return _.chain(data)
+      .filter((x: any) => {
+        return x && x.gps;
+      })
+      .map((x: EnterpriseMap) => {
+        const position = _.split(x.gps, ',');
+        return {
+          name: x.name,
+          lat: parseFloat(_.trim(_.first(position))),
+          lng: parseFloat(_.trim(_.last(position))),
+          icon: 'assets/images/work.png',
+          draggable: false
+        };
+      })
+      .value();
+  }
+
+  setCollege(data) {
+    return _.chain(data)
+      .filter((x: any) => {
+        return x && x.gps;
+      })
+      .map((x: CollegeMap) => {
+        const position = _.split(x.gps, ',');
+        return {
+          name: x.name,
+          lat: parseFloat(_.trim(_.first(position))),
+          lng: parseFloat(_.trim(_.last(position))),
+          icon: 'assets/images/escolas/casa-02.png',
+          draggable: false
+        };
+      })
+      .value();
+  }
+
   setFair(data) {
     return _.chain(data)
       .filter((x: any) => {
@@ -134,24 +180,6 @@ export class MapComponent implements OnInit {
           lng: parseFloat(_.trim(_.last(position))),
           icon: this.getWeekImgURL(x.weekday),
           weekday: this.setWeekName(x.weekday),
-          draggable: false
-        };
-      })
-      .value();
-  }
-
-  setEnterprise(data) {
-    return _.chain(data)
-      .filter((x: any) => {
-        return x && x.gps;
-      })
-      .map((x: EnterpriseMap) => {
-        const position = _.split(x.gps, ',');
-        return {
-          name: x.name,
-          lat: parseFloat(_.trim(_.first(position))),
-          lng: parseFloat(_.trim(_.last(position))),
-          icon: 'assets/images/work.png',
           draggable: false
         };
       })

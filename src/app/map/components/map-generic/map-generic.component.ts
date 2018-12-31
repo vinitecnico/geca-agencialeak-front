@@ -16,13 +16,15 @@ export class MapGenericComponent implements OnInit {
                     case '/map/peoplemap':
                         this.type = 'people';
                         break;
-                    case '/map/fairmap':
-                        this.type = 'fair';
-                        break;
                     case '/map/enterprisemap':
                         this.type = 'enterprise';
                         break;
-
+                    case '/map/collegemap':
+                        this.type = 'college';
+                        break;
+                    case '/map/fairmap':
+                        this.type = 'fair';
+                        break;
                 }
 
             }
