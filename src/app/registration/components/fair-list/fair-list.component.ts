@@ -21,7 +21,7 @@ export class FairListComponent implements OnInit {
     dataSource = new MatTableDataSource<any>();
     pageIndex = 0;
     length = 0;
-    pageSize = 5;
+    pageSize = 10;
     pageSizeOptions = [5, 10, 15, 25];
     sort = { active: 'name', direction: 'asc' };
     titleMsg: String = 'Não foram encontrados resultados!';

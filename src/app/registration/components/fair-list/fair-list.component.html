@@ -36,7 +36,7 @@
                                 Nome
                             </mat-header-cell>
                             <mat-cell *matCellDef="let fair">
-                                <div a-h [innerHtml]="fair.name | highlight : filterValue"></div>
+                                <div [innerHtml]="fair.name | highlight : filterValue"></div>
                             </mat-cell>
                         </ng-container>
 
@@ -48,7 +48,7 @@
                                 Dia
                             </mat-header-cell>
                             <mat-cell *matCellDef="let fair">
-                                <div a-h [innerHtml]="fair.weekday | highlight : filterValue"></div>
+                                <div [innerHtml]="fair.weekday | highlight : filterValue"></div>
                             </mat-cell>
                         </ng-container>
 
@@ -60,7 +60,7 @@
                                 Cidade
                             </mat-header-cell>
                             <mat-cell *matCellDef="let fair">
-                                <div a-h [innerHtml]="fair.city | highlight : filterValue"></div>
+                                <div [innerHtml]="fair.city | highlight : filterValue"></div>
                             </mat-cell>
                         </ng-container>
 

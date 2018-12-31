@@ -36,7 +36,9 @@
                                     [matTooltipPosition]="'above'">help</mat-icon>
                                 Nome
                             </mat-header-cell>
-                            <mat-cell *matCellDef="let college"> {{college.name}} </mat-cell>
+                            <mat-cell *matCellDef="let college">
+                                <div [innerHtml]="college.name | highlight : filterValue"></div>
+                            </mat-cell>
                         </ng-container>
 
                         <!-- electoralzone -->
@@ -46,7 +48,9 @@
                                     [matTooltipPosition]="'above'">help</mat-icon>
                                 Zona
                             </mat-header-cell>
-                            <mat-cell *matCellDef="let college"> {{college.electoralzone}} </mat-cell>
+                            <mat-cell *matCellDef="let college">
+                                <div [innerHtml]="college.electoralzone | highlight : filterValue"></div>
+                            </mat-cell>
                         </ng-container>
 
                         <!-- section -->
@@ -56,7 +60,9 @@
                                     [matTooltipPosition]="'above'">help</mat-icon>
                                 Seção
                             </mat-header-cell>
-                            <mat-cell *matCellDef="let college"> {{college.section}} </mat-cell>
+                            <mat-cell *matCellDef="let college">
+                                <div [innerHtml]="college.section | highlight : filterValue"></div>
+                            </mat-cell>
                         </ng-container>
 
                         <!-- neighborhood -->
@@ -66,7 +72,9 @@
                                     [matTooltipPosition]="'above'">help</mat-icon>
                                 Bairro
                             </mat-header-cell>
-                            <mat-cell *matCellDef="let college"> {{college.neighborhood}} </mat-cell>
+                            <mat-cell *matCellDef="let college">
+                                <div [innerHtml]="college.neighborhood | highlight : filterValue"></div>
+                            </mat-cell>
                         </ng-container>
 
                         <!-- city -->
@@ -76,7 +84,9 @@
                                     [matTooltipPosition]="'above'">help</mat-icon>
                                 Cidade
                             </mat-header-cell>
-                            <mat-cell *matCellDef="let college"> {{college.city}} </mat-cell>
+                            <mat-cell *matCellDef="let college">
+                                <div [innerHtml]="college.city | highlight : filterValue"></div>
+                            </mat-cell>
                         </ng-container>
 
 

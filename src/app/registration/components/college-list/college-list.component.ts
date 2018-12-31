@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatTableDataSource, MatPaginator, Sort } from '@angular/material';
+import { MatTableDataSource, MatPaginator, PageEvent, Sort } from '@angular/material';
 import { Observable } from 'rxjs';
 import 'rxjs/Rx';
 import * as _ from 'lodash';
@@ -23,7 +23,7 @@ export class CollegeListComponent implements OnInit {
     dataSource = new MatTableDataSource<College>();
     pageIndex = 0;
     length = 0;
-    pageSize = 5;
+    pageSize = 10;
     pageSizeOptions = [5, 10, 15, 25];
     sort = { active: 'name', direction: 'asc' };
     titleMsg: String = 'Não foram encontrados resultados!';
@@ -54,6 +54,10 @@ export class CollegeListComponent implements OnInit {
         this.sort = sort;
         this.pageIndex = 0;
         this.getAll(this.pageIndex, this.pageSize);
+    }
+
+    getNext(event: PageEvent) {
+        this.getAll(event.pageIndex, event.pageSize);
     }
 
     getAll(page, pageSize): void {
