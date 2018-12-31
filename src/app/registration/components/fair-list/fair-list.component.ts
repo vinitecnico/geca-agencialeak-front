@@ -30,11 +30,12 @@ export class FairListComponent implements OnInit {
     hasSearch: boolean;
     filterValue: string;
     searchTextChanged = new Subject<string>();
+    noItems: boolean;
 
     constructor(private router: Router, private fairService: FairService) {
     }
 
-    applyFilter(filterValue: string, data: any): void {
+    applyFilter(filterValue: string): void {
         setTimeout(() => {
             this.filterValue = filterValue.trim().toLowerCase();
             this.pageIndex = 0;
@@ -43,8 +44,8 @@ export class FairListComponent implements OnInit {
     }
 
     sortData(sort: Sort) {
-        if (!sort.active || sort.direction === '') {
-            return;
+        if (sort.active && !sort.direction) {
+            sort.direction = 'asc';
         }
         this.sort = sort;
         this.pageIndex = 0;
@@ -77,9 +78,12 @@ export class FairListComponent implements OnInit {
                 if (this.length === 0) {
                     this.showMessage = true;
                     this.hasSearch = false;
-                    return;
+                    if (this.filterValue) {
+                        this.noItems = true;
+                    }
                 } else {
                     this.hasSearch = true;
+                    this.noItems = true;
                     this.showMessage = false;
                 }
             }, (erro) => {

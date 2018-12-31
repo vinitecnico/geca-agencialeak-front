@@ -13,21 +13,20 @@
         </div>
         <div class="row">
             <div class="col-12 col-sm-12">
+                <div class="table-container mat-elevation-z8" *ngIf="dataSource">
 
-                <div *ngIf="showMessage">
-                    <app-message [message]="titleMsg" [type]="'info'"></app-message>
-                </div>
-
-                <div class="table-container mat-elevation-z8" [hidden]="!hasSearch">
-
-                    <div class="table-header">
+                    <div class="table-header" *ngIf="noItems">
                         <mat-form-field>
-                            <input matInput (change)="applyFilter($event.target.value, dataSource)" placeholder="Pesquisar">
+                            <input matInput (change)="applyFilter($event.target.value)" placeholder="Pesquisar">
                         </mat-form-field>
                     </div>
 
+                    <div *ngIf="showMessage">
+                        <app-message [message]="titleMsg" [type]="'info'"></app-message>
+                    </div>
+
                     <mat-table #table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc"
-                        (matSortChange)="sortData($event)">
+                        (matSortChange)="sortData($event)" [hidden]="!hasSearch">
 
                         <!-- Name -->
                         <ng-container matColumnDef="name">
@@ -86,7 +85,7 @@
                         [pageSize]="pageSize" 
                         [pageSizeOptions]="pageSizeOptions"
                         (page)="getNext($event)" 
-                        showFirstLastButtons>
+                        showFirstLastButtons [hidden]="!hasSearch">
                     </mat-paginator>
                 </div>
             </div>
