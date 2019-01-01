@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as _ from 'lodash';
 
 // Class
 import { Enterprise } from '../classes/enterprise.class';
@@ -17,10 +18,23 @@ const httpOptions = {
 export class EnterpriseService {
 
     constructor(private http: HttpClient, private apiConfig: StartupConfigService, @Inject('LocalStorage') localStorage) { }
+    
+    private setParameters(parameters: any): HttpParams {
+        if (parameters) {
+            let Params = new HttpParams();
+            _.each(parameters, (value, key) => {
+                Params = Params.append(key, value);
+            });
 
-    getAll(): Observable<Enterprise[]> {
+            return Params;
+        }
+
+        return null;
+    }
+
+    getAll(request): Observable<Enterprise[]> {
         const url = `${this.apiConfig.domain}api/empresa`;
-        return this.http.get<Enterprise[]>(url, httpOptions);
+        return this.http.get<Enterprise[]>(url, {params: this.setParameters(request)});
     }
 
     getById(_id: string): Observable<Enterprise[]> {

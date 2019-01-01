@@ -14,20 +14,20 @@
         <div class="row">
             <div class="col-12 col-sm-12">
 
-                <div *ngIf="showMessage">
-                    <app-message [message]="titleMsg" [type]="'info'"></app-message>
-                </div>
+                <div class="table-container mat-elevation-z8" *ngIf="dataSource">
 
-                <div class="table-container mat-elevation-z8" [hidden]="!hasSearch">
-
-                    <div class="table-header">
+                    <div class="table-header" *ngIf="noItems">
                         <mat-form-field>
-                            <input matInput (keyup)="applyFilter($event.target.value, dataSource)" placeholder="Pesquisar">
+                            <input matInput #searchTextRef placeholder="Pesquisar">
                         </mat-form-field>
                     </div>
 
+                    <div *ngIf="showMessage">
+                        <app-message [message]="titleMsg" [type]="'info'"></app-message>
+                    </div>
+
                     <mat-table #table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc"
-                        matSortDisableClear>
+                        (matSortChange)="sortData($event)" [hidden]="!hasSearch">
 
                         <!-- Name -->
                         <ng-container matColumnDef="name">
@@ -36,7 +36,9 @@
                                     [matTooltipPosition]="'above'">help</mat-icon>
                                 Nome
                             </mat-header-cell>
-                            <mat-cell *matCellDef="let enterprise"> {{enterprise.name}} </mat-cell>
+                            <mat-cell *matCellDef="let enterprise">
+                                <div [innerHtml]="enterprise.name | highlight : filterValue"></div>
+                            </mat-cell>
                         </ng-container>
 
                         <!-- cnpj -->
@@ -46,7 +48,9 @@
                                     [matTooltipPosition]="'above'">help</mat-icon>
                                 CNPJ
                             </mat-header-cell>
-                            <mat-cell *matCellDef="let enterprise"> {{enterprise.cnpj}} </mat-cell>
+                            <mat-cell *matCellDef="let enterprise">
+                                <div [innerHtml]="enterprise.cnpj | highlight : filterValue"></div>
+                            </mat-cell>
                         </ng-container>
 
                         <!-- city -->
@@ -56,7 +60,9 @@
                                     [matTooltipPosition]="'above'">help</mat-icon>
                                 Cidade
                             </mat-header-cell>
-                            <mat-cell *matCellDef="let enterprise"> {{enterprise.city}} </mat-cell>
+                            <mat-cell *matCellDef="let enterprise">
+                                <div [innerHtml]="enterprise.city | highlight : filterValue"></div>
+                            </mat-cell>
                         </ng-container>
 
                         <!-- mainContact -->
@@ -66,7 +72,9 @@
                                     [matTooltipPosition]="'above'">help</mat-icon>
                                 Contato
                             </mat-header-cell>
-                            <mat-cell *matCellDef="let enterprise"> {{enterprise.mainContact}} </mat-cell>
+                            <mat-cell *matCellDef="let enterprise">
+                                <div [innerHtml]="enterprise.mainContact | highlight : filterValue"></div>
+                            </mat-cell>
                         </ng-container>
 
                         <!-- phone -->
@@ -76,7 +84,9 @@
                                     [matTooltipPosition]="'above'">help</mat-icon>
                                 Telefone
                             </mat-header-cell>
-                            <mat-cell *matCellDef="let enterprise"> {{enterprise.phone}} </mat-cell>
+                            <mat-cell *matCellDef="let enterprise">
+                                <div [innerHtml]="enterprise.phone | highlight : filterValue"></div>
+                            </mat-cell>
                         </ng-container>
 
                         <!-- mobile -->
@@ -86,7 +96,9 @@
                                     [matTooltipPosition]="'above'">help</mat-icon>
                                 Celular
                             </mat-header-cell>
-                            <mat-cell *matCellDef="let enterprise"> {{enterprise.mobile}} </mat-cell>
+                            <mat-cell *matCellDef="let enterprise">
+                                <div [innerHtml]="enterprise.mobile | highlight : filterValue"></div>
+                            </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="edit">
@@ -109,7 +121,8 @@
                         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
                     </mat-table>
 
-                    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]">
+                    <mat-paginator #paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+                        [pageSizeOptions]="pageSizeOptions" (page)="getNext($event)" showFirstLastButtons [hidden]="!hasSearch">
                     </mat-paginator>
                 </div>
             </div>
