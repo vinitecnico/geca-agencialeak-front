@@ -31,9 +31,9 @@ export class CollegeService {
         return null;
     }
 
-    getAll(request): Observable<College[]> {
+    getAll(request): Observable<any[]> {
         const url = `${this.apiConfig.domain}api/colegio`;
-        return this.http.get<College[]>(url, {params: this.setParameters(request)});
+        return this.http.get<any[]>(url, {params: this.setParameters(request)});
     }
 
     getById(_id: string): Observable<College[]> {

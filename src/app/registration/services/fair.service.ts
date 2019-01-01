@@ -32,9 +32,9 @@ export class FairService {
         return null;
     }
 
-    getAll(request): Observable<Fair[]> {
+    getAll(request): Observable<any[]> {
         const url = `${this.apiConfig.domain}api/feira`;
-        return this.http.get<Fair[]>(url, {params: this.setParameters(request)});
+        return this.http.get<any[]>(url, {params: this.setParameters(request)});
     }
 
     getById(_id: string): Observable<Fair[]> {

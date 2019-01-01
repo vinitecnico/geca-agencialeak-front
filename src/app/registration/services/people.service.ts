@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as _ from 'lodash';
 
 // Class
 import { People } from '../classes/people.class';
@@ -17,9 +18,22 @@ export class PeopleService {
 
     constructor(private http: HttpClient, private apiConfig: StartupConfigService, @Inject('LocalStorage') localStorage) { }
 
-    getAll(): Observable<People[]> {
+    private setParameters(parameters: any): HttpParams {
+        if (parameters) {
+            let Params = new HttpParams();
+            _.each(parameters, (value, key) => {
+                Params = Params.append(key, value);
+            });
+
+            return Params;
+        }
+
+        return null;
+    }
+    
+    getAll(request): Observable<any[]> {
         const url = `${this.apiConfig.domain}api/pessoa`;
-        return this.http.get<People[]>(url, httpOptions);
+        return this.http.get<any[]>(url, {params: this.setParameters(request)});
     }
 
     getById(_id: string): Observable<People[]> {
