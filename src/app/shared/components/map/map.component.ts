@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MouseEvent } from '@agm/core';
 import * as _ from 'lodash';
 
@@ -26,7 +27,7 @@ export class MapComponent implements OnInit {
   lng: Number = -46.6388;
   name: string;
 
-  constructor(private mapService: MapService) {
+  constructor(private router: Router, private mapService: MapService) {
 
   }
 
@@ -125,6 +126,8 @@ export class MapComponent implements OnInit {
           lat: parseFloat(_.trim(_.first(position))),
           lng: parseFloat(_.trim(_.last(position))),
           icon: 'assets/images/map-people.png',
+          router: 'people',
+          _id: x.dados_pessoais.cpf,
           draggable: false
         };
       })
@@ -143,6 +146,8 @@ export class MapComponent implements OnInit {
           lat: parseFloat(_.trim(_.first(position))),
           lng: parseFloat(_.trim(_.last(position))),
           icon: 'assets/images/work.png',
+          router: 'enterprise',
+          _id: x.cnpj,
           draggable: false
         };
       })
@@ -161,6 +166,8 @@ export class MapComponent implements OnInit {
           lat: parseFloat(_.trim(_.first(position))),
           lng: parseFloat(_.trim(_.last(position))),
           icon: 'assets/images/graduation-hat-and-diploma.png',
+          router: 'college',
+          _id: x._id,
           draggable: false
         };
       })
@@ -180,6 +187,8 @@ export class MapComponent implements OnInit {
           lng: parseFloat(_.trim(_.last(position))),
           icon: this.getWeekImgURL(x.weekday),
           weekday: this.setWeekName(x.weekday),
+          router: 'fair',
+          _id: x._id,
           draggable: false
         };
       })

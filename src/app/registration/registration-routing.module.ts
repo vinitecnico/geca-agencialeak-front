@@ -21,13 +21,13 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         children: [
             { path: 'people', component: PeopleComponent },
-            { path: 'people-list', component: PeopleListComponent},
+            { path: 'people-list', component: PeopleListComponent },
             { path: 'enterprise', component: EnterpriseComponent },
             { path: 'enterprise-list', component: EnterpriseListComponent },
-            { path: 'fair', component: FairComponent},
-            { path: 'fair-list', component: FairListComponent},
-            { path: 'college', component: CollegeComponent},
-            { path: 'college-list', component: CollegeListComponent}
+            { path: 'college', component: CollegeComponent },
+            { path: 'college-list', component: CollegeListComponent },
+            { path: 'fair', component: FairComponent },
+            { path: 'fair-list', component: FairListComponent }
         ]
     }
 ];

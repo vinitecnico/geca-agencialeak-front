@@ -7,8 +7,10 @@
             [iconUrl]="m.icon">
 
             <agm-info-window>
-                <strong>{{m.name}}</strong>
-                <span *ngIf="m.weekday"> - {{m.weekday}}</span>
+                <a [routerLink]="['/registration/' + m.router]" [queryParams]="{_id: m._id}" target="_blank">
+                    <strong>{{m.name}}</strong>
+                    <span *ngIf="m.weekday"> - {{m.weekday}}</span>
+                </a>
             </agm-info-window>
 
         </agm-marker>
