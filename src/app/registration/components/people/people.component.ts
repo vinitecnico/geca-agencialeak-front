@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MatStepper } from '@angular/material';
+import { MatStepper, MatAutocompleteSelectedEvent, ErrorStateMatcher } from '@angular/material';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 
@@ -11,6 +11,9 @@ import { People } from '../../classes/people.class';
 // Services
 import { PeopleService } from '../../services/people.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { EnterpriseService } from '../../services/enterprise.service';
+import { map, debounceTime } from 'rxjs/operators';
 
 declare var swal: any;
 
@@ -36,12 +39,14 @@ export class PeopleComponent implements OnInit {
     fourthFormGroup: FormGroup;
     isEditable = false;
     _id: string;
+    filteredCompanies: Observable<any>;
 
     constructor(private router: Router,
         private route: ActivatedRoute,
         private formBuilder: FormBuilder,
         private peopleService: PeopleService,
-        private utilsService: UtilsService) {
+        private utilsService: UtilsService,
+        private enterpriseService: EnterpriseService) {
         this.route.queryParams.subscribe(params => {
             this._id = params['_id'];
         });
@@ -240,4 +245,50 @@ export class PeopleComponent implements OnInit {
             });
     }
 
+    updateCompanyOptions(event) {
+        if (event.length < 3) {
+            return new Observable<any>((array) => { array.next(null); });
+        }
+
+        if (typeof event === 'object') {
+            return;
+        }
+
+        this.filteredCompanies = this.getCompanies(event)
+            .distinctUntilChanged();
+    }
+
+    getCompanies(value: string): Observable<any> {
+        if (typeof value === 'object') {
+            return;
+        }
+
+        const request: any = {
+            page: 1,
+            per_page: 20
+        };
+        if (value) {
+            request.value = value;
+        }
+
+        return this.enterpriseService.getAll(request)
+            .pipe(debounceTime(1000), map((response: any) => response.data))
+            .catch((error) => {
+                return new Observable<any>((array) => { array.next(null); });
+            });
+    }
+
+    onCompanySelected = (event: MatAutocompleteSelectedEvent) => {
+        if (event.option.value && event.option.value.name) {
+            this.thirdFormGroup.controls.company.setValue(event.option.value.name);
+            this.thirdFormGroup.controls.workplace.setValue(event.option.value.gps);
+        } else {
+            this.thirdFormGroup.controls.company.setValue('');
+            this.thirdFormGroup.controls.workplace.setValue('');
+        }
+    }
+
+    displayFn(val: any): string {
+        return val && val.name ? val.name : null;
+    }
 }
