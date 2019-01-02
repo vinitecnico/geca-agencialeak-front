@@ -30,7 +30,6 @@ import { LayoutComponent } from './layout/layout.component';
 import { HomeComponent } from './home/home.component';
 
 import {
-  MatAutocompleteModule,
   MatButtonModule,
   MatButtonToggleModule,
   MatCardModule,
@@ -61,6 +60,7 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatStepperModule,
+  MatAutocompleteModule,
   MatPaginatorIntl,
   ErrorStateMatcher,
   ShowOnDirtyErrorStateMatcher,
@@ -117,6 +117,7 @@ export function getLocalStorage() {
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatAutocompleteModule,
     AuthenticationModule,
     LayoutModule,
     UserSettingsModule,

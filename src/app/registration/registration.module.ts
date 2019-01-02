@@ -16,7 +16,8 @@ import {
         MatStepperModule,
         MatSelectModule,
         MatCheckboxModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatAutocompleteModule
 } from '@angular/material';
 
 // Components
@@ -54,6 +55,7 @@ import { PeopleService } from './services/people.service';
         MatSelectModule,
         MatCheckboxModule,
         MatTooltipModule,
+        MatAutocompleteModule,
         SharedModule,
         FormsModule,
         ReactiveFormsModule,
