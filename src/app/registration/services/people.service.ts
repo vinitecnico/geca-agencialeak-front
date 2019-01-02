@@ -8,6 +8,7 @@ import { People } from '../classes/people.class';
 
 // Services
 import { StartupConfigService } from '../../shared/services/startup.config.service';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,24 +17,17 @@ const httpOptions = {
 @Injectable()
 export class PeopleService {
 
-    constructor(private http: HttpClient, private apiConfig: StartupConfigService, @Inject('LocalStorage') localStorage) { }
+    constructor(private http: HttpClient,
+        private apiConfig: StartupConfigService,
+        @Inject('LocalStorage') localStorage,
+        private utilsService: UtilsService) { }
 
-    private setParameters(parameters: any): HttpParams {
-        if (parameters) {
-            let Params = new HttpParams();
-            _.each(parameters, (value, key) => {
-                Params = Params.append(key, value);
-            });
-
-            return Params;
-        }
-
-        return null;
-    }
-    
     getAll(request): Observable<any[]> {
         const url = `${this.apiConfig.domain}api/pessoa`;
-        return this.http.get<any[]>(url, {params: this.setParameters(request)});
+        return this.http.get<any[]>(url, {
+            headers: httpOptions.headers,
+            params: this.utilsService.setParameters(request)
+        });
     }
 
     getById(_id: string): Observable<People[]> {

@@ -8,6 +8,7 @@ import { Fair } from '../classes/fair.class';
 
 // Services
 import { StartupConfigService } from '../../shared/services/startup.config.service';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 
 const httpOptions = {
@@ -17,24 +18,17 @@ const httpOptions = {
 @Injectable()
 export class FairService {
 
-    constructor(private http: HttpClient, private apiConfig: StartupConfigService, @Inject('LocalStorage') localStorage) { }
-
-    private setParameters(parameters: any): HttpParams {
-        if (parameters) {
-            let Params = new HttpParams();
-            _.each(parameters, (value, key) => {
-                Params = Params.append(key, value);
-            });
-
-            return Params;
-        }
-
-        return null;
-    }
+    constructor(private http: HttpClient,
+        private apiConfig: StartupConfigService,
+        @Inject('LocalStorage') localStorage,
+        private utilsService: UtilsService) { }
 
     getAll(request): Observable<any[]> {
         const url = `${this.apiConfig.domain}api/feira`;
-        return this.http.get<any[]>(url, {params: this.setParameters(request)});
+        return this.http.get<any[]>(url, {
+            headers: httpOptions.headers,
+            params: this.utilsService.setParameters(request)
+        });
     }
 
     getById(_id: string): Observable<Fair[]> {

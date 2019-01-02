@@ -1,8 +1,21 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class UtilsService {
+    setParameters(parameters: any): HttpParams {
+        if (parameters) {
+            let Params = new HttpParams();
+            _.each(parameters, (value, key) => {
+                Params = Params.append(key, value);
+            });
+
+            return Params;
+        }
+
+        return null;
+    }
 
     removeSpecialCharacters(value: string) {
         return value.replace(/[&\/\\#,+()$~%'":*?<>{}|]/g, '');
