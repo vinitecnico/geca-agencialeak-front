@@ -17,6 +17,11 @@ export class AuthenticationInterceptor implements HttpInterceptor {
         const authObj = JSON.parse(auth);
         const isTokenValid = this.validateAuthenticationToken(authObj);
 
+        if (req.url.indexOf('https://viacep.com.br/ws/') > -1 ||
+            req.url.indexOf('https://maps.googleapis.com/maps/api/geocode') > -1) {
+            return next.handle(req);
+        }
+
         if (isTokenValid) {
             // Clone the request to add the new header.
             const authReq = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + authObj.access_token) });
