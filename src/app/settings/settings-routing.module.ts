@@ -5,6 +5,7 @@ import { AuthGuard } from '../authentication/services/auth-guard.service';
 
 // Website settings
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
         component: LayoutComponent,
         canActivate: [AuthGuard],
         children: [
-            { path: 'user-settings', component: UserSettingsComponent }
+            { path: 'user-list', component: UserListComponent },
+            { path: 'user', component: UserSettingsComponent }
         ]
     }
 ];

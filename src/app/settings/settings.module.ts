@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 import {
     MatTableModule,
@@ -10,14 +11,21 @@ import {
     MatInputModule,
     MatButtonModule,
     MatButtonToggleModule,
+    MatRadioModule,
+    MatStepperModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatTooltipModule,
+    MatAutocompleteModule
 } from '@angular/material';
 
 // Components
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 import { SharedModule } from '../shared/shared.module';
 
 // Services
-
+import { UserService } from './services/user.service';
 
 // Router
 import { UserRoutingModule } from './settings-routing.module';
@@ -33,15 +41,31 @@ import { UserRoutingModule } from './settings-routing.module';
         MatInputModule,
         MatButtonModule,
         MatButtonToggleModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatIconModule,
+        MatDialogModule,
+        MatInputModule,
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatRadioModule,
+        MatStepperModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        MatTooltipModule,
+        MatAutocompleteModule,
         FormsModule,
+        CommonModule,
         ReactiveFormsModule,
         SharedModule
     ],
     declarations: [
-        UserSettingsComponent
+        UserSettingsComponent,
+        UserListComponent
     ],
     entryComponents: [
     ],
-    providers: []
+    providers: [UserService]
 })
 export class UserSettingsModule { }

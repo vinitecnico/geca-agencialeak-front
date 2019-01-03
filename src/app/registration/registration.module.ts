@@ -1,23 +1,23 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { TextMaskModule } from 'angular2-text-mask';
 
 import {
     MatTableModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatIconModule,
-        MatDialogModule,
-        MatInputModule,
-        MatButtonModule,
-        MatButtonToggleModule,
-        MatRadioModule,
-        MatStepperModule,
-        MatSelectModule,
-        MatCheckboxModule,
-        MatTooltipModule,
-        MatAutocompleteModule
+    MatPaginatorModule,
+    MatSortModule,
+    MatIconModule,
+    MatDialogModule,
+    MatInputModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatRadioModule,
+    MatStepperModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatTooltipModule,
+    MatAutocompleteModule
 } from '@angular/material';
 
 // Components
