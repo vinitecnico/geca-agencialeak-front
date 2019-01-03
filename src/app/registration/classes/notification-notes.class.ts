@@ -1,9 +1,10 @@
 export class NotificationNotes {
-    correios: string;
-    telefone: string;
-    sms: string;
-    whatsapp: string;
-    email: string;
+    correios: boolean;
+    telefone: boolean;
+    sms: boolean;
+    whatsapp: boolean;
+    telegram: boolean;
+    email: boolean;
     score: string;
     history: string;
 }

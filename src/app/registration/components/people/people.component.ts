@@ -94,7 +94,7 @@ export class PeopleComponent implements OnInit {
                 workplace: '',
                 Sindicalizado: '',
                 associationNumber: '',
-                militante: '',
+                militante: 'nao',
                 directorsindication: '',
                 electoraltitle: '',
                 zone: '',
@@ -105,11 +105,12 @@ export class PeopleComponent implements OnInit {
 
         this.fourthFormGroup = this.formBuilder
             .group({
-                correios: '',
-                telefone: '',
-                sms: '',
-                whatsapp: '',
-                email: '',
+                correios: false,
+                telefone: false,
+                sms: false,
+                whatsapp: false,
+                telegram: false,
+                email: false,
                 score: '',
                 history: ''
             });
@@ -171,7 +172,10 @@ export class PeopleComponent implements OnInit {
             request.profissional_eleitoral.terminationDate = moment(request.profissional_eleitoral.terminationDate, 'YYYY-MM-DD')
                 .format('DD/MM/YYYY');
         }
-        this.thirdFormGroup.setValue(request.profissional_eleitoral);
+        if (request.notificacoes_anotacoes && !request.notificacoes_anotacoes.telegram) {
+            request.notificacoes_anotacoes.telegram = false;
+        }
+
         this.fourthFormGroup.setValue(request.notificacoes_anotacoes);
     }
 

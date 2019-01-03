@@ -51,7 +51,8 @@ export class LoginComponent implements OnInit {
         if (!auth) {
           return;
         }
-        localStorage.setItem('authData', JSON.stringify({ expires_in: moment().add(30, 'minutes') }));
+        localStorage.setItem('authData', JSON.stringify(
+          { expires_in: moment().add(120, 'minutes'), access_token: 'AIzaSyAdyvRIRT1iMFRzE4v8BzfGXc-Oc9OFTwk' }));
         this.router.navigateByUrl('/app/dashboard');
       }, (error) => {
         swal({

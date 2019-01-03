@@ -68,6 +68,10 @@ import {
   DateAdapter,
   MAT_DATE_FORMATS
 } from '@angular/material';
+import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthenticationInterceptor } from './authentication/interceptors/authentication.interceptor';
+import { StartupConfigService } from './shared/services/startup.config.service';
 
 export function getLocalStorage() {
   return (typeof window !== 'undefined') ? window.localStorage : null;
@@ -135,6 +139,10 @@ export function getLocalStorage() {
   ],
   providers: [
     { provide: 'LocalStorage', useFactory: getLocalStorage },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}
   ],
   bootstrap: [AppComponent]
 })
