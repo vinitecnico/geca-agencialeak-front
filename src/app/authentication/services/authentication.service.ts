@@ -19,7 +19,6 @@ export class AuthenticationService {
 
     login(authData): Observable<any> {
         const url = `${this.apiConfig.domain}api/login`;
-
         return this.http.post(url, authData);
     }
 
