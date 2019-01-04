@@ -28,12 +28,6 @@ export class ZipcodeComponent implements OnInit {
             .debounceTime(800)
             .distinctUntilChanged()
             .subscribe((value: string) => this.getZipcode());
-
-        Observable.fromEvent(this.numberAddressRef.nativeElement, 'keyup')
-            .map((evt: any) => evt.target.value)
-            .debounceTime(800)
-            .distinctUntilChanged()
-            .subscribe((value: string) => this.setPosition(null));
     }
 
     getZipcode() {
@@ -54,7 +48,6 @@ export class ZipcodeComponent implements OnInit {
                             this.parentForm.controls.city.setValue(zipcode.city);
                             this.parentForm.controls.state.setValue(zipcode.state);
                             this.numberAddressRef.nativeElement.focus();
-                            this.setPosition(zipcode.zipcode);
                         }
                     }, (error) => {
                         this.zipcodeLoading = false;
@@ -63,10 +56,15 @@ export class ZipcodeComponent implements OnInit {
         });
     }
 
-    setPosition(value) {
-        if (!value) {
+    setPosition() {
+        let value = null;
+        if (!this.parentForm.controls.address.value && this.parentForm.controls.numberAddress.value) {
             value = `${this.parentForm.controls.address.value} ${this.parentForm.controls.numberAddress.value}`;
             value = value.replace('+', ' ');
+        } else if (this.parentForm.controls.zipcode.value) {
+            value = this.parentForm.controls.zipcode.value;
+        } else {
+            return;
         }
         this.zipcodeService.getLocation(value)
             .subscribe((dataLocation: any) => {
