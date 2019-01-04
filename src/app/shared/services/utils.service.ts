@@ -18,11 +18,17 @@ export class UtilsService {
     }
 
     removeSpecialCharacters(value: string) {
-        return value.replace(/[&\/\\#,+()$~%'":*?<>{}|]/g, '');
+        if (value) {
+            return value.replace(/[&\/\\#,+()$~%'":*?<>{}|]/g, '');
+        }
+        return value;
     }
 
     onlyNumbers(value: string) {
-        return value.replace(/\D/g, '');
+        if (value) {
+            return value.replace(/\D/g, '');
+        }
+        return value;
     }
 
     inputMask(type: string) {
