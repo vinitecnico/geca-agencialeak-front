@@ -38,6 +38,7 @@ export class ZipcodeComponent implements OnInit {
                 this.zipcodeLoading = true;
                 this.zipcodeService.getZipCode(request.zipcode)
                     .subscribe(data => {
+                        this.zipcodeLoading = false;
                         if (data && _.isObject(data)) {
                             const zipcode = this.zipcodeResponse(data);
 
@@ -68,7 +69,6 @@ export class ZipcodeComponent implements OnInit {
         }
         this.zipcodeService.getLocation(value)
             .subscribe((dataLocation: any) => {
-                this.zipcodeLoading = false;
                 if (dataLocation && dataLocation.results && _.isArray(dataLocation.results)) {
                     const result: any = _.first(dataLocation.results);
                     if (result.geometry && result.geometry.location) {
