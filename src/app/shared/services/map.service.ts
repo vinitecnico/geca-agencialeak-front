@@ -28,7 +28,7 @@ export class MapService {
     getAllPeople(): Observable<PeopleMap[]> {
         const url = `${this.apiConfig.domain}api/map/pessoa`;
         return this.http.get<PeopleMap[]>(url, httpOptions);
-    }    
+    }
 
     getAllEnterprise(): Observable<EnterpriseMap[]> {
         const url = `${this.apiConfig.domain}api/map/empresa`;

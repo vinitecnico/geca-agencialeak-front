@@ -2,6 +2,9 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+// services
+import { StartupConfigService } from './startup.config.service';
+
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -9,17 +12,16 @@ const httpOptions = {
 @Injectable()
 export class ZipcodeService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private apiConfig: StartupConfigService) { }
 
     getZipCode(zipcode: string) {
-        const url = `https://viacep.com.br/ws/${zipcode}/json/`;
-
+        const url = `${this.apiConfig.domain}api/map/viacep/${zipcode}`;
         return this.http
             .get(url);
     }
 
     getLocation(zipcode: string) {
-        const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${zipcode}&key=AIzaSyAdyvRIRT1iMFRzE4v8BzfGXc-Oc9OFTwk`;
+        const url = `${this.apiConfig.domain}api/map/getGoogleMaps/${zipcode}`;
         return this.http
             .get(url);
     }
