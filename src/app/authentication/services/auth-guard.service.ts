@@ -29,10 +29,10 @@ export class AuthGuard implements CanActivate {
     const now = moment();
     const tokenData = moment(authObj.expires_in);
 
-    if (now.diff(tokenData, 'seconds') > 0) {
-      this.router.navigate(['/login']);
-      return false;
-    }
+    // if (now.diff(tokenData, 'seconds') > 0) {
+    //   this.router.navigate(['/login']);
+    //   return false;
+    // }
 
     return true;
   }

@@ -17,26 +17,28 @@ export class AuthenticationInterceptor implements HttpInterceptor {
         const authObj = JSON.parse(auth);
         const isTokenValid = this.validateAuthenticationToken(authObj);
 
-        if (req.url.indexOf('https://viacep.com.br/ws/') > -1 ||
-            req.url.indexOf('https://maps.googleapis.com/maps/api/geocode') > -1) {
+        if (req.url.indexOf('api/login') > -1) {
             return next.handle(req);
         }
 
         if (isTokenValid) {
             // Clone the request to add the new header.
-            const authReq = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + authObj.access_token) });
+            const authReq = req.clone({
+                setHeaders: {
+                    'x-access-token': authObj.token
+                }
+            });
+
+            // headers: req.headers.set('x-access-token', authObj.token)
 
             // send the newly created request
             return next.handle(authReq)
                 .catch((error, caught) => {
-                    // intercept the response error
-
-                    if (error.status === 401) {// unauthorized
+                    if (error.status === 401 || error.status === 403) {
                         localStorage.removeItem('authData');
-                        this.router.navigate(['home']);
+                        this.router.navigateByUrl('/login');
                     }
 
-                    // return the error to the method that called it
                     return Observable.throw(error);
                 }) as any;
         }
@@ -53,12 +55,12 @@ export class AuthenticationInterceptor implements HttpInterceptor {
             return false;
         }
 
-        const now = moment();
-        const tokenData = moment(authData.expires_in);
+        // const now = moment();
+        // const tokenData = moment(authData.expires_in);
 
-        if (now.diff(tokenData, 'seconds') > 0) {
-            return false;
-        }
+        // if (now.diff(tokenData, 'seconds') > 0) {
+        //     return false;
+        // }
 
         return true;
     }

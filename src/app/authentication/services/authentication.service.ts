@@ -8,6 +8,10 @@ import { Router } from '@angular/router';
 // Services
 import { StartupConfigService } from '../../shared/services/startup.config.service';
 
+const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
 @Injectable()
 export class AuthenticationService {
 
@@ -19,7 +23,7 @@ export class AuthenticationService {
 
     login(authData): Observable<any> {
         const url = `${this.apiConfig.domain}api/login`;
-        return this.http.post(url, authData);
+        return this.http.post(url, authData, httpOptions);
     }
 
     checkLocalData() {

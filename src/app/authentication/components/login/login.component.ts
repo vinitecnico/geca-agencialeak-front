@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
           return;
         }
         localStorage.setItem('authData', JSON.stringify(
-          { expires_in: moment().add(120, 'minutes'), access_token: 'AIzaSyAdyvRIRT1iMFRzE4v8BzfGXc-Oc9OFTwk' }));
+          { name: auth.name, token: auth.token }));
         this.router.navigateByUrl('/app/dashboard');
       }, (error) => {
         swal({
