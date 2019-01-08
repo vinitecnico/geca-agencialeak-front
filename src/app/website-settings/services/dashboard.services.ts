@@ -19,7 +19,7 @@ export class DashboardService {
         private apiConfig: StartupConfigService) { }
 
     get(): Observable<Dashboard[]> {
-        const url = `${this.apiConfig.domain}api/home`;
+        const url = `${this.apiConfig.getConfig()}api/home`;
         return this.http.get<Dashboard[]>(url, httpOptions);
     }
 }

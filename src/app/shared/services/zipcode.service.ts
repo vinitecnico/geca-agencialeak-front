@@ -15,13 +15,13 @@ export class ZipcodeService {
     constructor(private http: HttpClient, private apiConfig: StartupConfigService) { }
 
     getZipCode(zipcode: string) {
-        const url = `${this.apiConfig.domain}api/map/viacep/${zipcode}`;
+        const url = `${this.apiConfig.getConfig()}api/map/viacep/${zipcode}`;
         return this.http
             .get(url);
     }
 
     getLocation(zipcode: string) {
-        const url = `${this.apiConfig.domain}api/map/getGoogleMaps/${zipcode}`;
+        const url = `${this.apiConfig.getConfig()}api/map/getGoogleMaps/${zipcode}`;
         return this.http
             .get(url);
     }

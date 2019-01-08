@@ -23,7 +23,7 @@ export class CollegeService {
         private utilsService: UtilsService) { }
 
     getAll(request): Observable<any[]> {
-        const url = `${this.apiConfig.domain}api/colegio`;
+        const url = `${this.apiConfig.getConfig()}api/colegio`;
         return this.http.get<any[]>(url, {
             headers: httpOptions.headers,
             params: this.utilsService.setParameters(request)
@@ -31,12 +31,12 @@ export class CollegeService {
     }
 
     getById(_id: string): Observable<College[]> {
-        const url = `${this.apiConfig.domain}api/colegio/${_id}`;
+        const url = `${this.apiConfig.getConfig()}api/colegio/${_id}`;
         return this.http.get<College[]>(url, httpOptions);
     }
 
     createOrUpdateCollege(college: College): Observable<any> {
-        const url = `${this.apiConfig.domain}api/colegio`;
+        const url = `${this.apiConfig.getConfig()}api/colegio`;
 
         if (college._id) {
             return this.http.put(`${url}/${college._id}`, college, httpOptions);
@@ -46,7 +46,7 @@ export class CollegeService {
     }
 
     delete(_id: string): Observable<any> {
-        const url = `${this.apiConfig.domain}api/colegio/${_id}`;
+        const url = `${this.apiConfig.getConfig()}api/colegio/${_id}`;
         return this.http.delete(url, httpOptions);
     }
 }

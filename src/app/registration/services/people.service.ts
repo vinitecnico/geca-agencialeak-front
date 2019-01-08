@@ -23,7 +23,7 @@ export class PeopleService {
         private utilsService: UtilsService) { }
 
     getAll(request): Observable<any[]> {
-        const url = `${this.apiConfig.domain}api/pessoa`;
+        const url = `${this.apiConfig.value}api/pessoa`;
         return this.http.get<any[]>(url, {
             headers: httpOptions.headers,
             params: this.utilsService.setParameters(request)
@@ -31,12 +31,12 @@ export class PeopleService {
     }
 
     getById(_id: string): Observable<People[]> {
-        const url = `${this.apiConfig.domain}api/pessoa/${_id}`;
+        const url = `${this.apiConfig.value}api/pessoa/${_id}`;
         return this.http.get<People[]>(url, httpOptions);
     }
 
     createOrUpdatePeople(fair: People): Observable<any> {
-        const url = `${this.apiConfig.domain}api/pessoa`;
+        const url = `${this.apiConfig.value}api/pessoa`;
 
         if (fair._id) {
             return this.http.put(`${url}/${fair._id}`, fair, httpOptions);
@@ -46,7 +46,7 @@ export class PeopleService {
     }
 
     delete(_id: string): Observable<any> {
-        const url = `${this.apiConfig.domain}api/pessoa/${_id}`;
+        const url = `${this.apiConfig.value}api/pessoa/${_id}`;
         return this.http.delete(url, httpOptions);
     }
 }

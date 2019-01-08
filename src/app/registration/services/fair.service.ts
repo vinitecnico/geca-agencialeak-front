@@ -24,7 +24,7 @@ export class FairService {
         private utilsService: UtilsService) { }
 
     getAll(request): Observable<any[]> {
-        const url = `${this.apiConfig.domain}api/feira`;
+        const url = `${this.apiConfig.value}api/feira`;
         return this.http.get<any[]>(url, {
             headers: httpOptions.headers,
             params: this.utilsService.setParameters(request)
@@ -32,12 +32,12 @@ export class FairService {
     }
 
     getById(_id: string): Observable<Fair[]> {
-        const url = `${this.apiConfig.domain}api/feira/${_id}`;
+        const url = `${this.apiConfig.value}api/feira/${_id}`;
         return this.http.get<Fair[]>(url, httpOptions);
     }
 
     createOrUpdateFair(fair: Fair): Observable<any> {
-        const url = `${this.apiConfig.domain}api/feira`;
+        const url = `${this.apiConfig.value}api/feira`;
 
         if (fair._id) {
             return this.http.put(`${url}/${fair._id}`, fair, httpOptions);
@@ -47,7 +47,7 @@ export class FairService {
     }
 
     delete(_id: string): Observable<any> {
-        const url = `${this.apiConfig.domain}api/feira/${_id}`;
+        const url = `${this.apiConfig.value}api/feira/${_id}`;
         return this.http.delete(url, httpOptions);
     }
 }

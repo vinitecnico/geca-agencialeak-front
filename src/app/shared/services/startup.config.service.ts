@@ -3,6 +3,25 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class StartupConfigService {
     value: any;
-    domain: String = 'https://geca-agencialeak-api.herokuapp.com/';
-    // domain: String = 'http://127.0.0.1:3000/';
+
+    getConfig(): string {
+        if (this.value) {
+            return this.value;
+        }
+
+        const host = window.location.host;
+
+        if (host.indexOf('geca-agencialeak-front-dev.herokuapp.com') >= 0) {
+            // dev
+            this.value = 'https://geca-agencialeak-api-dev.herokuapp.com/';
+            return this.value;
+        } else if (host.indexOf('geca-agencialeak-front.herokuapp.com') >= 0) {
+            // Prod';
+            this.value = 'https://geca-agencialeak-front.herokuapp.com/';
+            return this.value;
+        } else {
+            this.value = 'https://geca-agencialeak-api-dev.herokuapp.com/';
+            return this.value;
+        }
+    }
 }
