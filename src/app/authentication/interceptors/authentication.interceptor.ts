@@ -16,7 +16,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
         const authObj = JSON.parse(auth);
         const isTokenValid = this.validateAuthenticationToken(authObj);
 
-        if (request.url.indexOf('api/login') > -1) {
+        if (request.url.indexOf('api/') > -1) {
             return next.handle(request);
         }
 

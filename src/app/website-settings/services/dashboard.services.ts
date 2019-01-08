@@ -9,7 +9,7 @@ import { Dashboard } from '../classes/dashboard.class';
 import { StartupConfigService } from 'src/app/shared/services/startup.config.service';
 
 const httpOptions = {
-    headers: new HttpHeaders({ 'content': 'application/json', 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable()

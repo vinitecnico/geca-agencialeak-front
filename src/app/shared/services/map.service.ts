@@ -12,7 +12,7 @@ import { CollegeMap } from '../classes/college-map.class';
 import { StartupConfigService } from './startup.config.service';
 
 const httpOptions = {
-    headers: new HttpHeaders({ 'content': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable()
