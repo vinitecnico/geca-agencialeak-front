@@ -9,13 +9,14 @@ import { Dashboard } from '../classes/dashboard.class';
 import { StartupConfigService } from 'src/app/shared/services/startup.config.service';
 
 const httpOptions = {
-    headers: new HttpHeaders({ 'content': 'application/json'})
+    headers: new HttpHeaders({ 'content': 'application/json', 'Content-Type': 'application/json' })
 };
 
 @Injectable()
 export class DashboardService {
 
-    constructor(private http: HttpClient, private apiConfig: StartupConfigService, @Inject('LocalStorage') localStorage) { }
+    constructor(private http: HttpClient,
+        private apiConfig: StartupConfigService) { }
 
     get(): Observable<Dashboard[]> {
         const url = `${this.apiConfig.domain}api/home`;

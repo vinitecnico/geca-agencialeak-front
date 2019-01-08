@@ -1,12 +1,10 @@
-import { Injectable, Injector, Inject } from '@angular/core';
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders } from '@angular/common/http';
+import { Injectable, Inject } from '@angular/core';
+import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/catch';
-
 import { Router } from '@angular/router';
-import * as moment from 'moment';
 import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class AuthenticationInterceptor implements HttpInterceptor {
@@ -23,14 +21,24 @@ export class AuthenticationInterceptor implements HttpInterceptor {
         }
 
         if (isTokenValid) {
-            const authReq = request.clone({
-                headers: request.headers.append('x-access-token', authObj.token)
-            });
+            if (!request.headers.has('authorization')) {
+                request = request.clone({ headers: request.headers.set('authorization', 'Bearer ' + authObj.token) });
+            }
 
-            console.log('Intercepted HTTP call', authReq);
+            if (!request.headers.has('content-Type')) {
+                request = request.clone({ headers: request.headers.set('content-Type', 'application/json') });
+            }
+
+            // setting the accept header
+            if (!request.headers.has('accept')) {
+                request = request.clone({ headers: request.headers.set('accept', 'application/json') });
+            }
 
             // send the newly created request
-            return next.handle(authReq)
+            return next.handle(request)
+                .do(ev => {
+                    console.log(ev);
+                })
                 .pipe(
                     catchError(error => {
                         // checks if a url is to an admin api or not
@@ -39,16 +47,8 @@ export class AuthenticationInterceptor implements HttpInterceptor {
                             localStorage.removeItem('authData');
                             this.router.navigateByUrl('/login');
                         }
-                        return Observable.throw(error);
+                        return throwError(error);
                     }));
-            // .catch((error, caught) => {
-            //     if (error.status === 401 || error.status === 403) {
-            //         localStorage.removeItem('authData');
-            //         this.router.navigateByUrl('/login');
-            //     }
-
-            //     return Observable.throw(error);
-            // }) as any;
         }
 
         if (authObj != null && !isTokenValid) {
@@ -62,13 +62,6 @@ export class AuthenticationInterceptor implements HttpInterceptor {
         if (!authData) {
             return false;
         }
-
-        // const now = moment();
-        // const tokenData = moment(authData.expires_in);
-
-        // if (now.diff(tokenData, 'seconds') > 0) {
-        //     return false;
-        // }
 
         return true;
     }
