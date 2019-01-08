@@ -20,25 +20,22 @@ export class AuthenticationInterceptor implements HttpInterceptor {
             return next.handle(request);
         }
 
-        if (isTokenValid) {
-            if (!request.headers.has('authorization')) {
-                request = request.clone({ headers: request.headers.set('authorization', 'Bearer ' + authObj.token) });
-            }
+       if (isTokenValid) {
+            // if (!request.headers.has('authorization')) {
+            //     request = request.clone({ headers: request.headers.set('authorization', 'Bearer aaa') });
+            // }
 
-            if (!request.headers.has('content-Type')) {
-                request = request.clone({ headers: request.headers.set('content-Type', 'application/json') });
-            }
+            // if (!request.headers.has('content-Type')) {
+            //     request = request.clone({ headers: request.headers.set('content-Type', 'application/json') });
+            // }
 
-            // setting the accept header
-            if (!request.headers.has('accept')) {
-                request = request.clone({ headers: request.headers.set('accept', 'application/json') });
-            }
+            // // setting the accept header
+            // if (!request.headers.has('accept')) {
+            //     request = request.clone({ headers: request.headers.set('accept', 'application/json') });
+            // }
 
             // send the newly created request
             return next.handle(request)
-                .do(ev => {
-                    console.log(ev);
-                })
                 .pipe(
                     catchError(error => {
                         // checks if a url is to an admin api or not
