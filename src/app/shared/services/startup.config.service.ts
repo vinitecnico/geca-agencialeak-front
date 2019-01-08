@@ -21,7 +21,7 @@ export class StartupConfigService {
             return this.value;
         } else {
             // local
-            this.value = 'https://geca-agencialeak-api-dev.herokuapp.com/';
+            this.value = 'http://127.0.0.1:3000/';
             return this.value;
         }
     }
