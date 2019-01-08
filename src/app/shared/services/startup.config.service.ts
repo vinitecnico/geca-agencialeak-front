@@ -5,10 +5,6 @@ export class StartupConfigService {
     value: any;
 
     getConfig(): string {
-        if (this.value) {
-            return this.value;
-        }
-
         const host = window.location.host;
 
         if (host.indexOf('geca-agencialeak-front-dev.herokuapp.com') >= 0) {
@@ -20,6 +16,7 @@ export class StartupConfigService {
             this.value = 'https://geca-agencialeak-front.herokuapp.com/';
             return this.value;
         } else {
+            // local
             this.value = 'https://geca-agencialeak-api-dev.herokuapp.com/';
             return this.value;
         }
