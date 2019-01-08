@@ -21,27 +21,27 @@ export class MapService {
     constructor(private http: HttpClient, private apiConfig: StartupConfigService, @Inject('LocalStorage') localStorage) { }
 
     getAll(): Observable<any[]> {
-        const url = `${this.apiConfig.domain}api/map`;
+        const url = `${this.apiConfig.getConfig()}api/map`;
         return this.http.get<any[]>(url, httpOptions);
     }
 
     getAllPeople(): Observable<PeopleMap[]> {
-        const url = `${this.apiConfig.domain}api/map/pessoa`;
+        const url = `${this.apiConfig.getConfig()}api/map/pessoa`;
         return this.http.get<PeopleMap[]>(url, httpOptions);
     }
 
     getAllEnterprise(): Observable<EnterpriseMap[]> {
-        const url = `${this.apiConfig.domain}api/map/empresa`;
+        const url = `${this.apiConfig.getConfig()}api/map/empresa`;
         return this.http.get<EnterpriseMap[]>(url, httpOptions);
     }
 
     getAllCollege(): Observable<CollegeMap[]> {
-        const url = `${this.apiConfig.domain}api/map/colegio`;
+        const url = `${this.apiConfig.getConfig()}api/map/colegio`;
         return this.http.get<CollegeMap[]>(url, httpOptions);
     }
 
     getAllFair(): Observable<FairMap[]> {
-        const url = `${this.apiConfig.domain}api/map/feira`;
+        const url = `${this.apiConfig.getConfig()}api/map/feira`;
         return this.http.get<FairMap[]>(url, httpOptions);
     }
 }

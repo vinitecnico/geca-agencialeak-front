@@ -22,7 +22,7 @@ export class AuthenticationService {
     }
 
     login(authData): Observable<any> {
-        const url = `${this.apiConfig.domain}api/login`;
+        const url = `${this.apiConfig.value}api/login`;
         return this.http.post(url, authData, httpOptions);
     }
 

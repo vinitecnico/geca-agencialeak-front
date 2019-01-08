@@ -22,7 +22,7 @@ export class EmailService {
     }
 
     sendEmail(request: Email) {
-        const url = `${this.apiConfig.domain}api/email`;
+        const url = `${this.apiConfig.value}api/email`;
         return this.http.post(url, request);
     }
 }

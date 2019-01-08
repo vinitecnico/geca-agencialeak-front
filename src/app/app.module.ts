@@ -77,6 +77,13 @@ export function getLocalStorage() {
   return (typeof window !== 'undefined') ? window.localStorage : null;
 }
 
+export function StartupConfigServiceFactory(startupConfigService: StartupConfigService) {
+  const domain = startupConfigService.getConfig();
+  console.log(domain);
+  startupConfigService.value = domain;
+  return domain;
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -139,6 +146,7 @@ export function getLocalStorage() {
   ],
   providers: [
     { provide: 'LocalStorage', useFactory: getLocalStorage },
+    // { provide: 'ApiConfig', useFactory: StartupConfigServiceFactory, deps: [StartupConfigService], multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },

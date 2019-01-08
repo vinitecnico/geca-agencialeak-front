@@ -16,23 +16,23 @@ export class AuthenticationInterceptor implements HttpInterceptor {
         const authObj = JSON.parse(auth);
         const isTokenValid = this.validateAuthenticationToken(authObj);
 
-        if (request.url.indexOf('api/') > -1) {
+        if (request.url.indexOf('api/login') > -1) {
             return next.handle(request);
         }
 
        if (isTokenValid) {
-            // if (!request.headers.has('authorization')) {
-            //     request = request.clone({ headers: request.headers.set('authorization', 'Bearer aaa') });
-            // }
+            if (!request.headers.has('authorization')) {
+                request = request.clone({ headers: request.headers.set('authorization', `Bearer ${authObj.token}`) });
+            }
 
-            // if (!request.headers.has('content-Type')) {
-            //     request = request.clone({ headers: request.headers.set('content-Type', 'application/json') });
-            // }
+            if (!request.headers.has('content-Type')) {
+                request = request.clone({ headers: request.headers.set('content-Type', 'application/json') });
+            }
 
-            // // setting the accept header
-            // if (!request.headers.has('accept')) {
-            //     request = request.clone({ headers: request.headers.set('accept', 'application/json') });
-            // }
+            // setting the accept header
+            if (!request.headers.has('accept')) {
+                request = request.clone({ headers: request.headers.set('accept', 'application/json') });
+            }
 
             // send the newly created request
             return next.handle(request)

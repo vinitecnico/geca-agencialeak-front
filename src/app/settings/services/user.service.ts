@@ -25,7 +25,7 @@ export class UserService {
         private utilsService: UtilsService) { }
 
     getAll(request): Observable<any[]> {
-        const url = `${this.apiConfig.domain}api/user`;
+        const url = `${this.apiConfig.getConfig()}api/user`;
         return this.http.get<any[]>(url, {
             headers: httpOptions.headers,
             params: this.utilsService.setParameters(request)
@@ -33,12 +33,12 @@ export class UserService {
     }
 
     getById(_id: string): Observable<User[]> {
-        const url = `${this.apiConfig.domain}api/user/${_id}`;
+        const url = `${this.apiConfig.getConfig()}api/user/${_id}`;
         return this.http.get<User[]>(url, httpOptions);
     }
 
     createOrUpdate(user: User): Observable<any> {
-        const url = `${this.apiConfig.domain}api/user`;
+        const url = `${this.apiConfig.getConfig()}api/user`;
 
         if (user._id) {
             return this.http.put(`${url}/${user._id}`, user, httpOptions);
@@ -48,7 +48,7 @@ export class UserService {
     }
 
     delete(_id: string): Observable<any> {
-        const url = `${this.apiConfig.domain}api/user/${_id}`;
+        const url = `${this.apiConfig.getConfig()}api/user/${_id}`;
         return this.http.delete(url, httpOptions);
     }
 }
