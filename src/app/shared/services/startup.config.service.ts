@@ -13,7 +13,7 @@ export class StartupConfigService {
             return this.value;
         } else if (host.indexOf('geca-agencialeak-front.herokuapp.com') >= 0) {
             // Prod';
-            this.value = 'https://geca-agencialeak-front.herokuapp.com/';
+            this.value = 'https://geca-agencialeak-api.herokuapp.com/';
             return this.value;
         } else {
             // local
