@@ -7,6 +7,10 @@ export class StartupConfigService {
     getConfig(): string {
         const host = window.location.host;
 
+        if (this.value) {
+            return this.value;
+        }
+
         if (host.indexOf('geca-agencialeak-front-dev.herokuapp.com') >= 0) {
             // dev
             this.value = 'https://geca-agencialeak-api-dev.herokuapp.com/';
