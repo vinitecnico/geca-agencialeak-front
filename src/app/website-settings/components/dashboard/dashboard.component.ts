@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit {
                             ],
                             options: {
                                 legend: { position: 'none' },
-                                width: '80%'
+                                width: '60%'
                             }
                         };
 
@@ -64,7 +64,7 @@ export class DashboardComponent implements OnInit {
                                 ],
                                 options: {
                                     legend: { position: 'right' },
-                                    width: '80%',
+                                    width: '60%',
                                     slices: {
                                         is3D: true,
                                         0: {
