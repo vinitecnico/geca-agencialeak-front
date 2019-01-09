@@ -24,7 +24,7 @@ export class EnterpriseService {
         private utilsService: UtilsService) { }
 
     getAll(request): Observable<any[]> {
-        const url = `${this.apiConfig.value}api/empresa`;
+        const url = `${this.apiConfig.getConfig()}api/empresa`;
         return this.http.get<any[]>(url, {
             headers: httpOptions.headers,
             params: this.utilsService.setParameters(request)
@@ -32,7 +32,7 @@ export class EnterpriseService {
     }
 
     getById(_id: string): Observable<Enterprise[]> {
-        const url = `${this.apiConfig.value}api/empresa/${_id}`;
+        const url = `${this.apiConfig.getConfig()}api/empresa/${_id}`;
         return this.http.get<Enterprise[]>(url, httpOptions);
     }
 
@@ -42,7 +42,7 @@ export class EnterpriseService {
     }
 
     createOrUpdateEnterprise(fair: Enterprise): Observable<any> {
-        const url = `${this.apiConfig.value}api/empresa`;
+        const url = `${this.apiConfig.getConfig()}api/empresa`;
 
         if (fair._id) {
             return this.http.put(`${url}/${fair._id}`, fair, httpOptions);
@@ -52,7 +52,7 @@ export class EnterpriseService {
     }
 
     delete(_id: string): Observable<any> {
-        const url = `${this.apiConfig.value}api/empresa/${_id}`;
+        const url = `${this.apiConfig.getConfig()}api/empresa/${_id}`;
         return this.http.delete(url, httpOptions);
     }
 }
