@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit {
                             ],
                             options: {
                                 legend: { position: 'none' },
-                                width: '70%'
+                                width: '60%'
                             }
                         };
 
