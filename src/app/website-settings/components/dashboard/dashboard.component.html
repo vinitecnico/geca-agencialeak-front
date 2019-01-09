@@ -10,8 +10,9 @@
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                <div class="stat-text"><span class="count">{{dashboard?.colegios}}</span></div>
-                                <div class="stat-heading">{{dashboard?.colegios > 1 ? 'Colégios' : 'Colégio'}}</div>
+                                <div class="stat-text"><span class="count">{{dashboard?.totalItems?.colegios}}</span></div>
+                                <div class="stat-heading">{{dashboard?.totalItems?.colegios > 1 ? 'Colégios' :
+                                    'Colégio'}}</div>
                             </div>
                         </div>
                     </div>
@@ -28,8 +29,8 @@
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                <div class="stat-text"><span class="count">{{dashboard?.feiras}}</span></div>
-                                <div class="stat-heading">{{dashboard?.feiras > 1 ? 'Feiras' : 'Feira'}}</div>
+                                <div class="stat-text"><span class="count">{{dashboard?.totalItems?.feiras}}</span></div>
+                                <div class="stat-heading">{{dashboard?.totalItems?.feiras > 1 ? 'Feiras' : 'Feira'}}</div>
                             </div>
                         </div>
                     </div>
@@ -46,8 +47,9 @@
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                <div class="stat-text"><span class="count">{{dashboard?.empresas}}</span></div>
-                                <div class="stat-heading">{{dashboard?.empresas > 1 ? 'Empresas' : 'Empresa'}}</div>
+                                <div class="stat-text"><span class="count">{{dashboard?.totalItems?.empresas}}</span></div>
+                                <div class="stat-heading">{{dashboard?.totalItems?.empresas > 1 ? 'Empresas' :
+                                    'Empresa'}}</div>
                             </div>
                         </div>
                     </div>
@@ -64,8 +66,8 @@
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                <div class="stat-text"><span class="count">{{dashboard?.pessoa}}</span></div>
-                                <div class="stat-heading">{{dashboard?.pessoa > 1 ? 'Pessoas' : 'Pessoa'}}</div>
+                                <div class="stat-text"><span class="count">{{dashboard?.totalItems?.pessoa}}</span></div>
+                                <div class="stat-heading">{{dashboard?.totalItems?.pessoa > 1 ? 'Pessoas' : 'Pessoa'}}</div>
                             </div>
                         </div>
                     </div>
@@ -74,6 +76,28 @@
         </div>
     </div>
     <!-- /Widgets -->
+
+    <div class="row">
+        <div class="col-xs-12 col-md-6" *ngIf="genderChartData">
+            <div class="card weather-box">
+                <h4 class="weather-title box-title">Sexo</h4>
+                <div class="card-body">
+                    <google-chart [data]="genderChartData"></google-chart>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-6" *ngIf="etniaChartData">
+            <div class="card weather-box">
+                <h4 class="weather-title box-title">Etnia</h4>
+                <div class="card-body">
+                    <google-chart [data]="etniaChartData"></google-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
     <!--  Traffic  -->
     <div class="row">
         <div class="col-lg-12">
@@ -93,28 +117,7 @@
     <!--  /Traffic -->
     <div class="clearfix"></div>
 
-    <div class="row">
-        <!-- <div class="col-md-6 col-xs-12">
-            <div class="card">
-                <div class="card-body" style="min-height: 357px;">
-                    <div class="calender-cont widget-calender">
-                        <div id="calendar"></div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-        <!-- <div class="col-xs-12 col-md-6">
-            <div class="card weather-box">
-                <h4 class="weather-title box-title">Clima</h4>
-                <div class="card-body">
-                    <div class="weather-widget">
-                        <div id="weather-one" class="weather-one"></div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-    </div>
+    
     <!-- /Calender Chart Weather -->
     <!-- Modal - Calendar - Add New Event -->
     <div class="modal fade none-border" id="event-modal">
