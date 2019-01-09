@@ -22,6 +22,7 @@ import { RegistrationModule } from './registration/registration.module';
 import { SharedModule } from './shared/shared.module';
 import { MapModule } from './map/map.module';
 import { MarketingModule } from './marketing/marketing.module';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
 // Layout
 import { LayoutComponent } from './layout/layout.component';
@@ -137,6 +138,7 @@ export function StartupConfigServiceFactory(startupConfigService: StartupConfigS
     SharedModule,
     MapModule,
     MarketingModule,
+    Ng2GoogleChartsModule,
     BlockUIModule.forRoot(),
     BlockUIHttpModule.forRoot({
       requestFilters: []

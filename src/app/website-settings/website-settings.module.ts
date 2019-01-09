@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
 import {
     MatTableModule,
@@ -49,6 +50,7 @@ import { SharedModule } from '../shared/shared.module';
         MatCheckboxModule,
         MatTooltipModule,
         MapModule,
+        Ng2GoogleChartsModule,
         SharedModule,
         FormsModule,
         ReactiveFormsModule

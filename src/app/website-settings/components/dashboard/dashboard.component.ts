@@ -14,6 +14,19 @@ import { DashboardService } from '../../services/dashboard.services';
 
 export class DashboardComponent implements OnInit {
     dashboard: Dashboard;
+    // pieChartData = {
+    //     chartType: 'PieChart',
+    //     dataTable: [
+    //         ['Task', 'Hours per Day'],
+    //         ['Work', 11],
+    //         ['Eat', 2],
+    //         ['Commute', 2],
+    //         ['Watch TV', 2],
+    //         ['Sleep', 7]
+    //     ],
+    //     options: { 'title': 'Tasks' },
+    // };
+    pieChartData;
     constructor(private dashboardService: DashboardService) {
     }
 
@@ -31,6 +44,26 @@ export class DashboardComponent implements OnInit {
                 };
                 setTimeout(() => {
                     this.dashboard = _.last(response);
+
+                    this.pieChartData = {
+                        chartType: 'ColumnChart',
+                        dataTable: [
+                            ['Sexo', 'Total'],
+                            ['Masculino', this.dashboard.charts &&
+                                this.dashboard.charts.gender &&
+                                this.dashboard.charts.gender.male ?
+                                this.dashboard.charts.gender.male : 0],
+                            ['Feminino', this.dashboard.charts &&
+                                this.dashboard.charts.gender &&
+                                this.dashboard.charts.gender.female ?
+                                this.dashboard.charts.gender.female : 0]
+                        ],
+                        options: {
+                            legend: { position: 'none' },
+                            width: '80%'
+                        }
+                    };
+
                 }, 600);
             }, (erro) => {
                 console.log(erro);
