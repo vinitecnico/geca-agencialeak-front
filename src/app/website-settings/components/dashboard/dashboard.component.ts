@@ -21,10 +21,13 @@ export class DashboardComponent implements OnInit {
         this.dashboardService.get()
             .subscribe((response) => {
                 this.dashboard = {
-                    pessoa: 0,
-                    feiras: 0,
-                    empresas: 0,
-                    colegios: 0
+                    totalItems: {
+                        pessoa: 0,
+                        feiras: 0,
+                        empresas: 0,
+                        colegios: 0
+                    },
+                    charts: {}
                 };
                 setTimeout(() => {
                     this.dashboard = _.last(response);

@@ -1,6 +1,9 @@
 export class Dashboard {
-    pessoa: number;
-    feiras: number;
-    empresas: number;
-    colegios: number;
+    totalItems: {
+        pessoa: number;
+        feiras: number;
+        empresas: number;
+        colegios: number;
+    };
+    charts: any;
 }
