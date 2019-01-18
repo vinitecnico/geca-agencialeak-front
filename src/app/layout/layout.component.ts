@@ -68,6 +68,9 @@ export class LayoutComponent implements OnInit {
           if (this.urlSubItem.indexOf('-') >= 0) {
             this.urlSubItem = _.first(_.split(this.urlSubItem, '-'));
           }
+          if (this.urlSubItem.indexOf('?') >= 0) {
+            this.urlSubItem = _.first(_.split(this.urlSubItem, '?'));
+          }
           $(`#${this.urlSubItem}`).addClass('action-sub-menu');
         }
       });

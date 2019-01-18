@@ -172,6 +172,7 @@ export class PeopleComponent implements OnInit {
             request.profissional_eleitoral.terminationDate = moment(request.profissional_eleitoral.terminationDate, 'YYYY-MM-DD')
                 .format('DD/MM/YYYY');
         }
+        this.thirdFormGroup.setValue(request.profissional_eleitoral);
         if (request.notificacoes_anotacoes && !request.notificacoes_anotacoes.telegram) {
             request.notificacoes_anotacoes.telegram = false;
         }
